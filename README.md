@@ -14,5 +14,7 @@ Public hosting for gLitCh Labs store assets, privacy policies, and release notes
 |------|-----|
 | Hub | `https://acoaria4.github.io/gLitCh-Labs-Releases/` |
 | Expenses privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/privacy.html` |
+| Expenses support | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/support.html` |
 
 Use the Expenses privacy URL in Google Play Console → App content → Privacy policy.
+Use the Expenses support URL as the App Store Connect / Play Support URL.
