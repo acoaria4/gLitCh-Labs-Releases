@@ -96,15 +96,16 @@
         display: inline-flex;
         align-items: center;
         text-decoration: none;
+        opacity: 0.9;
         transition: opacity 0.2s ease;
       }
 
       .nav-studio:hover {
-        opacity: 0.85;
+        opacity: 1;
       }
 
       .nav-studio img {
-        width: min(148px, 42vw);
+        width: min(96px, 34vw);
         height: auto;
       }
 
@@ -135,7 +136,7 @@
 
       .hero-brand {
         width: min(280px, 72vw);
-        margin: 0 auto 20px;
+        margin: 0 auto 16px;
         opacity: 0;
         animation: rise 0.9s var(--ease) 0.15s forwards;
       }
@@ -146,22 +147,30 @@
       }
 
       .hero-studio {
-        display: block;
-        width: min(168px, 48vw);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
         margin: 0 auto 28px;
         text-decoration: none;
+        color: var(--muted);
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
         opacity: 0;
         animation: rise 0.9s var(--ease) 0.2s forwards;
-        transition: opacity 0.2s ease;
+        transition: color 0.2s ease;
       }
 
       .hero-studio:hover {
-        opacity: 0.85;
+        color: var(--text);
       }
 
       .hero-studio img {
-        width: 100%;
+        width: min(88px, 28vw);
         height: auto;
+        opacity: 0.85;
       }
 
       .hero-copy {
@@ -386,17 +395,22 @@
       footer .credit {
         display: inline-flex;
         align-items: center;
+        gap: 8px;
         text-decoration: none;
-        transition: opacity 0.2s ease;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 500;
+        transition: color 0.2s ease;
       }
 
       footer .credit:hover {
-        opacity: 0.85;
+        color: var(--text);
       }
 
       footer .credit img {
-        width: 120px;
+        width: 72px;
         height: auto;
+        opacity: 0.9;
       }
 
       @keyframes rise {
@@ -441,7 +455,7 @@
 
         .hero-brand {
           width: min(320px, 40vw);
-          margin-bottom: 16px;
+          margin-bottom: 12px;
         }
 
         .hero-studio {
@@ -504,7 +518,7 @@
     <div class="wrap">
       <header class="nav">
         <a class="nav-studio" href="../">
-          <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="148" height="58" />
+          <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="96" height="38" />
         </a>
         <nav class="nav-links" aria-label="Page">
           <a href="#local">Local-first</a>
@@ -518,7 +532,8 @@
             <img src="assets/expenses-logo.png" alt="Expenses" width="320" height="320" />
           </div>
           <a class="hero-studio" href="../">
-            <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="168" height="66" />
+            <span>by</span>
+            <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="88" height="35" />
           </a>
           <div class="hero-copy">
             <h1>A private <em>pocket ledger</em></h1>
@@ -566,7 +581,8 @@
           <a href="support.html">Support</a>
         </nav>
         <a class="credit" href="../">
-          <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="120" height="47" />
+          <span>by</span>
+          <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="72" height="28" />
         </a>
       </footer>
     </div>
