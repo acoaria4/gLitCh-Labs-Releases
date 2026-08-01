@@ -58,10 +58,43 @@
       a {
         color: var(--accent);
       }
+      .app-mark {
+        display: block;
+        width: min(112px, 36vw);
+        height: auto;
+        margin-bottom: 12px;
+      }
+      .studio {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 28px;
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+      .studio img {
+        width: 72px;
+        height: auto;
+        display: block;
+        opacity: 0.9;
+      }
     </style>
   </head>
   <body>
     <main>
+      <img
+        class="app-mark"
+        src="assets/expenses-logo.png"
+        alt="Expenses"
+        width="112"
+        height="112"
+      />
+      <a class="studio" href="../">
+        <span>by</span>
+        <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="72" height="28" />
+      </a>
       <h1>Support</h1>
       <p class="meta">
         <strong style="color: var(--text)">Expenses</strong> by gLitCh Labs<br />
