@@ -3,6 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Public releases, policies, and store assets for gLitCh Labs apps."
+    />
     <title>gLitCh Labs — Releases</title>
     <link rel="icon" href="./expenses/assets/glitchlabs-logo.png" type="image/png" />
     <style>
@@ -60,12 +64,35 @@
         border-radius: 16px;
         background: rgba(255, 255, 255, 0.03);
       }
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 0.55rem;
+      }
+      .card-head img {
+        width: 48px;
+        height: 48px;
+        display: block;
+        object-fit: contain;
+      }
       .card h2 {
-        margin: 0 0 0.4rem;
+        margin: 0;
         font-size: 1.25rem;
       }
+      .card > p {
+        margin: 0 0 0.75rem;
+        color: var(--muted);
+      }
       a { color: var(--accent); }
-      ul { padding-left: 1.15rem; color: var(--muted); }
+      ul {
+        margin: 0;
+        padding-left: 1.15rem;
+        color: var(--muted);
+      }
+      li + li {
+        margin-top: 0.25rem;
+      }
     </style>
   </head>
   <body>
@@ -82,10 +109,14 @@
       <p class="lede">Public releases, policies, and store assets for gLitCh Labs apps.</p>
 
       <section class="card">
-        <h2>Expenses</h2>
+        <div class="card-head">
+          <img src="./expenses/assets/expenses-logo.png" alt="" width="48" height="48" />
+          <h2>Expenses</h2>
+        </div>
         <p>Local-first personal + shared expense tracker.</p>
         <ul>
           <li><a href="./expenses/">Product page</a></li>
+          <li><a href="./expenses/invite.html">Group invite</a></li>
           <li><a href="./expenses/privacy.html">Privacy Policy</a></li>
           <li><a href="./expenses/support.html">Support</a></li>
           <li>
@@ -95,7 +126,9 @@
       </section>
 
       <section class="card">
-        <h2>AURA</h2>
+        <div class="card-head">
+          <h2>AURA</h2>
+        </div>
         <p>Vedic astrology — charts, predictions, Porutham, and Tamil calendar.</p>
         <ul>
           <li><a href="./aura/privacy.html">Privacy Policy</a></li>
