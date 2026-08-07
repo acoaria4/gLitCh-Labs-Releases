@@ -95,18 +95,23 @@
       .nav-studio {
         display: inline-flex;
         align-items: center;
+        gap: 10px;
         text-decoration: none;
-        opacity: 0.9;
-        transition: opacity 0.2s ease;
+        color: var(--muted);
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        transition: color 0.2s ease;
       }
 
       .nav-studio:hover {
-        opacity: 1;
+        color: var(--text);
       }
 
       .nav-studio img {
-        width: min(96px, 34vw);
-        height: auto;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
       }
 
       .nav-links {
@@ -147,17 +152,15 @@
       }
 
       .hero-studio {
-        display: flex;
-        flex-direction: column;
+        display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 8px;
         margin: 0 auto 28px;
         text-decoration: none;
         color: var(--muted);
-        font-size: 0.75rem;
+        font-size: 0.85rem;
         font-weight: 500;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
         opacity: 0;
         animation: rise 0.9s var(--ease) 0.2s forwards;
         transition: color 0.2s ease;
@@ -168,9 +171,9 @@
       }
 
       .hero-studio img {
-        width: min(88px, 28vw);
-        height: auto;
-        opacity: 0.85;
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
       }
 
       .hero-copy {
@@ -408,9 +411,9 @@
       }
 
       footer .credit img {
-        width: 72px;
-        height: auto;
-        opacity: 0.9;
+        width: 22px;
+        height: 22px;
+        border-radius: 5px;
       }
 
       @keyframes rise {
@@ -518,7 +521,8 @@
     <div class="wrap">
       <header class="nav">
         <a class="nav-studio" href="../">
-          <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="96" height="38" />
+          <img src="assets/glitchlabs-icon.png" alt="" width="32" height="32" />
+          gLitCh Labs
         </a>
         <nav class="nav-links" aria-label="Page">
           <a href="#local">Local-first</a>
@@ -533,7 +537,8 @@
           </div>
           <a class="hero-studio" href="../">
             <span>by</span>
-            <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="88" height="35" />
+            <img src="assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+            <span>gLitCh Labs</span>
           </a>
           <div class="hero-copy">
             <h1>A private <em>pocket ledger</em></h1>
@@ -582,7 +587,8 @@
         </nav>
         <a class="credit" href="../">
           <span>by</span>
-          <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="72" height="28" />
+          <img src="assets/glitchlabs-icon.png" alt="" width="22" height="22" />
+          <span>gLitCh Labs</span>
         </a>
       </footer>
     </div>

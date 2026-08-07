@@ -69,23 +69,21 @@
         display: block;
       }
       .studio {
-        display: flex;
-        flex-direction: column;
+        display: inline-flex;
         align-items: center;
-        gap: 6px;
+        justify-content: center;
+        gap: 8px;
         margin: 0 auto 28px;
         text-decoration: none;
         color: var(--muted);
-        font-size: 0.7rem;
+        font-size: 0.85rem;
         font-weight: 500;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
       }
       .studio img {
-        width: min(80px, 28vw);
-        height: auto;
+        width: 28px;
+        height: 28px;
+        border-radius: 7px;
         display: block;
-        opacity: 0.85;
       }
       h1 {
         font-family: var(--font-display);
@@ -158,7 +156,8 @@
       />
       <a class="studio" href="../">
         <span>by</span>
-        <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="80" height="32" />
+        <img src="assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+        <span>gLitCh Labs</span>
       </a>
       <h1>Join a shared group</h1>
       <p class="lead" id="lead">
