@@ -16,6 +16,7 @@ Public hosting for gLitCh Labs store assets, privacy policies, and release notes
 | Expenses product | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/` |
 | Expenses group invite | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/invite.html` |
 | Expenses privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/privacy.html` |
+| Expenses delete account | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/delete-account.html` |
 | Expenses support | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/support.html` |
 | AURA privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/privacy.html` |
 
@@ -23,4 +24,5 @@ Public hosting for gLitCh Labs store assets, privacy policies, and release notes
 
 - Use the **Expenses privacy** URL in Google Play Console → App content → Privacy policy.
 - Use the **Expenses support** URL as the App Store Connect / Play Support URL.
+- Use the **Expenses delete account** URL for App Store / Play account-deletion URL requirements.
 - Group invites open `expenses/invite.html?t=<token>` (or `?token=`), which deep-links into the Expenses app.
