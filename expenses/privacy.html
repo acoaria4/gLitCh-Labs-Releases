@@ -57,113 +57,141 @@
       a {
         color: #d8c4a0;
       }
-      .app-mark {
-        display: block;
-        width: min(112px, 36vw);
-        height: auto;
-        margin-bottom: 12px;
-      }
-      .studio {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 28px;
-        text-decoration: none;
-        color: var(--muted);
-        font-size: 0.8rem;
-        font-weight: 500;
-      }
-      .studio img {
-        width: 72px;
-        height: auto;
-        display: block;
-        opacity: 0.9;
-      }
     </style>
   </head>
   <body>
     <main>
-      <img
-        class="app-mark"
-        src="assets/expenses-logo.png"
-        alt="Expenses"
-        width="112"
-        height="112"
-      />
-      <a class="studio" href="../">
-        <span>by</span>
-        <img src="assets/glitchlabs-logo.png" alt="gLitCh Labs" width="72" height="28" />
-      </a>
       <h1>Privacy Policy</h1>
       <p class="meta">
         <strong style="color: var(--text)">Expenses</strong> by gLitCh Labs<br />
         App ID: <code>com.glitchlabs.expenses</code><br />
-        Last updated: 15 July 2026
+        Last updated: 8 August 2026
       </p>
 
       <p>
-        Expenses is a local-first personal and shared expense tracker. We designed it so your
-        financial data stays on your device. This policy explains what the app stores, what it
-        does <em>not</em> collect, and how backups work.
+        Expenses is a <strong style="color: var(--text)">local-first</strong> personal and shared
+        expense tracker. You can use it entirely on your device. Optional sign-in unlocks cloud sync
+        and shared groups across devices. This policy explains what stays on-device, what is stored
+        when you opt into cloud features, and how to leave.
       </p>
 
-      <h2>1. Data we store</h2>
-      <p>Expenses stores the following on your device only:</p>
+      <h2>1. Local-only use (no sign-in)</h2>
+      <p>
+        Without signing in, Expenses stores data only on your device (Capacitor Preferences on
+        Android/iOS; IndexedDB on the web), including:
+      </p>
       <ul>
         <li>Profile details you enter (such as display name)</li>
         <li>Personal expenses, categories, budgets, and settings</li>
-        <li>Shared groups, members, shared expenses, and settlements</li>
+        <li>Local shared groups, members, shared expenses, and settlements</li>
         <li>Activity history generated from your actions in the app</li>
         <li>Theme, currency, and backup preferences</li>
       </ul>
       <p>
-        On Android and iOS this data is stored using on-device app storage (Capacitor Preferences).
-        On the web version it is stored in your browser (IndexedDB). Nothing in the above list is
-        uploaded to gLitCh Labs servers, because the app has no account backend.
+        In this mode, that data is not uploaded to gLitCh Labs servers. Optional JSON backups you
+        export stay under your control (device storage or wherever you save/share the file).
       </p>
 
-      <h2>2. Data we do not collect</h2>
+      <h2>2. Optional cloud sync (sign-in)</h2>
+      <p>
+        If you choose to sign in, Expenses uses a cloud account so you can sync a personal vault and
+        collaborate in shared groups. Cloud is optional; signing out returns you to local-only use on
+        that device (local data remains unless you reset the app).
+      </p>
+      <p>When signed in, we process:</p>
       <ul>
-        <li>No account sign-up or login</li>
-        <li>No cloud sync of expenses (unless a future version you opt into adds it)</li>
-        <li>No advertising SDKs</li>
-        <li>No analytics or crash-reporting SDKs in the current app</li>
-        <li>No selling or sharing of personal financial data with third parties</li>
+        <li>
+          <strong style="color: var(--text)">Account identity</strong> — Google Sign-In provides
+          identifiers such as email and user id so we can authenticate you. (Apple Sign-In may be
+          offered on iOS where required.)
+        </li>
+        <li>
+          <strong style="color: var(--text)">Phone number</strong> — an E.164 phone you add for
+          matching members when joining shared groups. Verification may use a one-time code sent by
+          SMS through our SMS provider (for example Twilio) via our backend.
+        </li>
+        <li>
+          <strong style="color: var(--text)">Personal vault</strong> — expenses, activity,
+          categories, people, settings, reminders, and related app data you sync.
+        </li>
+        <li>
+          <strong style="color: var(--text)">Shared cloud groups</strong> — membership, shared
+          expenses, settlements, and contact names/phones you add for splits.
+        </li>
+        <li>
+          <strong style="color: var(--text)">Display name</strong> — the name you set in the app
+          (not overwritten by Google/Apple full name once you have set one).
+        </li>
       </ul>
+      <p>
+        Cloud data is hosted by our processor
+        <strong style="color: var(--text)">Supabase</strong>. When SMS OTP is enabled, the SMS
+        provider is a subprocessor for delivering verification codes. We do not sell your personal
+        or financial data. We do not use advertising SDKs. We do not currently include third-party
+        analytics or crash-reporting SDKs.
+      </p>
 
       <h2>3. Backups you choose to make</h2>
       <p>
         You may export a JSON backup or enable optional automatic local backups. Those files are
         created on your device (or downloaded by you). We do not receive them unless
-        <em>you</em> choose to send a file to someone (for example by email or cloud drive of your
-        own).
+        <em>you</em> choose to send a file to someone (for example by email or a cloud drive of your
+        own). Cloud sync is separate from file backup.
       </p>
 
       <h2>4. Permissions and device features</h2>
+      <p>Depending on platform and features you use, Expenses may request:</p>
+      <ul>
+        <li>
+          <strong style="color: var(--text)">Internet</strong> — for optional sign-in, sync, and
+          invites
+        </li>
+        <li>
+          <strong style="color: var(--text)">Contacts</strong> — only when you pick people from your
+          address book for shared-group splits (on-device picker; we do not upload your full address
+          book)
+        </li>
+        <li>Storage / preferences for on-device app data</li>
+        <li>Local notifications if you enable reminders</li>
+      </ul>
       <p>
-        The app may use standard platform features needed to run as a mobile app (such as storage
-        for preferences, status bar / splash screen presentation). It does not require access to
-        your contacts, microphone, camera, or location for core expense tracking.
+        Core personal expense tracking does not require microphone, camera, or location. Camera or
+        photo library may be used later only for optional features you choose (for example receipt
+        capture) when those ship.
       </p>
 
-      <h2>5. Children</h2>
+      <h2>5. Sign out and account / cloud data</h2>
+      <p>
+        You can sign out in Settings. That disconnects cloud sync on that device. To request deletion
+        of your cloud account data (profile, synced vault, and cloud group memberships tied to your
+        account), email
+        <a href="mailto:glitchlabsio@gmail.com">glitchlabsio@gmail.com</a>
+        from the address used to sign in (include that Google/Apple account email in the message). We
+        will process deletion requests within a reasonable time. Local data can also be cleared with
+        the in-app Reset option.
+      </p>
+
+      <h2>6. Children</h2>
       <p>
         Expenses is not directed at children under 13. Do not use the app to store information about
         children if you do not have authority to do so.
       </p>
 
-      <h2>6. Changes</h2>
+      <h2>7. Changes</h2>
       <p>
-        If we change this policy in a material way (for example if a future release adds optional
-        cloud sync), we will update this page and the “Last updated” date.
+        If we change this policy in a material way, we will update this page and the “Last updated”
+        date. Store privacy questionnaires (Apple App Privacy / Google Play Data safety) are kept
+        aligned with this policy for the build you install.
       </p>
 
-      <h2>7. Contact</h2>
+      <h2>8. Contact</h2>
       <p>
-        Questions about privacy:
+        Privacy questions and cloud data deletion requests:
+        <a href="mailto:glitchlabsio@gmail.com">glitchlabsio@gmail.com</a>.
+        Product issues:
         <a href="https://github.com/acoaria4/expenses-by-glitchlabs/issues"
           >github.com/acoaria4/expenses-by-glitchlabs/issues</a
-        >
+        >.
       </p>
     </main>
   </body>
