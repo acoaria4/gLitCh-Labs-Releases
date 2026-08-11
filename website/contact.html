@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Contact gLitCh Labs — questions, feedback, or collaboration."
+    />
+    <title>Contact — gLitCh Labs</title>
+    <link rel="icon" href="./assets/glitchlabs-icon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-brand" href="./index.html">
+          <img src="./assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+          gLitCh Labs
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="./index.html#products">Products</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a class="nav-cta" href="./contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+
+      <header class="page-hero">
+        <p class="section-kicker">Contact</p>
+        <h1>Say <em>hello</em>.</h1>
+        <p class="hero-lead">
+          Questions, feedback, or collaboration — we’d love to hear from you.
+        </p>
+      </header>
+
+      <section class="section" aria-labelledby="contact-title">
+        <h2 id="contact-title" class="visually-hidden">Contact form</h2>
+        <div class="contact-grid">
+          <aside class="contact-aside glass reveal">
+            <h3>Write to us</h3>
+            <p>
+              Prefer email? Reach the studio directly and we’ll get back when we can.
+            </p>
+            <a class="mail" href="mailto:hello@glitchlabs.dev">hello@glitchlabs.dev</a>
+          </aside>
+
+          <form class="contact-form glass reveal reveal-delay-1" id="contact-form" novalidate>
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              />
+            </div>
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Send message</button>
+            <p class="form-note">Opens your mail app — no account required.</p>
+            <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-brand">
+          <img src="./assets/glitchlabs-icon.png" alt="" width="22" height="22" />
+          <span>© <span id="year"></span> gLitCh Labs</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="./products/expenses.html">Expenses</a></li>
+          <li><a href="./products/aura.html">AURA</a></li>
+          <li><a href="../expenses/privacy.html">Expenses privacy</a></li>
+          <li><a href="../aura/privacy.html">AURA privacy</a></li>
+          <li><a href="https://github.com/acoaria4/gLitCh-Labs-Releases">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

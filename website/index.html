@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="gLitCh Labs — a small studio building focused, privacy-minded apps."
+    />
+    <title>gLitCh Labs</title>
+    <link rel="icon" href="./assets/glitchlabs-icon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-brand" href="./index.html" aria-current="page">
+          <img src="./assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+          gLitCh Labs
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#products">Products</a></li>
+          <li><a href="./about.html">About</a></li>
+          <li><a class="nav-cta" href="./contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <header class="hero" id="top">
+        <img
+          class="hero-logo"
+          src="./assets/glitchlabs-wordmark.png"
+          alt="gLitCh Labs"
+          width="280"
+          height="280"
+        />
+        <h1>Apps with <em>clarity</em>.</h1>
+        <p class="hero-lead">
+          A small studio shipping focused, privacy-minded software — built to feel calm,
+          useful, and unmistakably ours.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#products">Explore apps</a>
+          <a class="btn btn-secondary" href="./contact.html">Contact</a>
+        </div>
+      </header>
+
+      <section class="section" id="products" aria-labelledby="products-title">
+        <div class="section-head reveal">
+          <p class="section-kicker">Products</p>
+          <h2 id="products-title">What we’re shipping</h2>
+          <p>Two apps. Clear jobs. No clutter.</p>
+        </div>
+
+        <div class="product-grid">
+          <article class="product glass reveal reveal-delay-1">
+            <div class="product-top">
+              <img
+                class="product-icon"
+                src="./assets/expenses-icon.png"
+                alt=""
+                width="52"
+                height="52"
+              />
+              <h3>Expenses</h3>
+            </div>
+            <p class="product-desc">
+              Local-first personal and shared expense tracking — with optional sign-in to
+              sync when you’re ready.
+            </p>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="./products/expenses.html">View Expenses</a>
+            </div>
+            <ul class="product-links">
+              <li><a href="../expenses/">Store page</a></li>
+              <li><a href="../expenses/privacy.html">Privacy</a></li>
+            </ul>
+          </article>
+
+          <article class="product glass reveal reveal-delay-2">
+            <div class="product-top">
+              <div class="product-icon aura" aria-hidden="true">A</div>
+              <h3>AURA</h3>
+            </div>
+            <p class="product-desc">
+              Vedic astrology — charts, predictions, Porutham, and Tamil calendar —
+              grounded and thoughtfully presented.
+            </p>
+            <div class="product-actions">
+              <a class="btn btn-primary" href="./products/aura.html">View AURA</a>
+            </div>
+            <ul class="product-links">
+              <li><a href="../aura/privacy.html">Privacy</a></li>
+              <li><a href="https://github.com/acoaria4/AstroAI">Source</a></li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="studio-title">
+        <div class="section-head reveal">
+          <p class="section-kicker">Studio</p>
+          <h2 id="studio-title">Built with intention</h2>
+          <p>Fewer features. Stronger defaults. Respect for your data.</p>
+        </div>
+        <div class="about-panel glass reveal">
+          <p>
+            <strong>gLitCh Labs</strong> designs for clarity first — local-first where it
+            matters, optional sync when it helps, and interfaces that feel quiet rather
+            than loud.
+          </p>
+          <p>
+            Read the six pillars that shape every product —
+            <a href="./about.html" class="text-link">About the studio</a>.
+          </p>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-brand">
+          <img src="./assets/glitchlabs-icon.png" alt="" width="22" height="22" />
+          <span>© <span id="year"></span> gLitCh Labs</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="./about.html">About</a></li>
+          <li><a href="./contact.html">Contact</a></li>
+          <li><a href="../expenses/privacy.html">Expenses privacy</a></li>
+          <li><a href="../aura/privacy.html">AURA privacy</a></li>
+          <li><a href="https://github.com/acoaria4/gLitCh-Labs-Releases">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
