@@ -8,7 +8,7 @@
       content="Join a shared Expenses group — open the invite in the Expenses app."
     />
     <title>Join group — Expenses</title>
-    <link rel="icon" href="assets/expenses-logo.png" type="image/png" />
+    <link rel="icon" href="../assets/expenses-icon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,140 +19,93 @@
       href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #0b0b12;
-        --text: #f5f3ee;
-        --muted: #a8a6b3;
-        --accent: #6366f1;
-        --accent-hover: #818cf8;
-        --font-sans: 'Satoshi', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
-        --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        min-height: 100dvh;
-        font-family: var(--font-sans);
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-        -webkit-font-smoothing: antialiased;
-      }
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(
-          ellipse 80% 50% at 50% -10%,
-          rgba(99, 102, 241, 0.12),
-          transparent 55%
-        );
-      }
-      .wrap {
-        position: relative;
-        z-index: 1;
-        max-width: 420px;
-        margin: 0 auto;
-        padding: 48px 24px 64px;
-        text-align: center;
-      }
-      .mark {
-        width: 64px;
-        height: 64px;
-        margin: 0 auto 28px;
-        border-radius: 16px;
-      }
-      h1 {
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-size: clamp(2rem, 6vw, 2.6rem);
-        line-height: 1.15;
-        margin: 0 0 12px;
-        letter-spacing: -0.02em;
-      }
-      .lead {
-        color: var(--muted);
-        margin: 0 0 28px;
-        font-size: 1.05rem;
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 48px;
-        padding: 0 22px;
-        border-radius: 12px;
-        font-weight: 600;
-        text-decoration: none;
-        border: none;
-        cursor: pointer;
-        font: inherit;
-        transition: background 0.2s var(--ease), transform 0.2s var(--ease);
-      }
-      .btn-primary {
-        background: var(--accent);
-        color: #fff;
-        width: 100%;
-      }
-      .btn-primary:hover {
-        background: var(--accent-hover);
-      }
-      .btn-ghost {
-        margin-top: 12px;
-        background: transparent;
-        color: var(--muted);
-        width: 100%;
-      }
-      .hint {
-        margin-top: 28px;
-        font-size: 0.9rem;
-        color: var(--muted);
-      }
-      .err {
-        color: #fca5a5;
-        margin-bottom: 16px;
-      }
-      .footer {
-        margin-top: 40px;
-        font-size: 0.85rem;
-        color: var(--muted);
-      }
-      .footer a {
-        color: var(--text);
-      }
-    </style>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/theme.js"></script>
   </head>
   <body>
     <div class="wrap">
-      <img
-        class="mark"
-        src="assets/expenses-logo.png"
-        alt=""
-        width="64"
-        height="64"
-      />
-      <h1>Join a shared group</h1>
-      <p class="lead" id="lead">
-        Open this invite in Expenses, then sign in with Google to join.
-      </p>
-      <p class="err" id="err" hidden></p>
-      <a class="btn btn-primary" id="open-app" href="#">Open in Expenses</a>
-      <a class="btn btn-ghost" href="./">About Expenses</a>
-      <p class="hint" id="hint">
-        Don’t have the app yet? Install Expenses on your phone, then tap Open again.
-      </p>
-      <p class="footer">
-        <a href="privacy.html">Privacy</a>
-        ·
-        <a href="support.html">Support</a>
-      </p>
+      <nav class="nav" aria-label="Primary">
+        <div class="nav-brand-lockup">
+          <a class="nav-brand" href="../index.html">
+            <img src="../assets/glitchlabs-icon.png" alt="" width="40" height="40" />
+            gLitCh Labs
+          </a>
+          <span class="nav-crumb" aria-hidden="true">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M4.25 2.25 8.5 6 4.25 9.75"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <a class="nav-product" href="./index.html">
+            <img src="../assets/expenses-icon.png" alt="" width="32" height="32" />
+            Expenses
+          </a>
+        </div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <section class="invite-panel glass" aria-labelledby="invite-title">
+        <img
+          class="invite-mark"
+          src="assets/expenses-logo.png"
+          alt=""
+          width="64"
+          height="64"
+        />
+        <h1 id="invite-title">Join a shared group</h1>
+        <p class="invite-lead" id="lead">
+          Open this invite in Expenses, then sign in with Google to join.
+        </p>
+        <p class="invite-err" id="err" hidden></p>
+        <div class="invite-actions">
+          <a class="btn btn-primary" id="open-app" href="#">Open in Expenses</a>
+          <a class="btn btn-secondary" href="./">About Expenses</a>
+        </div>
+        <p class="invite-hint" id="hint">
+          Don’t have the app yet? Install Expenses on your phone, then tap Open again.
+        </p>
+        <p class="invite-links">
+          <a href="privacy.html">Privacy</a>
+          ·
+          <a href="support.html">Support</a>
+        </p>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-brand">
+          <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+          <span>© <span id="year"></span> gLitCh Labs</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="./index.html">Expenses</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+          <li><a href="./support.html">Support</a></li>
+          <li><a href="https://github.com/acoaria4/gLitCh-Labs-Releases">GitHub</a></li>
+        </ul>
+      </footer>
     </div>
+
+    <script src="../js/main.js"></script>
     <script>
       ;(function () {
         var params = new URLSearchParams(window.location.search)
