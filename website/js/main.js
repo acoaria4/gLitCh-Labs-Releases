@@ -70,4 +70,10 @@
       window.location.href = `mailto:glitchlabsio@gmail.com?subject=${subject}&body=${body}`;
     });
   }
+
+  document.querySelectorAll('a.btn-soon').forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+      event.preventDefault();
+    });
+  });
 })();

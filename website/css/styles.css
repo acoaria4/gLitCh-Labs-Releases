@@ -310,7 +310,7 @@ a {
   color: var(--bg);
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(.btn-soon) {
   background: var(--accent-hover);
   box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent);
   transform: translateY(-2px);
@@ -319,15 +319,34 @@ a {
 .btn-secondary {
   background: var(--glass);
   color: var(--text);
-  border-color: var(--glass-border);
+  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
-.btn-secondary:hover {
-  background: var(--glass-strong);
-  border-color: rgba(255, 255, 255, 0.22);
+.btn-secondary:hover:not(.btn-soon) {
+  background: var(--accent-soft);
+  border-color: var(--accent);
   transform: translateY(-2px);
+}
+
+.btn-soon {
+  opacity: 0.62;
+  cursor: default;
+}
+
+.btn-soon:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.btn .soon-label {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-left: 6px;
 }
 
 /* —— Sections —— */
