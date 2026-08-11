@@ -492,15 +492,6 @@ a {
   border: 1px solid var(--line);
 }
 
-.product-icon.aura {
-  display: grid;
-  place-items: center;
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  color: var(--accent);
-  letter-spacing: 0.02em;
-}
-
 .product h3 {
   margin: 0;
   font-size: 1.35rem;
@@ -939,24 +930,6 @@ a {
   font-size: 0.92rem;
   color: var(--muted);
   line-height: 1.45;
-}
-
-.aura-mark {
-  width: min(96px, 22vw);
-  aspect-ratio: 1;
-  display: grid;
-  place-items: center;
-  margin: 0 auto 24px;
-  border-radius: 22px;
-  border: 1px solid var(--glass-border);
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6vw, 3.2rem);
-  color: var(--accent);
-  opacity: 0;
-  animation: rise 0.9s var(--ease) 0.1s forwards;
 }
 
 /* —— Contact —— */
@@ -1553,7 +1526,6 @@ a {
   .product-page-hero .hero-lead,
   .product-page-hero .cta-row,
   .product-wordmark-block,
-  .aura-mark,
   .reveal {
     opacity: 1;
     transform: none;
