@@ -7,7 +7,7 @@
       name="description"
       content="Expenses by gLitCh Labs — beautiful, fast, effortless personal and shared expense tracking."
     />
-    <title>Expenses — gLitCh Labs</title>
+    <title>gLitCh Labs → Expenses</title>
     <link rel="icon" href="../assets/expenses-icon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -25,10 +25,14 @@
   <body>
     <div class="wrap">
       <nav class="nav" aria-label="Primary">
-        <a class="nav-brand" href="../index.html">
-          <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
-          gLitCh Labs
-        </a>
+        <div class="nav-brand-lockup">
+          <a class="nav-brand" href="../index.html">
+            <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+            gLitCh Labs
+          </a>
+          <span class="nav-crumb" aria-hidden="true">→</span>
+          <span class="nav-product" aria-current="page">Expenses</span>
+        </div>
         <button
           class="nav-toggle"
           type="button"
@@ -121,7 +125,7 @@
 
       <footer class="footer">
         <div class="footer-brand">
-          <img src="../assets/glitchlabs-icon.png" alt="" width="22" height="22" />
+          <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
           <span>© <span id="year"></span> gLitCh Labs</span>
         </div>
         <ul class="footer-links">

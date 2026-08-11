@@ -155,6 +155,28 @@ a {
   border-radius: 7px;
 }
 
+.nav-brand-lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+
+.nav-crumb {
+  color: var(--muted);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.nav-product {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -852,9 +874,12 @@ a {
 }
 
 .footer-brand img {
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  filter:
+    drop-shadow(0 0 10px color-mix(in srgb, var(--accent) 28%, transparent))
+    drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
 }
 
 .footer-links {
