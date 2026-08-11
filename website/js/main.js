@@ -67,7 +67,7 @@
       );
 
       if (status) status.textContent = 'Opening your mail app…';
-      window.location.href = `mailto:hello@glitchlabs.dev?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:glitchlabsio@gmail.com?subject=${subject}&body=${body}`;
     });
   }
 })();
