@@ -205,6 +205,7 @@ Studio mark + © year (`#year` filled by `main.js`) + sparse product/privacy/Git
 | `assets/glitchlabs-icon.png` | Favicon, nav, footer |
 | `assets/glitchlabs-wordmark.png` | Home hero |
 | `assets/expenses-icon.png` | Nav product crumb, product grid |
+| `assets/aura-icon.png` | AURA favicon, nav crumb, product grid, AURA hero mark |
 | `assets/expenses-wordmark.png` | Expenses hero |
 | `assets/expenses-logo.png` | Legacy / invite mark under `expenses/assets/` also kept for store pages |
 
