@@ -130,7 +130,18 @@
 
     helper.appendChild(panel);
     helper.appendChild(toggle);
-    document.body.appendChild(helper);
+
+    const nav = document.querySelector('.nav');
+    if (nav) {
+      const navToggle = nav.querySelector('.nav-toggle');
+      if (navToggle) {
+        nav.insertBefore(helper, navToggle);
+      } else {
+        nav.appendChild(helper);
+      }
+    } else {
+      document.body.appendChild(helper);
+    }
 
     function syncUi() {
       const preference = readPreference();
