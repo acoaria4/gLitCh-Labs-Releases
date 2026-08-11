@@ -233,11 +233,15 @@ a {
 }
 
 .hero-logo {
-  width: min(360px, 78vw);
+  width: min(420px, 82vw);
   margin: 0 auto 28px;
   opacity: 0;
   animation: rise-logo 0.95s var(--ease) 0.12s forwards;
-  filter: drop-shadow(0 12px 36px rgba(0, 0, 0, 0.18));
+  filter:
+    drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 35%, transparent))
+    drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25))
+    contrast(1.08)
+    brightness(1.06);
 }
 
 .hero h1 {
@@ -568,11 +572,13 @@ a {
 
 /* —— Product marketing page —— */
 .product-page-hero {
-  min-height: calc(100svh - var(--nav-h) - 40px);
+  min-height: min(56svh, calc(100svh - var(--nav-h) - 40px));
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 48px 0 0;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px 0 24px;
 }
 
 .product-page-hero .product-mark {
@@ -595,11 +601,11 @@ a {
 .product-page-hero .hero-copy {
   text-align: center;
   max-width: 34rem;
-  margin: 0 auto 28px;
+  margin: 0 auto 14px;
 }
 
 .product-page-hero h1 {
-  margin: 0 0 14px;
+  margin: 0 0 10px;
   font-family: var(--font-display);
   font-weight: 400;
   font-size: clamp(2.4rem, 6vw, 3.6rem);
@@ -615,22 +621,27 @@ a {
 }
 
 .product-page-hero .cta-row {
+  margin-bottom: 0;
   opacity: 0;
   animation: rise 0.9s var(--ease) 0.46s forwards;
 }
 
 .product-wordmark-block {
-  width: min(420px, 86vw);
-  margin: 40px auto 0;
+  width: min(420px, 82vw);
+  margin: 0 auto 12px;
   opacity: 0;
-  animation: rise 1s var(--ease) 0.55s forwards;
+  animation: rise-logo 0.95s var(--ease) 0.1s forwards;
 }
 
 .product-wordmark-block img {
   width: 100%;
   height: auto;
   object-fit: contain;
-  filter: drop-shadow(0 18px 50px rgba(0, 0, 0, 0.35));
+  filter:
+    drop-shadow(0 0 18px color-mix(in srgb, var(--accent) 35%, transparent))
+    drop-shadow(0 10px 28px rgba(0, 0, 0, 0.25))
+    contrast(1.08)
+    brightness(1.06);
 }
 
 .product-meta {
