@@ -4,170 +4,175 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Delete account — Expenses by gLitCh Labs</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #0b0b12;
-        --text: #f5f3ee;
-        --muted: #a8a6b3;
-        --line: rgba(255, 255, 255, 0.08);
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family:
-          'Avenir Next',
-          'Segoe UI',
-          system-ui,
-          -apple-system,
-          sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-      }
-      main {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 48px 24px 80px;
-      }
-      h1 {
-        font-size: 2rem;
-        letter-spacing: -0.03em;
-        margin: 0 0 8px;
-      }
-      h2 {
-        font-size: 1.15rem;
-        margin: 2rem 0 0.6rem;
-      }
-      p,
-      li {
-        color: var(--muted);
-      }
-      .meta {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid var(--line);
-      }
-      ol,
-      ul {
-        padding-left: 1.2rem;
-      }
-      a {
-        color: #d8c4a0;
-      }
-      .cta {
-        display: inline-block;
-        margin-top: 8px;
-        padding: 12px 18px;
-        border-radius: 10px;
-        background: rgba(216, 196, 160, 0.12);
-        border: 1px solid rgba(216, 196, 160, 0.35);
-        color: var(--text);
-        text-decoration: none;
-        font-weight: 600;
-      }
-      .cta:hover {
-        background: rgba(216, 196, 160, 0.2);
-      }
-      .footer-nav {
-        margin-top: 2.5rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--line);
-        font-size: 0.9rem;
-      }
-    </style>
+    <link rel="icon" href="../assets/glitchlabs-icon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/theme.js"></script>
   </head>
   <body>
-    <main>
-      <h1>Delete your Expenses account</h1>
-      <p class="meta">
-        <strong style="color: var(--text)">Expenses</strong> by gLitCh Labs<br />
-        App ID: <code>com.glitchlabs.expenses</code><br />
-        Last updated: 8 August 2026
-      </p>
-
-      <p>
-        If you created an Expenses account by signing in (for example with Google), you can request
-        that we delete that account and the cloud data tied to it. You do not need the app installed
-        to make this request.
-      </p>
-
-      <h2>How to request deletion</h2>
-      <ol>
-        <li>
-          Email
-          <a href="mailto:glitchlabsio@gmail.com?subject=Expenses%20account%20deletion%20request"
-            >glitchlabsio@gmail.com</a
-          >
-          with the subject line <strong style="color: var(--text)">Expenses account deletion request</strong>.
-        </li>
-        <li>
-          Send the message from the same email address you used to sign in (or clearly state that
-          Google/Apple account email in the body).
-        </li>
-        <li>
-          Optionally include your display name in Expenses and that the app is
-          <strong style="color: var(--text)">Expenses by gLitCh Labs</strong>
-          (<code>com.glitchlabs.expenses</code>.
-        </li>
-      </ol>
-      <p>
-        <a
-          class="cta"
-          href="mailto:glitchlabsio@gmail.com?subject=Expenses%20account%20deletion%20request"
-          >Email deletion request</a
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <div class="nav-brand-lockup">
+          <a class="nav-brand" href="../index.html">
+            <img src="../assets/glitchlabs-icon.png" alt="" width="40" height="40" />
+            gLitCh Labs
+          </a>
+          <span class="nav-crumb" aria-hidden="true">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M4.25 2.25 8.5 6 4.25 9.75"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <a class="nav-product" href="./index.html">
+            <img src="../assets/expenses-icon.png" alt="" width="32" height="32" />
+            Expenses
+          </a>
+        </div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
         >
-      </p>
-      <p>
-        We will process requests within a reasonable time and confirm by email when the account and
-        associated cloud data have been deleted.
-      </p>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
 
-      <h2>What we delete</h2>
-      <p>When we complete your request, we delete cloud data associated with your account, including:</p>
-      <ul>
-        <li>Account / profile records (including display name and phone on your profile)</li>
-        <li>Synced personal vault data (expenses, activity, categories, people, settings, reminders, etc.)</li>
-        <li>Your membership in shared cloud groups and related cloud ledger data owned through that membership</li>
-      </ul>
+      <main class="doc-page">
+        <h1>Delete your Expenses account</h1>
+        <p class="meta">
+          <strong>Expenses</strong> by gLitCh Labs<br />
+          App ID: <code>com.glitchlabs.expenses</code><br />
+          Last updated: 8 August 2026
+        </p>
 
-      <h2>What may be retained</h2>
-      <ul>
-        <li>
-          Data other members still need in a shared group (for example an expense you logged that
-          remains part of the group’s history) may be kept in anonymized or member-orphaned form where
-          required for the group to stay consistent — we do not keep your sign-in identity for that
-          purpose.
-        </li>
-        <li>
-          Limited records we must keep for security, fraud prevention, or legal compliance, if any,
-          only for as long as required.
-        </li>
-        <li>
-          Data that exists only on your device (local-only use, or after sign-out) is not on our
-          servers. Clear it with Settings → Reset in the app, or by uninstalling / clearing app
-          storage.
-        </li>
-      </ul>
+        <p>
+          If you created an Expenses account by signing in (for example with Google), you can request
+          that we delete that account and the cloud data tied to it. You do not need the app installed
+          to make this request.
+        </p>
 
-      <h2>Sign out without deleting</h2>
-      <p>
-        In the app, Settings → sign out disconnects cloud sync on that device but does
-        <em>not</em> delete your cloud account. Use the email steps above to delete the account.
-      </p>
+        <h2>How to request deletion</h2>
+        <ol>
+          <li>
+            Email
+            <a href="mailto:glitchlabsio@gmail.com?subject=Expenses%20account%20deletion%20request"
+              >glitchlabsio@gmail.com</a
+            >
+            with the subject line <strong>Expenses account deletion request</strong>.
+          </li>
+          <li>
+            Send the message from the same email address you used to sign in (or clearly state that
+            Google/Apple account email in the body).
+          </li>
+          <li>
+            Optionally include your display name in Expenses and that the app is
+            <strong>Expenses by gLitCh Labs</strong>
+            <code>com.glitchlabs.expenses</code>.
+          </li>
+        </ol>
+        <p>
+          <a
+            class="cta"
+            href="mailto:glitchlabsio@gmail.com?subject=Expenses%20account%20deletion%20request"
+            >Email deletion request</a
+          >
+        </p>
+        <p>
+          We will process requests within a reasonable time and confirm by email when the account and
+          associated cloud data have been deleted.
+        </p>
 
-      <p class="footer-nav">
-        <a href="privacy.html#account-deletion">Privacy policy</a>
-        ·
-        <a href="support.html">Support</a>
-        ·
-        <a href="./">About Expenses</a>
-        ·
-        <a href="../">gLitCh Labs hub</a>
-      </p>
-    </main>
+        <h2>What we delete</h2>
+        <p>
+          When we complete your request, we delete cloud data associated with your account,
+          including:
+        </p>
+        <ul>
+          <li>Account / profile records (including display name and phone on your profile)</li>
+          <li>
+            Synced personal vault data (expenses, activity, categories, people, settings, reminders,
+            etc.)
+          </li>
+          <li>
+            Your membership in shared cloud groups and related cloud ledger data owned through that
+            membership
+          </li>
+        </ul>
+
+        <h2>What may be retained</h2>
+        <ul>
+          <li>
+            Data other members still need in a shared group (for example an expense you logged that
+            remains part of the group’s history) may be kept in anonymized or member-orphaned form
+            where required for the group to stay consistent — we do not keep your sign-in identity
+            for that purpose.
+          </li>
+          <li>
+            Limited records we must keep for security, fraud prevention, or legal compliance, if any,
+            only for as long as required.
+          </li>
+          <li>
+            Data that exists only on your device (local-only use, or after sign-out) is not on our
+            servers. Clear it with Settings → Reset in the app, or by uninstalling / clearing app
+            storage.
+          </li>
+        </ul>
+
+        <h2>Sign out without deleting</h2>
+        <p>
+          In the app, Settings → sign out disconnects cloud sync on that device but does
+          <em>not</em> delete your cloud account. Use the email steps above to delete the account.
+        </p>
+
+        <p class="footer-nav">
+          <a href="privacy.html#account-deletion">Privacy policy</a>
+          ·
+          <a href="support.html">Support</a>
+          ·
+          <a href="./">About Expenses</a>
+          ·
+          <a href="../">gLitCh Labs hub</a>
+        </p>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-brand">
+          <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+          <span>© <span id="year"></span> gLitCh Labs</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="./index.html">Expenses</a></li>
+          <li><a href="./privacy.html">Privacy</a></li>
+          <li><a href="./support.html">Support</a></li>
+          <li><a href="../aura/privacy.html">AURA privacy</a></li>
+          <li><a href="https://github.com/acoaria4/gLitCh-Labs-Releases">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script src="../js/main.js"></script>
   </body>
 </html>

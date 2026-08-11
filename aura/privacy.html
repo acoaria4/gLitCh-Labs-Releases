@@ -4,215 +4,196 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Privacy Policy — AURA by gLitCh Labs</title>
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #0b0b12;
-        --text: #f5f3ee;
-        --muted: #a8a6b3;
-        --line: rgba(255, 255, 255, 0.08);
-      }
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        margin: 0;
-        font-family:
-          'Avenir Next',
-          'Segoe UI',
-          system-ui,
-          -apple-system,
-          sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-      }
-      main {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 48px 24px 80px;
-      }
-      h1 {
-        font-size: 2rem;
-        letter-spacing: -0.03em;
-        margin: 0 0 8px;
-      }
-      h2 {
-        font-size: 1.15rem;
-        margin: 2rem 0 0.6rem;
-      }
-      p,
-      li {
-        color: var(--muted);
-      }
-      .meta {
-        font-size: 0.95rem;
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid var(--line);
-      }
-      ul {
-        padding-left: 1.2rem;
-      }
-      a {
-        color: #d8c4a0;
-      }
-      code {
-        font-size: 0.9em;
-      }
-      .app-name {
-        margin: 0 0 10px;
-        font-size: 1.35rem;
-        letter-spacing: -0.03em;
-        color: var(--text);
-      }
-      .studio {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: 28px;
-        text-decoration: none;
-        color: var(--muted);
-        font-size: 0.85rem;
-        font-weight: 500;
-      }
-      .studio img {
-        width: 28px;
-        height: 28px;
-        border-radius: 7px;
-        display: block;
-      }
-    </style>
+    <link rel="icon" href="../assets/glitchlabs-icon.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/theme.js"></script>
   </head>
   <body>
-    <main>
-      <p class="app-name">AURA</p>
-      <a class="studio" href="../">
-        <span>by</span>
-        <img src="../expenses/assets/glitchlabs-icon.png" alt="" width="28" height="28" />
-        <span>gLitCh Labs</span>
-      </a>
-      <h1>Privacy Policy</h1>
-      <p class="meta">
-        <strong style="color: var(--text)">AURA</strong> by gLitCh Labs<br />
-        App ID: <code>com.glitchlabs.aura</code><br />
-        Last updated: 17 July 2026
-      </p>
+    <div class="wrap">
+      <nav class="nav" aria-label="Primary">
+        <div class="nav-brand-lockup">
+          <a class="nav-brand" href="../index.html">
+            <img src="../assets/glitchlabs-icon.png" alt="" width="40" height="40" />
+            gLitCh Labs
+          </a>
+          <span class="nav-crumb" aria-hidden="true">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M4.25 2.25 8.5 6 4.25 9.75"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <a class="nav-product" href="./index.html">AURA</a>
+        </div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="../index.html#products">Products</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
 
-      <p>
-        AURA is a Vedic astrology app (birth charts, predictions, compatibility, and a public
-        Tamil Nadu–oriented calendar). This policy explains what data the app handles, where it is
-        processed, and the controls available to you.
-      </p>
+      <main class="doc-page">
+        <h1>Privacy Policy</h1>
+        <p class="meta">
+          <strong>AURA</strong> by gLitCh Labs<br />
+          App ID: <code>com.glitchlabs.aura</code><br />
+          Last updated: 17 July 2026
+        </p>
 
-      <h2>1. Who we are</h2>
-      <p>
-        AURA is published by gLitCh Labs. The mobile apps (Android / iOS) and optional web client
-        connect to the AURA API operated by gLitCh Labs (currently hosted on Fly.io). Desktop /
-        self-hosted deployments may run the same software entirely on your own machine.
-      </p>
+        <p>
+          AURA is a Vedic astrology app (birth charts, predictions, compatibility, and a public Tamil
+          Nadu–oriented calendar). This policy explains what data the app handles, where it is
+          processed, and the controls available to you.
+        </p>
 
-      <h2>2. Data you provide</h2>
-      <p>Depending on features you use, AURA may process:</p>
-      <ul>
-        <li>
-          Birth details you enter (date, time, and place of birth) to cast charts and generate
-          readings
-        </li>
-        <li>Names or labels you assign to saved horoscope profiles</li>
-        <li>
-          Place-search queries when you look up a birth location (offline gazetteer first; optional
-          online lookup below)
-        </li>
-        <li>Compatibility (Porutham) inputs for two charts you choose to compare</li>
-        <li>
-          Optional purchase / entitlement state if you buy a product through the store or billing
-          flow (handled by the store / payment provider; we do not store your full payment card
-          details)
-        </li>
-      </ul>
+        <h2>1. Who we are</h2>
+        <p>
+          AURA is published by gLitCh Labs. The mobile apps (Android / iOS) and optional web client
+          connect to the AURA API operated by gLitCh Labs (currently hosted on Fly.io). Desktop /
+          self-hosted deployments may run the same software entirely on your own machine.
+        </p>
 
-      <h2>3. Where data is stored and processed</h2>
-      <ul>
-        <li>
-          <strong style="color: var(--text)">Hosted AURA API (default for store apps):</strong>
-          chart calculation, predictions, saved profiles, and prediction caches are processed on
-          our server and stored in application databases on that host (SQLite on the deployed
-          volume). Data is associated with your app installation / client identifier used by the
-          API, not with a public social profile.
-        </li>
-        <li>
-          <strong style="color: var(--text)">Self-hosted / local installs:</strong> the same data
-          can remain entirely on your computer if you run the API yourself and point the app at it.
-        </li>
-        <li>
-          The public Day / Month calendar (panchanga, muhurta, festivals) does not require a
-          personal birth chart; it uses the place configuration of the service (Chennai / Tamil Nadu
-          by default).
-        </li>
-      </ul>
+        <h2>2. Data you provide</h2>
+        <p>Depending on features you use, AURA may process:</p>
+        <ul>
+          <li>
+            Birth details you enter (date, time, and place of birth) to cast charts and generate
+            readings
+          </li>
+          <li>Names or labels you assign to saved horoscope profiles</li>
+          <li>
+            Place-search queries when you look up a birth location (offline gazetteer first; optional
+            online lookup below)
+          </li>
+          <li>Compatibility (Porutham) inputs for two charts you choose to compare</li>
+          <li>
+            Optional purchase / entitlement state if you buy a product through the store or billing
+            flow (handled by the store / payment provider; we do not store your full payment card
+            details)
+          </li>
+        </ul>
 
-      <h2>4. Optional network features you control</h2>
-      <p>In Privacy settings you can enable or disable:</p>
-      <ul>
-        <li>
-          <strong style="color: var(--text)">Online geocoding (Nominatim):</strong> if a place is
-          missing from the offline gazetteer, a one-time lookup may be sent to the Nominatim
-          service and the result cached for later use. When disabled, only the offline place
-          database is used.
-        </li>
-        <li>
-          <strong style="color: var(--text)">Tradition corpus citations:</strong> optional quoting
-          from a local classical text index. First use may download an embedding model; citation
-          text itself is generated from local content when enabled.
-        </li>
-      </ul>
+        <h2>3. Where data is stored and processed</h2>
+        <ul>
+          <li>
+            <strong>Hosted AURA API (default for store apps):</strong>
+            chart calculation, predictions, saved profiles, and prediction caches are processed on
+            our server and stored in application databases on that host (SQLite on the deployed
+            volume). Data is associated with your app installation / client identifier used by the
+            API, not with a public social profile.
+          </li>
+          <li>
+            <strong>Self-hosted / local installs:</strong> the same data can remain entirely on your
+            computer if you run the API yourself and point the app at it.
+          </li>
+          <li>
+            The public Day / Month calendar (panchanga, muhurta, festivals) does not require a
+            personal birth chart; it uses the place configuration of the service (Chennai / Tamil
+            Nadu by default).
+          </li>
+        </ul>
 
-      <h2>5. Data we do not collect</h2>
-      <ul>
-        <li>No advertising SDKs or ad tracking</li>
-        <li>No selling of birth or chart data to data brokers</li>
-        <li>No requirement to create a public social account to use core chart features</li>
-        <li>
-          We do not ask for contacts, microphone, or camera access for core astrology features
-        </li>
-      </ul>
+        <h2>4. Optional network features you control</h2>
+        <p>In Privacy settings you can enable or disable:</p>
+        <ul>
+          <li>
+            <strong>Online geocoding (Nominatim):</strong> if a place is missing from the offline
+            gazetteer, a one-time lookup may be sent to the Nominatim service and the result cached
+            for later use. When disabled, only the offline place database is used.
+          </li>
+          <li>
+            <strong>Tradition corpus citations:</strong> optional quoting from a local classical text
+            index. First use may download an embedding model; citation text itself is generated from
+            local content when enabled.
+          </li>
+        </ul>
 
-      <h2>6. Your controls</h2>
-      <p>From the in-app Privacy panel you can:</p>
-      <ul>
-        <li>Export local / account-associated data available through the API export endpoint</li>
-        <li>Clear the prediction cache</li>
-        <li>Delete saved horoscope profiles</li>
-        <li>Change the optional geocoding and citations preferences</li>
-      </ul>
-      <p>
-        Uninstalling the mobile app removes the app from your device. Server-side profiles and cache
-        for a hosted deployment may remain until you delete them via Privacy controls or contact us
-        to request deletion.
-      </p>
+        <h2>5. Data we do not collect</h2>
+        <ul>
+          <li>No advertising SDKs or ad tracking</li>
+          <li>No selling of birth or chart data to data brokers</li>
+          <li>No requirement to create a public social account to use core chart features</li>
+          <li>
+            We do not ask for contacts, microphone, or camera access for core astrology features
+          </li>
+        </ul>
 
-      <h2>7. Children</h2>
-      <p>
-        AURA is not directed at children under 13. Do not submit birth details for a child unless
-        you are a parent or guardian with authority to do so.
-      </p>
+        <h2>6. Your controls</h2>
+        <p>From the in-app Privacy panel you can:</p>
+        <ul>
+          <li>Export local / account-associated data available through the API export endpoint</li>
+          <li>Clear the prediction cache</li>
+          <li>Delete saved horoscope profiles</li>
+          <li>Change the optional geocoding and citations preferences</li>
+        </ul>
+        <p>
+          Uninstalling the mobile app removes the app from your device. Server-side profiles and
+          cache for a hosted deployment may remain until you delete them via Privacy controls or
+          contact us to request deletion.
+        </p>
 
-      <h2>8. Changes</h2>
-      <p>
-        If we change this policy in a material way (for example new analytics, a new data
-        processor, or a change of hosting provider), we will update this page and the “Last
-        updated” date.
-      </p>
+        <h2>7. Children</h2>
+        <p>
+          AURA is not directed at children under 13. Do not submit birth details for a child unless
+          you are a parent or guardian with authority to do so.
+        </p>
 
-      <h2>9. Contact</h2>
-      <p>
-        Questions about privacy:
-        <a href="https://github.com/acoaria4/AstroAI/issues">github.com/acoaria4/AstroAI/issues</a>
-      </p>
-      <p>
-        <a href="../index.html">← Back to gLitCh Labs Releases</a>
-      </p>
-    </main>
+        <h2>8. Changes</h2>
+        <p>
+          If we change this policy in a material way (for example new analytics, a new data
+          processor, or a change of hosting provider), we will update this page and the “Last
+          updated” date.
+        </p>
+
+        <h2>9. Contact</h2>
+        <p>
+          Questions about privacy:
+          <a href="https://github.com/acoaria4/AstroAI/issues">github.com/acoaria4/AstroAI/issues</a>
+        </p>
+        <p>
+          <a href="../index.html">← Back to gLitCh Labs Releases</a>
+        </p>
+      </main>
+
+      <footer class="footer">
+        <div class="footer-brand">
+          <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+          <span>© <span id="year"></span> gLitCh Labs</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="./index.html">AURA</a></li>
+          <li><a href="../expenses/privacy.html">Expenses privacy</a></li>
+          <li><a href="../expenses/index.html">Expenses</a></li>
+          <li><a href="https://github.com/acoaria4/gLitCh-Labs-Releases">GitHub</a></li>
+        </ul>
+      </footer>
+    </div>
+
+    <script src="../js/main.js"></script>
   </body>
 </html>

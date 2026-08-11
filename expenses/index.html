@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Expenses by gLitCh Labs — a private pocket ledger. Local-first personal and shared expense tracking. Optional sign-in to sync."
+      content="Expenses by gLitCh Labs ? beautiful, fast, effortless personal and shared expense tracking."
     />
-    <title>Expenses — by gLitCh Labs</title>
-    <link rel="icon" href="assets/expenses-logo.png" type="image/png" />
+    <title>gLitCh Labs ? Expenses</title>
+    <link rel="icon" href="../assets/expenses-icon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -19,575 +19,139 @@
       href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      :root {
-        color-scheme: dark;
-        --bg: #0b0b12;
-        --bg-elevated: #12121a;
-        --text: #f5f3ee;
-        --muted: #a8a6b3;
-        --line: rgba(255, 255, 255, 0.08);
-        --accent: #6366f1;
-        --accent-hover: #818cf8;
-        --radius: 14px;
-        --ease: cubic-bezier(0.22, 1, 0.36, 1);
-        --font-sans: 'Satoshi', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
-        --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-      }
-
-      body {
-        margin: 0;
-        font-family: var(--font-sans);
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.55;
-        -webkit-font-smoothing: antialiased;
-      }
-
-      /* Atmosphere — subtle radial wash, not a purple gradient hero */
-      body::before {
-        content: '';
-        position: fixed;
-        inset: 0;
-        pointer-events: none;
-        z-index: 0;
-        background:
-          radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99, 102, 241, 0.12), transparent 55%),
-          radial-gradient(ellipse 40% 30% at 90% 20%, rgba(245, 243, 238, 0.03), transparent 50%);
-      }
-
-      a {
-        color: inherit;
-      }
-
-      img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-      }
-
-      .wrap {
-        position: relative;
-        z-index: 1;
-        max-width: 1080px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-
-      /* —— Nav (minimal; brand carries the page) —— */
-      .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 0 0;
-        opacity: 0;
-        animation: rise 0.8s var(--ease) 0.05s forwards;
-      }
-
-      .nav-studio {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        text-decoration: none;
-        color: var(--muted);
-        font-size: 0.8rem;
-        font-weight: 500;
-        letter-spacing: 0.02em;
-      }
-
-      .nav-studio img {
-        width: 22px;
-        height: 22px;
-        border-radius: 5px;
-      }
-
-      .nav-links {
-        display: flex;
-        gap: 20px;
-        font-size: 0.85rem;
-        color: var(--muted);
-      }
-
-      .nav-links a {
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
-
-      .nav-links a:hover {
-        color: var(--text);
-      }
-
-      /* —— Hero —— */
-      .hero {
-        min-height: calc(100svh - 64px);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        padding: 48px 0 0;
-      }
-
-      .hero-brand {
-        width: min(280px, 72vw);
-        margin: 0 auto 28px;
-        opacity: 0;
-        animation: rise 0.9s var(--ease) 0.15s forwards;
-      }
-
-      .hero-brand img {
-        width: 100%;
-        filter: drop-shadow(0 12px 40px rgba(0, 0, 0, 0.35));
-      }
-
-      .hero-copy {
-        text-align: center;
-        max-width: 34rem;
-        margin: 0 auto 32px;
-        opacity: 0;
-        animation: rise 0.9s var(--ease) 0.28s forwards;
-      }
-
-      .hero h1 {
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-size: clamp(2.35rem, 6vw, 3.5rem);
-        letter-spacing: -0.02em;
-        line-height: 1.1;
-        margin: 0 0 14px;
-        color: var(--text);
-      }
-
-      .hero h1 em {
-        font-style: italic;
-        color: var(--muted);
-      }
-
-      .hero-lead {
-        margin: 0;
-        color: var(--muted);
-        font-size: 1.05rem;
-        font-weight: 400;
-      }
-
-      .cta-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        justify-content: center;
-        margin-bottom: 40px;
-        opacity: 0;
-        animation: rise 0.9s var(--ease) 0.4s forwards;
-      }
-
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        min-height: 48px;
-        padding: 0 22px;
-        border-radius: 999px;
-        font-family: var(--font-sans);
-        font-size: 0.95rem;
-        font-weight: 600;
-        text-decoration: none;
-        border: 1px solid transparent;
-        cursor: pointer;
-        transition:
-          background 0.25s var(--ease),
-          color 0.25s var(--ease),
-          border-color 0.25s var(--ease),
-          transform 0.25s var(--ease),
-          opacity 0.25s var(--ease);
-      }
-
-      .btn:active {
-        transform: scale(0.98);
-      }
-
-      .btn-primary {
-        background: var(--accent);
-        color: #fff;
-      }
-
-      .btn-primary:hover:not(.btn-soon) {
-        background: var(--accent-hover);
-      }
-
-      .btn-secondary {
-        background: transparent;
-        color: var(--text);
-        border-color: var(--line);
-      }
-
-      .btn-secondary:hover:not(.btn-soon) {
-        border-color: rgba(255, 255, 255, 0.22);
-        background: rgba(255, 255, 255, 0.04);
-      }
-
-      .btn-soon {
-        opacity: 0.55;
-        cursor: default;
-      }
-
-      .btn-soon:hover {
-        transform: none;
-      }
-
-      .btn .soon-label {
-        font-size: 0.7rem;
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-        opacity: 0.85;
-        margin-left: 4px;
-      }
-
-      /* Full-bleed hero visual plane */
-      .hero-visual {
-        position: relative;
-        margin: 0 -24px;
-        overflow: hidden;
-        opacity: 0;
-        animation: rise 1s var(--ease) 0.5s forwards;
-      }
-
-      .hero-visual::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(to top, var(--bg) 0%, transparent 35%);
-        pointer-events: none;
-        z-index: 1;
-      }
-
-      .hero-visual img {
-        width: 100%;
-        min-height: 220px;
-        object-fit: cover;
-        object-position: center;
-        animation: drift 18s ease-in-out infinite alternate;
-      }
-
-      /* Soft light sweep across hero image */
-      .hero-visual::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        z-index: 2;
-        pointer-events: none;
-        background: linear-gradient(
-          105deg,
-          transparent 40%,
-          rgba(255, 255, 255, 0.06) 50%,
-          transparent 60%
-        );
-        background-size: 200% 100%;
-        animation: sweep 7s var(--ease) 1.2s infinite;
-      }
-
-      /* —— Sections —— */
-      section {
-        padding: 88px 0;
-        border-top: 1px solid var(--line);
-      }
-
-      section h2 {
-        font-family: var(--font-display);
-        font-weight: 400;
-        font-size: clamp(1.75rem, 4vw, 2.35rem);
-        letter-spacing: -0.02em;
-        line-height: 1.15;
-        margin: 0 0 14px;
-        max-width: 18ch;
-      }
-
-      section p {
-        margin: 0;
-        max-width: 36rem;
-        color: var(--muted);
-        font-size: 1.05rem;
-      }
-
-      .get {
-        text-align: center;
-      }
-
-      .get h2 {
-        max-width: none;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .get p {
-        margin-left: auto;
-        margin-right: auto;
-        margin-bottom: 28px;
-      }
-
-      .get .cta-row {
-        opacity: 1;
-        animation: none;
-        margin-bottom: 0;
-      }
-
-      /* —— Footer —— */
-      footer {
-        border-top: 1px solid var(--line);
-        padding: 36px 0 56px;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 16px 28px;
-        align-items: center;
-        justify-content: space-between;
-        color: var(--muted);
-        font-size: 0.85rem;
-      }
-
-      footer nav {
-        display: flex;
-        gap: 18px;
-      }
-
-      footer a {
-        text-decoration: none;
-        transition: color 0.2s ease;
-      }
-
-      footer a:hover {
-        color: var(--text);
-      }
-
-      footer .credit {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      footer .credit img {
-        width: 18px;
-        height: 18px;
-        border-radius: 4px;
-      }
-
-      @keyframes rise {
-        from {
-          opacity: 0;
-          transform: translateY(18px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes drift {
-        from {
-          transform: scale(1.02) translateY(0);
-        }
-        to {
-          transform: scale(1.06) translateY(-1.5%);
-        }
-      }
-
-      @keyframes sweep {
-        0%,
-        70% {
-          background-position: 120% 0;
-          opacity: 0;
-        }
-        75% {
-          opacity: 1;
-        }
-        100% {
-          background-position: -20% 0;
-          opacity: 0;
-        }
-      }
-
-      @media (min-width: 768px) {
-        .hero {
-          padding-top: 56px;
-        }
-
-        .hero-brand {
-          width: min(320px, 40vw);
-          margin-bottom: 32px;
-        }
-
-        .hero-visual {
-          margin: 0;
-          border-radius: var(--radius) var(--radius) 0 0;
-          overflow: hidden;
-        }
-
-        .hero-visual img {
-          min-height: 320px;
-          max-height: 42vh;
-        }
-
-        .cta-row .btn {
-          min-width: 200px;
-        }
-      }
-
-      @media (max-width: 480px) {
-        .cta-row {
-          flex-direction: column;
-          width: 100%;
-        }
-
-        .cta-row .btn {
-          width: 100%;
-        }
-
-        .nav-links {
-          gap: 14px;
-          font-size: 0.8rem;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
-
-        .nav,
-        .hero-brand,
-        .hero-copy,
-        .cta-row,
-        .hero-visual {
-          opacity: 1;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/theme.js"></script>
   </head>
   <body>
     <div class="wrap">
-      <header class="nav">
-        <a class="nav-studio" href="https://github.com/acoaria4" rel="noopener noreferrer">
-          <img src="assets/glitchlabs-icon.png" alt="" width="22" height="22" />
-          gLitCh Labs
-        </a>
-        <nav class="nav-links" aria-label="Page">
-          <a href="#local">Local-first</a>
-          <a href="#get">Get the app</a>
-        </nav>
+      <nav class="nav" aria-label="Primary">
+        <div class="nav-brand-lockup">
+          <a class="nav-brand" href="../index.html">
+            <img src="../assets/glitchlabs-icon.png" alt="" width="40" height="40" />
+            gLitCh Labs
+          </a>
+          <span class="nav-crumb" aria-hidden="true">
+            <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M4.25 2.25 8.5 6 4.25 9.75"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+          <a class="nav-product" href="./index.html" aria-current="page">
+            <img src="../assets/expenses-icon.png" alt="" width="32" height="32" />
+            Expenses
+          </a>
+        </div>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="../index.html#products" aria-current="page">Products</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+
+      <header class="product-page-hero">
+        <div class="product-wordmark-block">
+          <img
+            src="../assets/expenses-wordmark.png"
+            alt="Expenses by gLitCh Labs"
+            width="420"
+            height="420"
+          />
+        </div>
+        <div class="hero-copy">
+          <h1>Beautiful. Fast. <em>Effortless.</em></h1>
+          <p class="hero-lead">
+            Local-first personal and shared expense tracking ? with optional sign-in to
+            sync when you?re ready. A private pocket ledger that stays out of the way.
+          </p>
+        </div>
+        <!-- Store / beta links -->
+        <div class="cta-row">
+          <a
+            class="btn btn-primary"
+            href="https://play.google.com/store/apps/details?id=com.glitchlabs.expenses"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-store="play"
+          >
+            Get on Google Play
+            <span class="soon-label">Beta</span>
+          </a>
+          <a
+            class="btn btn-secondary"
+            href="https://testflight.apple.com/join/HnCTs7QU"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-store="appstore"
+          >
+            Download on the App Store
+            <span class="soon-label">Beta</span>
+          </a>
+        </div>
       </header>
 
-      <main>
-        <section class="hero" aria-label="Expenses">
-          <div class="hero-brand">
-            <img src="assets/expenses-logo.png" alt="Expenses" width="320" height="320" />
-          </div>
-          <div class="hero-copy">
-            <h1>A private <em>pocket ledger</em></h1>
-            <p class="hero-lead">
-              Local-first personal and shared expenses. Fast logging, quiet glass UI. Optional
-              sign-in to sync across devices.
-            </p>
-          </div>
-          <div class="cta-row" id="hero-ctas"></div>
-          <div class="hero-visual">
-            <img
-              src="assets/play-feature-graphic-1024x500.png"
-              alt="Expenses app on phone — personal and shared spending at a glance"
-              width="1024"
-              height="500"
-            />
-          </div>
-        </section>
-
-        <section id="local">
-          <h2>Your money stays on your device</h2>
-          <p>
-            Unsigned use stays on-device (IndexedDB on web, Preferences on native) with optional
-            JSON backup. Sign in only if you want cloud sync and shared groups across devices.
-            Privacy is the product, not a footer.
-          </p>
-        </section>
-
-        <section id="shared">
-          <h2>Personal and shared, clearly apart</h2>
-          <p>
-            Track your own spending without clutter. Split group expenses and settle up without
-            polluting personal totals — two ledgers, one calm app.
-          </p>
-        </section>
-
-        <section class="get" id="get">
-          <h2>Get Expenses</h2>
-          <p>Available on Google Play and the App Store when listings go live.</p>
-          <div class="cta-row" id="get-ctas"></div>
-        </section>
-      </main>
-
-      <footer>
-        <nav aria-label="Legal">
-          <a href="privacy.html">Privacy</a>
-          <a href="delete-account.html">Delete account</a>
-          <a href="support.html">Support</a>
-        </nav>
-        <div class="credit">
-          <img src="assets/glitchlabs-icon.png" alt="" width="18" height="18" />
-          <span>by gLitCh Labs</span>
+      <section class="section" id="resources" aria-labelledby="expenses-links">
+        <div class="section-head reveal">
+          <p class="section-kicker">Resources</p>
+          <h2 id="expenses-links">Policies &amp; support</h2>
+          <p>Everything you need for the App Store, Play Console, and day-to-day help.</p>
         </div>
+        <div class="link-grid">
+          <a class="link-card glass reveal" href="privacy.html">
+            <span class="link-card-label">Privacy policy</span>
+            <span class="link-card-desc">How Expenses handles your data</span>
+          </a>
+          <a class="link-card glass reveal reveal-delay-1" href="support.html">
+            <span class="link-card-label">Support</span>
+            <span class="link-card-desc">Get help with Expenses</span>
+          </a>
+          <a class="link-card glass reveal reveal-delay-2" href="delete-account.html">
+            <span class="link-card-label">Delete account</span>
+            <span class="link-card-desc">Store account-deletion flow</span>
+          </a>
+          <a class="link-card glass reveal" href="invite.html">
+            <span class="link-card-label">Group invite</span>
+            <span class="link-card-desc">Join a shared expense group</span>
+          </a>
+          <a
+            class="link-card glass reveal reveal-delay-1"
+            href="https://github.com/acoaria4/expenses-by-glitchlabs"
+          >
+            <span class="link-card-label">Source</span>
+            <span class="link-card-desc">expenses-by-glitchlabs on GitHub</span>
+          </a>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-brand">
+          <img src="../assets/glitchlabs-icon.png" alt="" width="28" height="28" />
+          <span>� <span id="year"></span> gLitCh Labs</span>
+        </div>
+        <ul class="footer-links">
+          <li><a href="../aura/index.html">AURA</a></li>
+          <li><a href="privacy.html">Expenses privacy</a></li>
+          <li><a href="../aura/privacy.html">AURA privacy</a></li>
+          <li><a href="https://github.com/acoaria4/gLitCh-Labs-Releases">GitHub</a></li>
+        </ul>
       </footer>
     </div>
 
-    <script>
-      /* STORE_LINKS: replace when live. Empty string or '#' → Coming soon. */
-      var PLAY_URL = ''
-      var APP_STORE_URL = ''
-
-      function isLive(url) {
-        return typeof url === 'string' && url.trim() !== '' && url.trim() !== '#'
-      }
-
-      function storeButton(label, url, variant) {
-        var live = isLive(url)
-        var a = document.createElement('a')
-        a.className = 'btn ' + variant + (live ? '' : ' btn-soon')
-        a.textContent = label
-        if (live) {
-          a.href = url.trim()
-          a.target = '_blank'
-          a.rel = 'noopener noreferrer'
-        } else {
-          a.href = '#get'
-          a.setAttribute('aria-disabled', 'true')
-          var tag = document.createElement('span')
-          tag.className = 'soon-label'
-          tag.textContent = 'Soon'
-          a.appendChild(tag)
-          a.addEventListener('click', function (e) {
-            e.preventDefault()
-            document.getElementById('get').scrollIntoView({ behavior: 'smooth' })
-          })
-        }
-        return a
-      }
-
-      function fillCtas(containerId) {
-        var el = document.getElementById(containerId)
-        if (!el) return
-        el.appendChild(storeButton('Get on Google Play', PLAY_URL, 'btn-primary'))
-        el.appendChild(storeButton('Download on the App Store', APP_STORE_URL, 'btn-secondary'))
-      }
-
-      fillCtas('hero-ctas')
-      fillCtas('get-ctas')
-    </script>
+    <script src="../js/main.js"></script>
   </body>
 </html>
