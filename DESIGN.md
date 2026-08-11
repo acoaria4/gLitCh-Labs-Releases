@@ -68,7 +68,7 @@ Stored in `localStorage` under `glitchlabs-accent` (`auto` or an id).
 | `dusk` | `#c9a48a` | `#d7b69f` | 16–19 |
 | `night` | `#b8a9c9` | `#cbbfd8` | 20–23 |
 
-Accent drives CTAs, links in docs, soft glows, and atmospheric radials. Do not hard-code gold into new components — use `var(--accent)`.
+Accent drives CTAs, links in docs, soft glows, and atmospheric radials. Do not hard-code gold into new components — use `var(--accent)`. The accent swatch lives in the nav (not a floating viewport control).
 
 ---
 
@@ -142,10 +142,11 @@ Blurred translucent surface: soft fill, light border, inset highlight, deep shad
 
 ### Navigation
 
-- **Brand:** icon 40×40 + `gLitCh Labs` (bold). Links home.
-- **Product crumb:** SVG chevron (`.nav-crumb`) → product link with optional product icon (Expenses: 32×32).
+- **Brand:** icon 40×40 + `<span class="nav-brand-label">gLitCh Labs</span>` (bold). Links home.
+- **Product crumb:** SVG chevron (`.nav-crumb`) → product link with optional product icon (Expenses: 32×32). Lockup uses `flex-wrap: nowrap` so it never stacks inside the fixed-height nav.
+- **Accent picker:** in-nav trailing control (`.accent-helper`), mounted by `theme.js` into `.nav`. Desktop order: brand → links → accent. Mobile order: lockup → accent → hamburger; palette drops below the swatch.
 - **Links:** Products · About · Contact (Contact uses `.nav-cta` accent fill).
-- Mobile: `.nav-toggle` hamburger; `.nav.is-open` expands links.
+- Mobile: `.nav-toggle` hamburger; `.nav.is-open` expands links. On ≤560px product pages, hide `.nav-brand-label` so the crumb stays one line (studio icon + chevron + product).
 
 ### Buttons
 
