@@ -22,3 +22,7 @@ Desktop.ini
 *.tmp
 *.temp
 .cache/
+
+# Local website experiments (new_website_3 stays tracked)
+new_website/
+new_website_2/
