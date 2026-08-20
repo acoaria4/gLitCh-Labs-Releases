@@ -25,3 +25,6 @@ Desktop.ini
 
 # Local website experiments
 new_website*/
+
+# Impeccable local review captures
+.impeccable/review/
