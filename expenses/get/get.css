@@ -1,25 +1,27 @@
-/* Instagram bio landing — inherits tokens from styles.css */
+/* Instagram bio landing — lockup rose-gold, scoped so studio gold stays put */
 
 body.get-page {
+  --accent: #ddbeaa;
+  --accent-hover: #f0d6c6;
+  --text: #f3ebe6;
+  --muted: #c4b4aa;
   min-height: 100dvh;
   min-height: 100svh;
   overflow-x: hidden;
+  color: var(--text);
   scrollbar-color: color-mix(in srgb, var(--accent) 55%, transparent) var(--bg-deep);
 }
 
 body.get-page::before {
   background:
     radial-gradient(
-      ellipse 80% 50% at 50% 28%,
-      color-mix(in srgb, var(--accent) 20%, transparent),
-      transparent 62%
+      ellipse 70% 48% at 50% 26%,
+      color-mix(in srgb, #f9e3d2 22%, transparent),
+      color-mix(in srgb, #ddbeaa 12%, transparent) 38%,
+      color-mix(in srgb, #583f3a 10%, transparent) 58%,
+      transparent 72%
     ),
-    radial-gradient(ellipse 40% 30% at 100% 80%, rgba(245, 243, 238, 0.04), transparent 50%),
-    radial-gradient(
-      ellipse 36% 32% at 0% 70%,
-      color-mix(in srgb, var(--accent) 7%, transparent),
-      transparent 55%
-    ),
+    radial-gradient(ellipse 40% 28% at 100% 88%, color-mix(in srgb, #968274 8%, transparent), transparent 52%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
 }
 
@@ -55,7 +57,9 @@ body.get-page ::selection {
   object-fit: contain;
   opacity: 0;
   animation: rise-logo 0.95s var(--ease) 0.08s forwards;
-  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.35));
+  filter:
+    drop-shadow(0 14px 28px color-mix(in srgb, #583f3a 55%, transparent))
+    drop-shadow(0 0 18px color-mix(in srgb, #ddbeaa 22%, transparent));
 }
 
 .get-lead {
