@@ -46,7 +46,7 @@ body.get-page ::selection {
 
 .get-mark-wrap {
   margin: 0;
-  width: min(260px, 68vw);
+  width: min(300px, 78vw);
 }
 
 .get-mark {
@@ -120,7 +120,7 @@ body.get-page ::selection {
 
 @media (max-height: 720px) {
   .get-mark-wrap {
-    width: min(200px, 52vw);
+    width: min(240px, 64vw);
   }
 
   .get-lead {
