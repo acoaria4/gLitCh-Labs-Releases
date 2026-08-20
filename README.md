@@ -16,6 +16,7 @@ Studio site and public store assets for gLitCh Labs apps.
 | About | `https://acoaria4.github.io/gLitCh-Labs-Releases/about.html` |
 | Contact | `https://acoaria4.github.io/gLitCh-Labs-Releases/contact.html` |
 | Expenses | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/` |
+| Expenses Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/get/` |
 | Expenses privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/privacy.html` |
 | Expenses group invite | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/invite.html` |
 | Expenses delete account | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/delete-account.html` |

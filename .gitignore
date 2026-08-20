@@ -22,3 +22,9 @@ Desktop.ini
 *.tmp
 *.temp
 .cache/
+
+# Local website experiments
+new_website*/
+
+# Impeccable local review captures
+.impeccable/review/
