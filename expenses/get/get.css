@@ -1,0 +1,152 @@
+/* Instagram bio landing — inherits tokens from styles.css */
+
+body.get-page {
+  min-height: 100dvh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  scrollbar-color: color-mix(in srgb, var(--accent) 55%, transparent) var(--bg-deep);
+}
+
+body.get-page::before {
+  background:
+    radial-gradient(
+      ellipse 80% 50% at 50% 28%,
+      color-mix(in srgb, var(--accent) 20%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(ellipse 40% 30% at 100% 80%, rgba(245, 243, 238, 0.04), transparent 50%),
+    radial-gradient(
+      ellipse 36% 32% at 0% 70%,
+      color-mix(in srgb, var(--accent) 7%, transparent),
+      transparent 55%
+    ),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+}
+
+body.get-page ::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.get {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: min(400px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: calc(28px + env(safe-area-inset-top, 0px)) 0
+    calc(28px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+}
+
+.get-mark-wrap {
+  margin: 0;
+  width: min(380px, 86vw);
+}
+
+.get-mark {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  animation: rise-logo 0.95s var(--ease) 0.08s forwards;
+  filter:
+    drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 38%, transparent))
+    drop-shadow(0 12px 32px rgba(0, 0, 0, 0.3))
+    contrast(1.08)
+    brightness(1.06);
+}
+
+.get-lead {
+  margin: 4px 0 0;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.28s forwards;
+}
+
+.get-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 28px;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.44s forwards;
+}
+
+.get-store {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 20px;
+  font-size: 0.98rem;
+  box-sizing: border-box;
+}
+
+.get-store:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.get-store-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.get-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 36px 0 0;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.58s forwards;
+}
+
+.get-credit img {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.28));
+}
+
+@media (max-height: 720px) {
+  .get-mark-wrap {
+    width: min(280px, 64vw);
+  }
+
+  .get-lead {
+    font-size: 0.98rem;
+  }
+
+  .get-cta {
+    margin-top: 20px;
+  }
+
+  .get-credit {
+    margin-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .get-mark,
+  .get-lead,
+  .get-cta,
+  .get-credit {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}

@@ -109,6 +109,7 @@ Path depth:
 
 - Root pages → `./css/`, `./js/`, `./assets/`
 - Product / policy pages under `expenses/` or `aura/` → `../css/`, `../js/`, `../assets/`
+- Instagram bio under `expenses/get/` → `../../css/`, `../../assets/` (no `js/`; no nav or footer)
 
 ### Page types
 
@@ -119,6 +120,9 @@ Path depth:
 | Product marketing | `.product-page-hero` + resources | `expenses/index.html`, `aura/index.html` |
 | Policy / support | `.doc-page` inside shell | `privacy.html`, `support.html`, … |
 | Invite landing | `.invite-panel.glass` + deep-link JS | `expenses/invite.html` |
+| Instagram bio (mark-as-page) | No studio shell. `body.get-page` + `.get` column; wordmark, one line, stacked store buttons. Inherits tokens; stays unlinked from studio and product nav. | `expenses/get/` |
+
+Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. `expenses/get/` is the exception: it loads Satoshi + `css/styles.css` + `expenses/get/get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. Do not add this URL to studio or product navigation.
 
 ### Stable store URLs (do not rename)
 
@@ -223,13 +227,14 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 
 ## Implementation checklist (new page)
 
-1. Copy shell from an existing page at the same path depth (`contact.html` or `expenses/index.html`).
-2. Include fonts + `styles.css` + `theme.js` + `main.js`.
+1. Copy shell from an existing page at the same path depth (`contact.html` or `expenses/index.html`). Instagram bio copies `expenses/get/`, not a studio-shell page.
+2. Include fonts + `styles.css` + `theme.js` + `main.js`. Instagram bio: Satoshi + `styles.css` + `get.css` only.
 3. Use CSS variables — no one-off hex for accent/text/bg.
-4. Pick the right page type (hero / product / doc / invite).
-5. If under `expenses/` or `aura/`, use brand lockup + product crumb.
+4. Pick the right page type (hero / product / doc / invite / Instagram bio).
+5. If under `expenses/` or `aura/` and using the studio shell, use brand lockup + product crumb. Skip the shell entirely for `expenses/get/`.
 6. Do not move or rename store-linked HTML files.
-7. Smoke-test mobile nav and reduced-motion.
+7. Smoke-test mobile nav and reduced-motion (bio page: reduced-motion only; there is no nav).
+8. Never link `expenses/get/` from studio or product navigation.
 
 ---
 
@@ -242,5 +247,6 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 | `js/main.js` | Nav, year, reveals, contact mailto, soon-button guard |
 | `assets/` | Studio + product imagery |
 | `expenses/*`, `aura/*` | Product + store-facing pages |
+| `expenses/get/` | Instagram bio landing — inherits `css/styles.css` tokens; layout in `get.css`; unlinked from nav |
 
 When the visual system changes, update **this file** and the CSS tokens together.

@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-20T06:52:13Z",
+  "title": "gLitCh Labs — Design Language",
+  "extensions": {
+    "colorMeta": {
+      "bg": {
+        "role": "neutral",
+        "displayName": "Near Black",
+        "canonical": "#0b0b12",
+        "tonalRamp": ["#07070c", "#0b0b12", "#14141f", "#1e1e2a", "#3a3a48", "#6e6d7a", "#a8a6b3", "#f5f3ee"]
+      },
+      "bg-deep": {
+        "role": "neutral",
+        "displayName": "Depth Black",
+        "canonical": "#07070c",
+        "tonalRamp": ["#050508", "#07070c", "#0b0b12", "#16161f", "#2a2a36", "#5c5b68", "#a8a6b3", "#f5f3ee"]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Cream",
+        "canonical": "#f5f3ee",
+        "tonalRamp": ["#2a2924", "#4a4840", "#7a776c", "#a8a6b3", "#cfcbc2", "#e4e1da", "#f5f3ee", "#fbfaf7"]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Lilac Gray",
+        "canonical": "#a8a6b3",
+        "tonalRamp": ["#2c2b33", "#45444e", "#6c6a76", "#8a8894", "#a8a6b3", "#c4c2cc", "#dddce3", "#f3f2f6"]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Soft Gold",
+        "canonical": "#d8c4a0",
+        "tonalRamp": ["#3d3428", "#5c4e3a", "#8a7354", "#b89a70", "#d8c4a0", "#e4d2b2", "#efe4d0", "#f7f1e6"]
+      },
+      "accent-hover": {
+        "role": "primary",
+        "displayName": "Gold Hover",
+        "canonical": "#e4d2b2",
+        "tonalRamp": ["#3d3428", "#5c4e3a", "#8a7354", "#c4ae88", "#d8c4a0", "#e4d2b2", "#efe4d0", "#f7f1e6"]
+      },
+      "line": {
+        "role": "neutral",
+        "displayName": "Hairline",
+        "canonical": "rgba(255,255,255,0.1)",
+        "tonalRamp": ["#0b0b12", "#14141c", "#1c1c26", "#2a2a36", "#3a3a48", "#5a5966", "#a8a6b3", "#f5f3ee"]
+      },
+      "glass": {
+        "role": "neutral",
+        "displayName": "Glass Fill",
+        "canonical": "rgba(255,255,255,0.045)",
+        "tonalRamp": ["#0b0b12", "#12121a", "#181822", "#22222e", "#323240", "#5a5966", "#a8a6b3", "#f5f3ee"]
+      },
+      "glass-strong": {
+        "role": "neutral",
+        "displayName": "Glass Strong",
+        "canonical": "rgba(255,255,255,0.07)",
+        "tonalRamp": ["#0b0b12", "#14141c", "#1a1a24", "#262632", "#383846", "#5a5966", "#a8a6b3", "#f5f3ee"]
+      },
+      "glass-border": {
+        "role": "neutral",
+        "displayName": "Glass Edge",
+        "canonical": "rgba(255,255,255,0.14)",
+        "tonalRamp": ["#0b0b12", "#16161e", "#22222c", "#333340", "#4a4a58", "#6e6d7a", "#a8a6b3", "#f5f3ee"]
+      }
+    },
+    "typographyMeta": {
+      "body": {
+        "displayName": "Satoshi",
+        "purpose": "UI, nav, buttons, prose, meta. The Instagram bio page loads this family only."
+      },
+      "display": {
+        "displayName": "Instrument Serif",
+        "purpose": "Studio heroes, page titles, product headlines. Not loaded on expenses/get/."
+      }
+    },
+    "shadows": [
+      {
+        "name": "glass-rest",
+        "value": "0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 60px rgba(0, 0, 0, 0.28)",
+        "purpose": "Inset highlight plus deep drop on .glass surfaces."
+      },
+      {
+        "name": "button-primary-hover",
+        "value": "0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent)",
+        "purpose": "Accent glow under a primary button on hover."
+      },
+      {
+        "name": "mark-accent",
+        "value": "drop-shadow(0 0 22px color-mix(in srgb, var(--accent) 38%, transparent)) drop-shadow(0 12px 32px rgba(0, 0, 0, 0.3))",
+        "purpose": "Soft gold halo under the Expenses wordmark on the bio landing. Nav product icons use a lighter version of the same idea."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Default easing for state transitions and entrance rises. Token: --ease."
+      },
+      {
+        "name": "rise",
+        "value": "opacity 0→1, translateY(22px)→0",
+        "purpose": "Entrance for copy and CTAs. Bio landing staggers lead 0.28s, CTAs 0.44s, credit 0.58s."
+      },
+      {
+        "name": "rise-logo",
+        "value": "0.95s var(--ease) 0.08s forwards",
+        "purpose": "Entrance for the bio wordmark; slightly longer than copy rise."
+      },
+      {
+        "name": "button-hover",
+        "value": "transform translateY(-2px), 0.25s var(--ease)",
+        "purpose": "Primary and secondary button hover lift. Active scale(0.98)."
+      }
+    ],
+    "breakpoints": [
+      { "name": "nav-compact", "value": "560px" },
+      { "name": "product-stack", "value": "860px" },
+      { "name": "grid-collapse", "value": "960px" },
+      { "name": "bio-short-viewport", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Solid accent fill, dark text, pill. Live store and contact CTAs.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">Get on Google Play <span class=\"ds-soon-label\">Beta</span></a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; text-decoration: none; border: 1px solid transparent; cursor: pointer; background: var(--accent); color: var(--bg); transition: background 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease); } .ds-btn-primary:hover { background: var(--accent-hover); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); transform: translateY(-2px); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-btn-primary:active { transform: scale(0.98); } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Glass fill, cream text, accent-tinted border, pill. Used for the App Store / TestFlight control.",
+      "html": "<a class=\"ds-btn-secondary\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 999px; font-family: var(--font-sans); font-size: 0.95rem; font-weight: 600; text-decoration: none; cursor: pointer; background: var(--glass); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease); } .ds-btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-2px); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-btn-secondary:active { transform: scale(0.98); } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; }"
+    },
+    {
+      "name": "Glass",
+      "kind": "card",
+      "refersTo": "glass",
+      "description": "Blurred translucent surface for interaction blocks — product panels, link cards, contact form, invite panel. Not every paragraph.",
+      "html": "<div class=\"ds-glass\">A distinct content block</div>",
+      "css": ".ds-glass { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 60px rgba(0, 0, 0, 0.28); padding: 24px 26px; color: var(--text); font-family: var(--font-sans); }"
+    },
+    {
+      "name": "Link Card",
+      "kind": "card",
+      "refersTo": "link-card",
+      "description": "Label plus short description on glass. Policy and support grids on product pages.",
+      "html": "<a class=\"ds-link-card\" href=\"#\"><span class=\"ds-link-card-label\">Privacy</span><span class=\"ds-link-card-desc\">How Expenses handles your data.</span></a>",
+      "css": ".ds-link-card { display: flex; flex-direction: column; gap: 8px; padding: 24px 26px; text-decoration: none; background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); backdrop-filter: blur(22px) saturate(140%); color: var(--text); font-family: var(--font-sans); transition: transform 0.35s var(--ease), border-color 0.35s var(--ease), background 0.35s var(--ease); } .ds-link-card:hover { transform: translateY(-3px); background: var(--glass-strong); border-color: color-mix(in srgb, var(--accent) 28%, transparent); } .ds-link-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-link-card-label { font-size: 1.15rem; font-weight: 600; letter-spacing: -0.02em; color: var(--text); } .ds-link-card-desc { font-size: 0.95rem; color: var(--muted); line-height: 1.55; }"
+    },
+    {
+      "name": "Instagram Bio Column",
+      "kind": "custom",
+      "refersTo": "get-page",
+      "description": "expenses/get/ only: phone-width stacked store taps under one muted sentence. No nav, no footer, no theme picker. Unlinked from studio chrome.",
+      "html": "<div class=\"ds-get\"><p class=\"ds-get-lead\">Local-first personal and shared expense tracking — with optional sign-in to sync when you’re ready.</p><div class=\"ds-get-cta\"><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Get on Google Play <span class=\"ds-soon-label\">Beta</span></a><a class=\"ds-btn-secondary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
+      "css": ".ds-get { display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-sans); width: min(400px, 100%); margin: 0 auto; } .ds-get-lead { margin: 4px 0 0; max-width: 34ch; color: var(--muted); font-size: 1.05rem; font-weight: 400; line-height: 1.5; } .ds-get-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 28px; } .ds-get-store { width: 100%; min-height: 58px; padding: 0 20px; font-size: 0.98rem; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-family: var(--font-sans); font-weight: 600; text-decoration: none; cursor: pointer; } .ds-btn-primary { background: var(--accent); color: var(--bg); border: 1px solid transparent; } .ds-btn-primary:hover { background: var(--accent-hover); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); transform: translateY(-2px); } .ds-btn-secondary { background: var(--glass); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); backdrop-filter: blur(12px); } .ds-btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-2px); } .ds-get-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; } .ds-get-credit { margin: 36px 0 0; color: var(--muted); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Marks lead; headlines support",
+    "overview": "Atmosphere over flat fill: soft accent glows and grain over solid black. Glass, not cards-for-cards’ sake. Dark by default — cream Satoshi UI on near-black, with Instrument Serif reserved for studio heroes. Brand and product marks lead; headlines support, never overpower. The Instagram bio page is a shell-off exception of the same world: token inheritance, no studio nav, unlinked from product chrome.",
+    "keyCharacteristics": [
+      "Atmosphere over flat fill",
+      "Glass, not cards-for-cards’ sake",
+      "One job per section",
+      "Real product imagery — wordmarks and icons, not stock collages",
+      "Dark by default; cream text on near-black",
+      "Accent is a CSS variable, never a hard-coded gold"
+    ],
+    "rules": [
+      {
+        "name": "The Marks-Lead Rule",
+        "body": "Brand and product marks lead; headlines support, never overpower.",
+        "section": "typography"
+      },
+      {
+        "name": "The Accent Variable Rule",
+        "body": "Do not hard-code gold into new components — use var(--accent). Accent drives CTAs, doc links, soft glows, and atmospheric radials.",
+        "section": "colors"
+      },
+      {
+        "name": "The Glass-When-It-Earns-It Rule",
+        "body": "Use .glass when a surface holds interaction or a distinct content block — not for every paragraph.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Unlinked Bio Rule",
+        "body": "expenses/get/ inherits tokens from css/styles.css and must not appear in studio or product navigation.",
+        "section": "layout"
+      }
+    ],
+    "dos": [
+      "Do use CSS variables from css/styles.css — no one-off hex for accent, text, or background.",
+      "Do keep store CTAs as .btn.btn-primary then .btn.btn-secondary, opening in a new tab.",
+      "Do treat expenses/get/ as a studio-shell exception: Satoshi + styles.css + get.css only.",
+      "Do keep store-linked paths intact (privacy, support, delete-account, invite)."
+    ],
+    "donts": [
+      "Don’t add expenses/get/ to studio or product nav.",
+      "Don’t drop the bio landing into the nav-hero-resources template.",
+      "Don’t invent a parallel palette on a leaf page.",
+      "Don’t hard-code gold; don’t load a theme picker on the bio page.",
+      "Don’t stuff stats, schedules, promo chips, or secondary marketing into a first viewport."
+    ]
+  }
+}
