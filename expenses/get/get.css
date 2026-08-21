@@ -105,10 +105,10 @@ body.get-page ::selection {
 .get-credit {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin: 36px 0 0;
   color: var(--muted);
-  font-size: 0.78rem;
+  font-size: 0.95rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   opacity: 0;
@@ -116,9 +116,9 @@ body.get-page ::selection {
 }
 
 .get-credit img {
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
   filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.28));
 }
 
