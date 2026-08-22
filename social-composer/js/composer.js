@@ -64,6 +64,10 @@
   const CUSTOM_STORAGE_KEY = "glitch-social-composer-custom-assets";
   const CUSTOM_MAX_COUNT = 12;
   const CUSTOM_MAX_BYTES = 2 * 1024 * 1024;
+  const TINT_STORAGE_KEY = "glitch-social-composer-tint-hex";
+  const CUSTOM_COLOR_ID = "expenses-custom-color";
+  const TINT_SOURCE_ID = "expenses-icon-darker";
+  const DEFAULT_TINT_HEX = "#d8c4a0";
 
   const els = {
     canvas: document.getElementById("stage-canvas"),
@@ -74,6 +78,17 @@
     customInput: document.getElementById("custom-asset-input"),
     customGrid: document.getElementById("assets-custom"),
     customEmpty: document.getElementById("custom-empty"),
+    tintHex: document.getElementById("tint-hex"),
+    tintR: document.getElementById("tint-r"),
+    tintG: document.getElementById("tint-g"),
+    tintB: document.getElementById("tint-b"),
+    tintRVal: document.getElementById("tint-r-val"),
+    tintGVal: document.getElementById("tint-g-val"),
+    tintBVal: document.getElementById("tint-b-val"),
+    tintSwatch: document.getElementById("tint-swatch"),
+    tintInsert: document.getElementById("tint-insert"),
+    tintReset: document.getElementById("tint-reset"),
+    tintPanel: document.getElementById("tint-panel"),
     preset: document.getElementById("preset-select"),
     download: document.getElementById("btn-download"),
     clear: document.getElementById("btn-clear"),
@@ -103,6 +118,8 @@
     interaction: null,
     /** @type {Array<{id:string, label:string, dataUrl:string}>} */
     customAssets: [],
+    tintHex: DEFAULT_TINT_HEX,
+    tintPanelOpen: false,
   };
 
   let idSeq = 1;
@@ -299,11 +316,16 @@
     if (!img || !state.width) {
       return { width: 200, height: 200 };
     }
+    const nw = img.naturalWidth || img.width;
+    const nh = img.naturalHeight || img.height;
+    if (!nw || !nh) {
+      return { width: 200, height: 200 };
+    }
     const maxDim = Math.min(state.width, state.height) * 0.35;
-    const scale = Math.min(maxDim / img.naturalWidth, maxDim / img.naturalHeight, 1);
+    const scale = Math.min(maxDim / nw, maxDim / nh, 1);
     return {
-      width: Math.round(img.naturalWidth * scale),
-      height: Math.round(img.naturalHeight * scale),
+      width: Math.round(nw * scale),
+      height: Math.round(nh * scale),
     };
   }
 
@@ -541,6 +563,21 @@
 
     btn.addEventListener("click", (e) => {
       if (e.target.closest(".asset-chip-remove")) return;
+
+      if (asset.id === CUSTOM_COLOR_ID) {
+        if (!state.tintPanelOpen) {
+          openTintPanel();
+          return;
+        }
+        if (!state.bgImage) {
+          els.meta.textContent = "Upload a background first";
+          return;
+        }
+        addOverlay(asset.id);
+        return;
+      }
+
+      closeTintPanel();
       if (!state.bgImage) {
         els.meta.textContent = "Upload a background first";
         return;
@@ -551,6 +588,34 @@
     return btn;
   }
 
+  function tintPreviewSrc() {
+    const tinted = assetImages.get(CUSTOM_COLOR_ID);
+    if (tinted instanceof HTMLCanvasElement) {
+      try {
+        return tinted.toDataURL("image/png");
+      } catch {
+        return "brands/expenses-icon-darker.png";
+      }
+    }
+    if (tinted && tinted.src) return tinted.src;
+    return "brands/expenses-icon-darker.png";
+  }
+
+  function openTintPanel() {
+    state.tintPanelOpen = true;
+    if (els.tintPanel) els.tintPanel.hidden = false;
+    const chip = document.getElementById("chip-custom-color");
+    if (chip) chip.classList.add("is-selected");
+    applyTintColor(state.tintHex || loadStoredTintHex(), { persist: false });
+  }
+
+  function closeTintPanel() {
+    state.tintPanelOpen = false;
+    if (els.tintPanel) els.tintPanel.hidden = true;
+    const chip = document.getElementById("chip-custom-color");
+    if (chip) chip.classList.remove("is-selected");
+  }
+
   function buildAssetPane() {
     for (const group of BRANDS) {
       const root = document.getElementById(group.container);
@@ -559,6 +624,237 @@
       for (const asset of group.assets) {
         root.appendChild(buildAssetChip(asset));
       }
+      if (group.group === "expenses") {
+        const chip = buildAssetChip({
+          id: CUSTOM_COLOR_ID,
+          label: "Custom Color",
+          src: tintPreviewSrc(),
+        });
+        chip.id = "chip-custom-color";
+        if (state.tintPanelOpen) chip.classList.add("is-selected");
+        root.appendChild(chip);
+      }
+    }
+  }
+
+  function clampByte(n) {
+    return Math.max(0, Math.min(255, Math.round(Number(n) || 0)));
+  }
+
+  function rgbToHex(r, g, b) {
+    return (
+      "#" +
+      [r, g, b]
+        .map((v) => clampByte(v).toString(16).padStart(2, "0"))
+        .join("")
+    );
+  }
+
+  function parseHex(raw) {
+    const s = String(raw || "")
+      .trim()
+      .replace(/^#/, "");
+    if (/^[0-9a-fA-F]{6}$/.test(s)) {
+      return {
+        hex: `#${s.toLowerCase()}`,
+        r: parseInt(s.slice(0, 2), 16),
+        g: parseInt(s.slice(2, 4), 16),
+        b: parseInt(s.slice(4, 6), 16),
+      };
+    }
+    if (/^[0-9a-fA-F]{3}$/.test(s)) {
+      const r = parseInt(s[0] + s[0], 16);
+      const g = parseInt(s[1] + s[1], 16);
+      const b = parseInt(s[2] + s[2], 16);
+      return { hex: rgbToHex(r, g, b), r, g, b };
+    }
+    return null;
+  }
+
+  function loadStoredTintHex() {
+    try {
+      const raw = localStorage.getItem(TINT_STORAGE_KEY);
+      const parsed = parseHex(raw || "");
+      return parsed ? parsed.hex : DEFAULT_TINT_HEX;
+    } catch {
+      return DEFAULT_TINT_HEX;
+    }
+  }
+
+  function saveTintHex(hex) {
+    try {
+      localStorage.setItem(TINT_STORAGE_KEY, hex);
+    } catch {
+      // ignore quota
+    }
+  }
+
+  function syncTintControls(hex, { fromHexInput = false } = {}) {
+    const parsed = parseHex(hex);
+    if (!parsed) return null;
+    state.tintHex = parsed.hex;
+    if (els.tintHex && !fromHexInput) els.tintHex.value = parsed.hex;
+    if (els.tintR) els.tintR.value = String(parsed.r);
+    if (els.tintG) els.tintG.value = String(parsed.g);
+    if (els.tintB) els.tintB.value = String(parsed.b);
+    if (els.tintRVal) els.tintRVal.textContent = String(parsed.r);
+    if (els.tintGVal) els.tintGVal.textContent = String(parsed.g);
+    if (els.tintBVal) els.tintBVal.textContent = String(parsed.b);
+    if (els.tintSwatch) els.tintSwatch.style.background = parsed.hex;
+    return parsed;
+  }
+
+  function tintSourceImageLuminance(sourceImg, r, g, b) {
+    const w = sourceImg.naturalWidth || sourceImg.width;
+    const h = sourceImg.naturalHeight || sourceImg.height;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const c = canvas.getContext("2d", { willReadFrequently: true });
+    c.drawImage(sourceImg, 0, 0);
+    const imageData = c.getImageData(0, 0, w, h);
+    const data = imageData.data;
+    for (let i = 0; i < data.length; i += 4) {
+      const a = data[i + 3];
+      if (a === 0) continue;
+      const L =
+        0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2];
+      const t = L / 255;
+      data[i] = Math.round(r * t);
+      data[i + 1] = Math.round(g * t);
+      data[i + 2] = Math.round(b * t);
+    }
+    c.putImageData(imageData, 0, 0);
+    return canvas;
+  }
+
+  function tintSourceImageMultiply(sourceImg, r, g, b) {
+    const w = sourceImg.naturalWidth || sourceImg.width;
+    const h = sourceImg.naturalHeight || sourceImg.height;
+    const canvas = document.createElement("canvas");
+    canvas.width = w;
+    canvas.height = h;
+    const c = canvas.getContext("2d");
+    c.drawImage(sourceImg, 0, 0);
+    c.globalCompositeOperation = "multiply";
+    c.fillStyle = `rgb(${r},${g},${b})`;
+    c.fillRect(0, 0, w, h);
+    c.globalCompositeOperation = "destination-in";
+    c.drawImage(sourceImg, 0, 0);
+    c.globalCompositeOperation = "source-over";
+    return canvas;
+  }
+
+  function tintSourceImage(sourceImg, r, g, b) {
+    try {
+      return tintSourceImageLuminance(sourceImg, r, g, b);
+    } catch {
+      return tintSourceImageMultiply(sourceImg, r, g, b);
+    }
+  }
+
+  function applyTintColor(hex, { persist = true } = {}) {
+    const parsed = syncTintControls(hex);
+    if (!parsed) return false;
+    const source = assetImages.get(TINT_SOURCE_ID);
+    if (!source) {
+      els.meta.textContent = "Custom Color source icon failed to load";
+      return false;
+    }
+
+    let canvas;
+    try {
+      canvas = tintSourceImage(source, parsed.r, parsed.g, parsed.b);
+    } catch (err) {
+      els.meta.textContent = "Could not tint Custom Color";
+      return false;
+    }
+
+    let dataUrl = "";
+    try {
+      dataUrl = canvas.toDataURL("image/png");
+    } catch {
+      els.meta.textContent = "Could not export tinted icon (try via local server)";
+      return false;
+    }
+
+    assetImages.set(CUSTOM_COLOR_ID, canvas);
+    const chipImg = document.querySelector(
+      `#chip-custom-color .asset-thumb img`
+    );
+    if (chipImg) chipImg.src = dataUrl;
+    if (persist) saveTintHex(parsed.hex);
+    if (els.meta && /not ready|Could not tint|source icon/i.test(els.meta.textContent || "")) {
+      els.meta.textContent = "";
+    }
+    draw();
+    return true;
+  }
+
+  function insertTintAsset() {
+    if (!assetImages.get(CUSTOM_COLOR_ID)) {
+      const ok = applyTintColor(state.tintHex || DEFAULT_TINT_HEX, {
+        persist: false,
+      });
+      if (!ok) {
+        els.meta.textContent = "Custom Color is not ready yet";
+        return;
+      }
+    }
+    if (!state.bgImage) {
+      els.meta.textContent = "Upload a background first";
+      return;
+    }
+    addOverlay(CUSTOM_COLOR_ID);
+    els.meta.textContent = `Inserted Custom Color (${state.tintHex.toUpperCase()})`;
+  }
+
+  function wireTintControls() {
+    if (!els.tintHex || !els.tintR || !els.tintG || !els.tintB) return;
+
+    const onSlider = () => {
+      const hex = rgbToHex(els.tintR.value, els.tintG.value, els.tintB.value);
+      applyTintColor(hex);
+    };
+
+    els.tintR.addEventListener("input", onSlider);
+    els.tintG.addEventListener("input", onSlider);
+    els.tintB.addEventListener("input", onSlider);
+
+    els.tintHex.addEventListener("input", () => {
+      const parsed = parseHex(els.tintHex.value);
+      if (!parsed) return;
+      syncTintControls(parsed.hex, { fromHexInput: true });
+      applyTintColor(parsed.hex);
+    });
+
+    els.tintHex.addEventListener("change", () => {
+      const parsed = parseHex(els.tintHex.value);
+      if (!parsed) {
+        els.tintHex.value = state.tintHex;
+        return;
+      }
+      applyTintColor(parsed.hex);
+    });
+
+    if (els.tintInsert) {
+      els.tintInsert.addEventListener("click", () => {
+        insertTintAsset();
+      });
+    }
+
+    if (els.tintReset) {
+      els.tintReset.addEventListener("click", () => {
+        applyTintColor(DEFAULT_TINT_HEX);
+        els.meta.textContent = "Custom Color reset to default";
+      });
+    }
+
+    const expensesGroup = els.tintPanel && els.tintPanel.closest("details");
+    if (expensesGroup) {
+      expensesGroup.addEventListener("toggle", () => {
+        if (!expensesGroup.open) closeTintPanel();
+      });
     }
   }
 
@@ -881,9 +1177,12 @@
   }
 
   // —— Boot ——
-  buildAssetPane();
+  wireTintControls();
   Promise.all([preloadAssets(), bootCustomAssets()])
     .then(() => {
+      state.tintHex = loadStoredTintHex();
+      buildAssetPane();
+      applyTintColor(state.tintHex, { persist: false });
       updateChrome();
     })
     .catch((err) => {
