@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Social Asset Compositor — gLitCh Labs</title>
+    <link rel="stylesheet" href="css/composer.css?v=3" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="toolbar">
+        <div class="toolbar-brand">
+          <a class="toolbar-home" href="../index.html">
+            <span class="toolbar-title">Social Compositor</span>
+            <span class="toolbar-sub">gLitCh Labs</span>
+          </a>
+        </div>
+
+        <div class="toolbar-actions">
+          <label class="btn btn-ghost">
+            Upload background
+            <input id="bg-input" type="file" accept="image/*" hidden />
+          </label>
+
+          <label class="field">
+            <span class="field-label">Size</span>
+            <select id="preset-select" aria-label="Export size">
+              <option value="native">Native (background)</option>
+              <option value="1080x1080">Instagram Square · 1080×1080</option>
+              <option value="1080x1920">Story · 1080×1920</option>
+              <option value="1200x630">Landscape · 1200×630</option>
+              <option value="1600x900">X / Twitter · 1600×900</option>
+            </select>
+          </label>
+
+          <button id="btn-clear" type="button" class="btn btn-ghost" disabled>
+            Clear marks
+          </button>
+          <button id="btn-download" type="button" class="btn btn-primary" disabled>
+            Download PNG
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="pane" aria-label="Brand assets">
+          <details class="brand-group" open>
+            <summary class="brand-heading">Expenses</summary>
+            <div class="asset-grid" id="assets-expenses"></div>
+          </details>
+          <details class="brand-group" open>
+            <summary class="brand-heading">gLitCh Labs</summary>
+            <div class="asset-grid" id="assets-glitch"></div>
+          </details>
+          <p class="pane-hint">
+            Drag a mark onto the stage, or click to place centered. Drag to move,
+            corners to scale. Delete removes the selection.
+          </p>
+        </aside>
+
+        <main class="stage-wrap">
+          <div
+            id="stage-drop"
+            class="stage-drop"
+            tabindex="0"
+            role="application"
+            aria-label="Composition stage"
+          >
+            <canvas id="stage-canvas"></canvas>
+            <div id="empty-state" class="empty-state">
+              <p>Drop a background image here</p>
+              <p class="empty-sub">or use Upload background</p>
+            </div>
+            <div id="selection-box" class="selection-box" hidden>
+              <span class="handle nw" data-handle="nw"></span>
+              <span class="handle ne" data-handle="ne"></span>
+              <span class="handle sw" data-handle="sw"></span>
+              <span class="handle se" data-handle="se"></span>
+            </div>
+          </div>
+          <p id="meta" class="meta"></p>
+        </main>
+      </div>
+    </div>
+
+    <script src="js/composer.js"></script>
+  </body>
+</html>
