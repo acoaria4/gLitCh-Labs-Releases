@@ -13,7 +13,7 @@ Studio site and public store assets for gLitCh Labs apps.
 | Page | URL |
 |------|-----|
 | Studio home | `https://acoaria4.github.io/gLitCh-Labs-Releases/` |
-| Social compositor | `https://acoaria4.github.io/gLitCh-Labs-Releases/social-composer/` |
+| Social Composer | `https://acoaria4.github.io/gLitCh-Labs-Releases/social-composer/` |
 | About | `https://acoaria4.github.io/gLitCh-Labs-Releases/about.html` |
 | Contact | `https://acoaria4.github.io/gLitCh-Labs-Releases/contact.html` |
 | Expenses | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/` |
