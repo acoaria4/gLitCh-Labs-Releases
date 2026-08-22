@@ -360,6 +360,52 @@ input {
   line-height: 1.5;
 }
 
+.custom-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.custom-empty {
+  margin-top: 4px;
+}
+
+.custom-empty[hidden] {
+  display: none;
+}
+
+.asset-chip {
+  position: relative;
+}
+
+.asset-chip-remove {
+  appearance: none;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(11, 11, 18, 0.85);
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.asset-chip-remove:hover {
+  color: var(--text);
+  border-color: var(--glass-border);
+  background: rgba(20, 18, 28, 0.95);
+}
+
 .stage-wrap {
   display: flex;
   flex-direction: column;
