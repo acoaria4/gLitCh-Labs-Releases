@@ -66,6 +66,7 @@
     preset: document.getElementById("preset-select"),
     download: document.getElementById("btn-download"),
     clear: document.getElementById("btn-clear"),
+    reset: document.getElementById("btn-reset"),
     meta: document.getElementById("meta"),
   };
 
@@ -216,6 +217,7 @@
     els.empty.hidden = hasBg;
     els.download.disabled = !hasBg;
     els.clear.disabled = !hasBg || state.overlays.length === 0;
+    els.reset.disabled = !hasBg;
 
     if (!hasBg) {
       els.meta.textContent = "";
@@ -230,6 +232,17 @@
         ? "no marks"
         : `${state.overlays.length} mark${state.overlays.length === 1 ? "" : "s"}`;
     els.meta.textContent = `${mode} · export ${state.width}×${state.height} · ${marks}`;
+  }
+
+  function resetSession() {
+    state.bgImage = null;
+    state.overlays = [];
+    state.selectedId = null;
+    state.width = 0;
+    state.height = 0;
+    if (els.bgInput) els.bgInput.value = "";
+    fitCanvasElement();
+    draw();
   }
 
   function loadImageFromFile(file) {
@@ -567,6 +580,7 @@
     state.selectedId = null;
     draw();
   });
+  els.reset.addEventListener("click", resetSession);
 
   ["dragenter", "dragover"].forEach((type) => {
     els.stage.addEventListener(type, (e) => {
