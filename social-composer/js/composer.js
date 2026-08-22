@@ -22,6 +22,11 @@
           src: "brands/expenses-icon.png",
         },
         {
+          id: "expenses-icon-darker",
+          label: "Icon Darker",
+          src: "brands/expenses-icon-darker.png",
+        },
+        {
           id: "expenses-wordmark",
           label: "Wordmark",
           src: "brands/expenses-wordmark.png",
@@ -56,6 +61,9 @@
 
   const HANDLE_SIZE = 10;
   const MIN_OVERLAY = 24;
+  const CUSTOM_STORAGE_KEY = "glitch-social-composer-custom-assets";
+  const CUSTOM_MAX_COUNT = 12;
+  const CUSTOM_MAX_BYTES = 2 * 1024 * 1024;
 
   const els = {
     canvas: document.getElementById("stage-canvas"),
@@ -63,6 +71,9 @@
     empty: document.getElementById("empty-state"),
     selection: document.getElementById("selection-box"),
     bgInput: document.getElementById("bg-input"),
+    customInput: document.getElementById("custom-asset-input"),
+    customGrid: document.getElementById("assets-custom"),
+    customEmpty: document.getElementById("custom-empty"),
     preset: document.getElementById("preset-select"),
     download: document.getElementById("btn-download"),
     clear: document.getElementById("btn-clear"),
@@ -90,9 +101,12 @@
     selectedId: null,
     presetKey: "native",
     interaction: null,
+    /** @type {Array<{id:string, label:string, dataUrl:string}>} */
+    customAssets: [],
   };
 
   let idSeq = 1;
+  let customSeq = 1;
 
   function nextId() {
     return `ov-${idSeq++}`;
@@ -491,39 +505,185 @@
     }, "image/png");
   }
 
+  function buildAssetChip(asset, { removable = false } = {}) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "asset-chip";
+    btn.draggable = true;
+    btn.dataset.assetId = asset.id;
+    btn.title = `Add ${asset.label}`;
+    btn.innerHTML = `
+      <span class="asset-thumb"><img alt="" src="${asset.src}" /></span>
+      <span class="asset-label"></span>
+    `;
+    btn.querySelector(".asset-label").textContent = asset.label;
+
+    if (removable) {
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "asset-chip-remove";
+      remove.title = `Remove ${asset.label}`;
+      remove.setAttribute("aria-label", `Remove ${asset.label}`);
+      remove.textContent = "×";
+      remove.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        removeCustomAsset(asset.id);
+      });
+      btn.appendChild(remove);
+    }
+
+    btn.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("application/x-brand-asset", asset.id);
+      e.dataTransfer.setData("text/plain", asset.id);
+      e.dataTransfer.effectAllowed = "copy";
+    });
+
+    btn.addEventListener("click", (e) => {
+      if (e.target.closest(".asset-chip-remove")) return;
+      if (!state.bgImage) {
+        els.meta.textContent = "Upload a background first";
+        return;
+      }
+      addOverlay(asset.id);
+    });
+
+    return btn;
+  }
+
   function buildAssetPane() {
     for (const group of BRANDS) {
       const root = document.getElementById(group.container);
       if (!root) continue;
+      root.replaceChildren();
       for (const asset of group.assets) {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "asset-chip";
-        btn.draggable = true;
-        btn.dataset.assetId = asset.id;
-        btn.title = `Add ${asset.label}`;
-        btn.innerHTML = `
-          <span class="asset-thumb"><img alt="" src="${asset.src}" /></span>
-          <span class="asset-label">${asset.label}</span>
-        `;
-
-        btn.addEventListener("dragstart", (e) => {
-          e.dataTransfer.setData("application/x-brand-asset", asset.id);
-          e.dataTransfer.setData("text/plain", asset.id);
-          e.dataTransfer.effectAllowed = "copy";
-        });
-
-        btn.addEventListener("click", () => {
-          if (!state.bgImage) {
-            els.meta.textContent = "Upload a background first";
-            return;
-          }
-          addOverlay(asset.id);
-        });
-
-        root.appendChild(btn);
+        root.appendChild(buildAssetChip(asset));
       }
     }
+  }
+
+  function customEncodedBytes() {
+    return state.customAssets.reduce((sum, a) => sum + (a.dataUrl?.length || 0), 0);
+  }
+
+  function saveCustomAssets() {
+    try {
+      localStorage.setItem(CUSTOM_STORAGE_KEY, JSON.stringify(state.customAssets));
+    } catch (err) {
+      els.meta.textContent = "Could not save custom assets in this browser";
+    }
+  }
+
+  function loadCustomAssetsFromStorage() {
+    try {
+      const raw = localStorage.getItem(CUSTOM_STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed
+        .filter(
+          (a) =>
+            a &&
+            typeof a.id === "string" &&
+            typeof a.label === "string" &&
+            typeof a.dataUrl === "string" &&
+            a.dataUrl.startsWith("data:image/")
+        )
+        .slice(0, CUSTOM_MAX_COUNT);
+    } catch {
+      return [];
+    }
+  }
+
+  function labelFromFilename(name) {
+    const base = String(name || "Custom")
+      .replace(/\.[^.]+$/, "")
+      .replace(/[_-]+/g, " ")
+      .trim();
+    const cleaned = base || "Custom";
+    return cleaned.length > 28 ? `${cleaned.slice(0, 27)}…` : cleaned;
+  }
+
+  function readFileAsDataUrl(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result || ""));
+      reader.onerror = () => reject(new Error("Failed to read file"));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function renderCustomPane() {
+    if (!els.customGrid) return;
+    els.customGrid.replaceChildren();
+    for (const asset of state.customAssets) {
+      els.customGrid.appendChild(
+        buildAssetChip(
+          { id: asset.id, label: asset.label, src: asset.dataUrl },
+          { removable: true }
+        )
+      );
+    }
+    if (els.customEmpty) {
+      els.customEmpty.hidden = state.customAssets.length > 0;
+    }
+  }
+
+  async function preloadCustomAsset(asset) {
+    const img = await loadImageUrl(asset.dataUrl);
+    assetImages.set(asset.id, img);
+  }
+
+  async function addCustomFiles(fileList) {
+    const files = Array.from(fileList || []).filter((f) =>
+      f.type.startsWith("image/")
+    );
+    if (!files.length) return;
+
+    for (const file of files) {
+      if (state.customAssets.length >= CUSTOM_MAX_COUNT) {
+        els.meta.textContent = `Custom library full (${CUSTOM_MAX_COUNT} max)`;
+        break;
+      }
+
+      const dataUrl = await readFileAsDataUrl(file);
+      if (customEncodedBytes() + dataUrl.length > CUSTOM_MAX_BYTES) {
+        els.meta.textContent = "Custom assets exceed 2MB browser limit";
+        break;
+      }
+
+      const id = `custom-${Date.now()}-${customSeq++}`;
+      const asset = {
+        id,
+        label: labelFromFilename(file.name),
+        dataUrl,
+      };
+
+      try {
+        await preloadCustomAsset(asset);
+      } catch {
+        els.meta.textContent = `Could not load ${file.name}`;
+        continue;
+      }
+
+      state.customAssets.push(asset);
+      els.meta.textContent = `Added “${asset.label}” to Custom`;
+    }
+
+    saveCustomAssets();
+    renderCustomPane();
+  }
+
+  function removeCustomAsset(assetId) {
+    state.customAssets = state.customAssets.filter((a) => a.id !== assetId);
+    assetImages.delete(assetId);
+    state.overlays = state.overlays.filter((o) => o.assetId !== assetId);
+    if (state.selectedId && !state.overlays.some((o) => o.id === state.selectedId)) {
+      state.selectedId = null;
+    }
+    saveCustomAssets();
+    renderCustomPane();
+    draw();
   }
 
   async function preloadAssets() {
@@ -548,6 +708,19 @@
     }
     e.target.value = "";
   });
+
+  if (els.customInput) {
+    els.customInput.addEventListener("change", async (e) => {
+      const files = e.target.files;
+      if (!files || !files.length) return;
+      try {
+        await addCustomFiles(files);
+      } catch (err) {
+        els.meta.textContent = err.message || "Could not add custom assets";
+      }
+      e.target.value = "";
+    });
+  }
 
   els.preset.addEventListener("change", () => {
     state.presetKey = els.preset.value;
@@ -689,9 +862,27 @@
     draw();
   });
 
+  async function bootCustomAssets() {
+    const stored = loadCustomAssetsFromStorage();
+    const loaded = [];
+    for (const asset of stored) {
+      try {
+        await preloadCustomAsset(asset);
+        loaded.push(asset);
+      } catch {
+        // drop broken entries
+      }
+    }
+    state.customAssets = loaded;
+    if (loaded.length !== stored.length) {
+      saveCustomAssets();
+    }
+    renderCustomPane();
+  }
+
   // —— Boot ——
   buildAssetPane();
-  preloadAssets()
+  Promise.all([preloadAssets(), bootCustomAssets()])
     .then(() => {
       updateChrome();
     })
