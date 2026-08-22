@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Social Composer — gLitCh Labs</title>
-    <link rel="icon" href="../assets/glitchlabs-icon.png" type="image/png" />
+    <link rel="icon" href="assets/glitchlabs-icon.png" type="image/png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -22,7 +22,7 @@
       <header class="toolbar">
         <a class="toolbar-home" href="../index.html" aria-label="gLitCh Labs home">
           <img
-            src="../assets/glitchlabs-icon.png"
+            src="assets/glitchlabs-icon.png"
             alt=""
             width="40"
             height="40"
@@ -67,6 +67,46 @@
           <details class="brand-group" open>
             <summary class="brand-heading">Expenses</summary>
             <div class="asset-grid" id="assets-expenses"></div>
+            <div class="tint-panel" id="tint-panel" hidden>
+              <p class="tint-panel-label">Custom Color</p>
+              <div class="tint-row">
+                <span class="tint-swatch" id="tint-swatch" aria-hidden="true"></span>
+                <label class="tint-hex-label">
+                  HEX
+                  <input
+                    id="tint-hex"
+                    type="text"
+                    spellcheck="false"
+                    maxlength="7"
+                    value="#d8c4a0"
+                    aria-label="Tint color HEX"
+                  />
+                </label>
+              </div>
+              <label class="tint-slider">
+                <span>R</span>
+                <input id="tint-r" type="range" min="0" max="255" value="216" />
+                <span class="tint-val" id="tint-r-val">216</span>
+              </label>
+              <label class="tint-slider">
+                <span>G</span>
+                <input id="tint-g" type="range" min="0" max="255" value="196" />
+                <span class="tint-val" id="tint-g-val">196</span>
+              </label>
+              <label class="tint-slider">
+                <span>B</span>
+                <input id="tint-b" type="range" min="0" max="255" value="160" />
+                <span class="tint-val" id="tint-b-val">160</span>
+              </label>
+              <div class="tint-actions">
+                <button id="tint-reset" type="button" class="btn btn-ghost">
+                  Reset
+                </button>
+                <button id="tint-insert" type="button" class="btn btn-ghost">
+                  Insert Asset
+                </button>
+              </div>
+            </div>
           </details>
           <details class="brand-group" open>
             <summary class="brand-heading">gLitCh Labs</summary>
