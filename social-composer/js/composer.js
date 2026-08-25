@@ -61,9 +61,16 @@
 
   const HANDLE_SIZE = 10;
   const MIN_OVERLAY = 24;
+  const GRID_SIZE = 72;
   const CUSTOM_STORAGE_KEY = "glitch-social-composer-custom-assets";
   const CUSTOM_MAX_COUNT = 12;
   const CUSTOM_MAX_BYTES = 2 * 1024 * 1024;
+  const CREATED_STORAGE_KEY = "glitch-social-composer-created-pics";
+  const CREATED_MAX_COUNT = 12;
+  const CREATED_MAX_BYTES = 2 * 1024 * 1024;
+  const GRID_STORAGE_KEY = "glitch-social-composer-show-grid";
+  const GRID_INVERT_STORAGE_KEY = "glitch-social-composer-grid-invert";
+  const CREATED_PANE_STORAGE_KEY = "glitch-social-composer-created-pane-open";
   const TINT_STORAGE_KEY = "glitch-social-composer-tint-hex";
   const CUSTOM_COLOR_ID = "expenses-custom-color";
   const TINT_SOURCE_ID = "expenses-icon-darker";
@@ -78,6 +85,10 @@
     customInput: document.getElementById("custom-asset-input"),
     customGrid: document.getElementById("assets-custom"),
     customEmpty: document.getElementById("custom-empty"),
+    createdPane: document.getElementById("pane-created"),
+    createdToggle: document.getElementById("btn-created-toggle"),
+    createdGrid: document.getElementById("assets-created"),
+    createdEmpty: document.getElementById("created-empty"),
     tintHex: document.getElementById("tint-hex"),
     tintR: document.getElementById("tint-r"),
     tintG: document.getElementById("tint-g"),
@@ -91,10 +102,17 @@
     tintPanel: document.getElementById("tint-panel"),
     preset: document.getElementById("preset-select"),
     download: document.getElementById("btn-download"),
+    save: document.getElementById("btn-save"),
     clear: document.getElementById("btn-clear"),
     reset: document.getElementById("btn-reset"),
+    gridToggle: document.getElementById("btn-grid"),
+    gridInvert: document.getElementById("btn-grid-invert"),
     meta: document.getElementById("meta"),
   };
+
+  const BUILTIN_ASSET_IDS = new Set(
+    BRANDS.flatMap((g) => g.assets.map((a) => a.id))
+  );
 
   const ctx = els.canvas.getContext("2d");
 
@@ -118,15 +136,136 @@
     interaction: null,
     /** @type {Array<{id:string, label:string, dataUrl:string}>} */
     customAssets: [],
+    /** @type {Array<{id:string, label:string, thumbDataUrl:string, width:number, height:number, createdAt:number, composition:object}>} */
+    createdPics: [],
+    showGrid: true,
+    gridInvert: false,
+    createdPaneOpen: false,
     tintHex: DEFAULT_TINT_HEX,
     tintPanelOpen: false,
   };
 
   let idSeq = 1;
   let customSeq = 1;
+  let createdSeq = 1;
 
   function nextId() {
     return `ov-${idSeq++}`;
+  }
+
+  function snap(v) {
+    return Math.round(v / GRID_SIZE) * GRID_SIZE;
+  }
+
+  function snapCoord(v) {
+    return state.showGrid ? snap(v) : Math.round(v);
+  }
+
+  function loadShowGrid() {
+    try {
+      const raw = localStorage.getItem(GRID_STORAGE_KEY);
+      if (raw === null) return true;
+      return raw === "1" || raw === "true";
+    } catch {
+      return true;
+    }
+  }
+
+  function saveShowGrid() {
+    try {
+      localStorage.setItem(GRID_STORAGE_KEY, state.showGrid ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function loadGridInvert() {
+    try {
+      const raw = localStorage.getItem(GRID_INVERT_STORAGE_KEY);
+      return raw === "1" || raw === "true";
+    } catch {
+      return false;
+    }
+  }
+
+  function saveGridInvert() {
+    try {
+      localStorage.setItem(GRID_INVERT_STORAGE_KEY, state.gridInvert ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function loadCreatedPaneOpen() {
+    try {
+      const raw = localStorage.getItem(CREATED_PANE_STORAGE_KEY);
+      return raw === "1" || raw === "true";
+    } catch {
+      return false;
+    }
+  }
+
+  function saveCreatedPaneOpen() {
+    try {
+      localStorage.setItem(
+        CREATED_PANE_STORAGE_KEY,
+        state.createdPaneOpen ? "1" : "0"
+      );
+    } catch {
+      /* ignore */
+    }
+  }
+
+  function syncGridToggle() {
+    if (!els.gridToggle) return;
+    els.gridToggle.setAttribute("aria-pressed", state.showGrid ? "true" : "false");
+  }
+
+  function syncGridInvert() {
+    if (!els.gridInvert) return;
+    els.gridInvert.setAttribute(
+      "aria-pressed",
+      state.gridInvert ? "true" : "false"
+    );
+    els.gridInvert.title = state.gridInvert
+      ? "Gridlines: black (click for white)"
+      : "Gridlines: white (click for black)";
+  }
+
+  function syncCreatedPane() {
+    if (!els.createdPane || !els.createdToggle) return;
+    els.createdPane.classList.toggle("is-collapsed", !state.createdPaneOpen);
+    els.createdToggle.setAttribute(
+      "aria-expanded",
+      state.createdPaneOpen ? "true" : "false"
+    );
+    els.createdToggle.title = state.createdPaneOpen
+      ? "Close created pics"
+      : "Open created pics";
+    const label = els.createdToggle.querySelector(".pane-edge-toggle-label");
+    if (label) {
+      label.textContent = state.createdPaneOpen ? "Close" : "Created";
+    }
+  }
+
+  function drawGrid() {
+    if (!state.showGrid || !state.width || !state.height) return;
+    ctx.save();
+    ctx.strokeStyle = state.gridInvert
+      ? "rgba(0, 0, 0, 0.55)"
+      : "rgba(255, 255, 255, 0.55)";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    for (let x = GRID_SIZE; x < state.width; x += GRID_SIZE) {
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, state.height);
+    }
+    for (let y = GRID_SIZE; y < state.height; y += GRID_SIZE) {
+      ctx.moveTo(0, y);
+      ctx.lineTo(state.width, y);
+    }
+    ctx.stroke();
+    ctx.restore();
   }
 
   function currentPreset() {
@@ -210,6 +349,8 @@
     );
     ctx.drawImage(state.bgImage, cover.x, cover.y, cover.w, cover.h);
 
+    drawGrid();
+
     for (const ov of state.overlays) {
       const img = assetImages.get(ov.assetId);
       if (!img) continue;
@@ -247,6 +388,7 @@
     const hasBg = Boolean(state.bgImage);
     els.empty.hidden = hasBg;
     els.download.disabled = !hasBg;
+    if (els.save) els.save.disabled = !hasBg;
     els.clear.disabled = !hasBg || state.overlays.length === 0;
     els.reset.disabled = !hasBg;
 
@@ -334,12 +476,12 @@
     const size = defaultOverlaySize(assetId);
     const x =
       canvasX == null
-        ? Math.round((state.width - size.width) / 2)
-        : Math.round(canvasX - size.width / 2);
+        ? snapCoord((state.width - size.width) / 2)
+        : snapCoord(canvasX - size.width / 2);
     const y =
       canvasY == null
-        ? Math.round((state.height - size.height) / 2)
-        : Math.round(canvasY - size.height / 2);
+        ? snapCoord((state.height - size.height) / 2)
+        : snapCoord(canvasY - size.height / 2);
 
     const ov = {
       id: nextId(),
@@ -430,8 +572,8 @@
     if (!ov) return;
 
     if (it.type === "move") {
-      ov.x = Math.round(it.origX + (cx - it.startX));
-      ov.y = Math.round(it.origY + (cy - it.startY));
+      ov.x = snapCoord(it.origX + (cx - it.startX));
+      ov.y = snapCoord(it.origY + (cy - it.startY));
     } else if (it.type === "scale") {
       const dx = cx - it.startX;
       const dy = cy - it.startY;
@@ -517,14 +659,359 @@
     const out = renderExportCanvas();
     const preset = currentPreset();
     const slug = preset ? preset.slug : "native";
+    const filename = `glitch-compose-${slug}-${state.width}x${state.height}.png`;
     out.toBlob((blob) => {
       if (!blob) return;
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
-      a.download = `glitch-compose-${slug}-${state.width}x${state.height}.png`;
+      a.download = filename;
       a.click();
       URL.revokeObjectURL(a.href);
     }, "image/png");
+  }
+
+  function sourceToDataUrl(source, type = "image/png", quality) {
+    const w = source.naturalWidth || source.width;
+    const h = source.naturalHeight || source.height;
+    if (!w || !h) throw new Error("Invalid image source");
+    const c = document.createElement("canvas");
+    c.width = w;
+    c.height = h;
+    c.getContext("2d").drawImage(source, 0, 0);
+    return quality != null ? c.toDataURL(type, quality) : c.toDataURL(type);
+  }
+
+  function makeThumbDataUrl() {
+    const out = renderExportCanvas();
+    const maxEdge = 320;
+    const scale = Math.min(1, maxEdge / Math.max(out.width, out.height));
+    const tw = Math.max(1, Math.round(out.width * scale));
+    const th = Math.max(1, Math.round(out.height * scale));
+    const t = document.createElement("canvas");
+    t.width = tw;
+    t.height = th;
+    t.getContext("2d").drawImage(out, 0, 0, tw, th);
+    return t.toDataURL("image/jpeg", 0.82);
+  }
+
+  function needsAssetSnapshot(assetId) {
+    return assetId === CUSTOM_COLOR_ID || !BUILTIN_ASSET_IDS.has(assetId);
+  }
+
+  function collectAssetDataUrls() {
+    /** @type {Record<string, string>} */
+    const assetDataUrls = {};
+    const needed = new Set(
+      state.overlays.map((o) => o.assetId).filter(needsAssetSnapshot)
+    );
+    for (const assetId of needed) {
+      const custom = state.customAssets.find((a) => a.id === assetId);
+      if (custom?.dataUrl) {
+        assetDataUrls[assetId] = custom.dataUrl;
+        continue;
+      }
+      const img = assetImages.get(assetId);
+      if (!img) continue;
+      try {
+        assetDataUrls[assetId] = sourceToDataUrl(img, "image/png");
+      } catch {
+        /* skip broken */
+      }
+    }
+    return assetDataUrls;
+  }
+
+  function entryEncodedBytes(entry) {
+    let n = (entry.thumbDataUrl?.length || 0) + (entry.label?.length || 0);
+    const c = entry.composition;
+    if (!c) return n;
+    n += c.bgDataUrl?.length || 0;
+    n += c.presetKey?.length || 0;
+    n += c.tintHex?.length || 0;
+    for (const url of Object.values(c.assetDataUrls || {})) {
+      n += url?.length || 0;
+    }
+    for (const ov of c.overlays || []) {
+      n += 64;
+    }
+    return n;
+  }
+
+  function createdEncodedBytes() {
+    return state.createdPics.reduce((sum, a) => sum + entryEncodedBytes(a), 0);
+  }
+
+  function saveCreatedPics() {
+    try {
+      localStorage.setItem(CREATED_STORAGE_KEY, JSON.stringify(state.createdPics));
+    } catch (err) {
+      els.meta.textContent = "Could not save created pics in this browser";
+    }
+  }
+
+  function isValidComposition(c) {
+    return (
+      c &&
+      typeof c === "object" &&
+      typeof c.bgDataUrl === "string" &&
+      c.bgDataUrl.startsWith("data:image/") &&
+      Array.isArray(c.overlays) &&
+      c.assetDataUrls &&
+      typeof c.assetDataUrls === "object"
+    );
+  }
+
+  function loadCreatedPicsFromStorage() {
+    try {
+      const raw = localStorage.getItem(CREATED_STORAGE_KEY);
+      if (!raw) return [];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed)) return [];
+      return parsed
+        .filter(
+          (a) =>
+            a &&
+            typeof a.id === "string" &&
+            typeof a.label === "string" &&
+            typeof a.thumbDataUrl === "string" &&
+            a.thumbDataUrl.startsWith("data:image/") &&
+            isValidComposition(a.composition)
+        )
+        .slice(0, CREATED_MAX_COUNT)
+        .map((a) => ({
+          id: a.id,
+          label: a.label,
+          thumbDataUrl: a.thumbDataUrl,
+          width: Number(a.width) || 0,
+          height: Number(a.height) || 0,
+          createdAt: Number(a.createdAt) || Date.now(),
+          composition: {
+            bgDataUrl: a.composition.bgDataUrl,
+            presetKey:
+              typeof a.composition.presetKey === "string"
+                ? a.composition.presetKey
+                : "native",
+            tintHex:
+              typeof a.composition.tintHex === "string"
+                ? a.composition.tintHex
+                : DEFAULT_TINT_HEX,
+            overlays: a.composition.overlays
+              .filter(
+                (o) =>
+                  o &&
+                  typeof o.assetId === "string" &&
+                  Number.isFinite(o.x) &&
+                  Number.isFinite(o.y) &&
+                  Number.isFinite(o.width) &&
+                  Number.isFinite(o.height)
+              )
+              .map((o) => ({
+                assetId: o.assetId,
+                x: Number(o.x),
+                y: Number(o.y),
+                width: Number(o.width),
+                height: Number(o.height),
+              })),
+            assetDataUrls: a.composition.assetDataUrls,
+          },
+        }));
+    } catch {
+      return [];
+    }
+  }
+
+  function saveCompositionToLibrary() {
+    if (!state.bgImage) return;
+
+    let bgDataUrl;
+    let thumbDataUrl;
+    try {
+      bgDataUrl = sourceToDataUrl(state.bgImage, "image/jpeg", 0.88);
+      thumbDataUrl = makeThumbDataUrl();
+    } catch (err) {
+      els.meta.textContent = err.message || "Could not encode composition";
+      return;
+    }
+
+    const preset = currentPreset();
+    const slug = preset ? preset.slug : "native";
+    const entry = {
+      id: `created-${Date.now()}-${createdSeq++}`,
+      label: `${slug} ${state.width}×${state.height}`,
+      thumbDataUrl,
+      width: state.width,
+      height: state.height,
+      createdAt: Date.now(),
+      composition: {
+        bgDataUrl,
+        presetKey: state.presetKey || "native",
+        tintHex: state.tintHex || DEFAULT_TINT_HEX,
+        overlays: state.overlays.map((o) => ({
+          assetId: o.assetId,
+          x: o.x,
+          y: o.y,
+          width: o.width,
+          height: o.height,
+        })),
+        assetDataUrls: collectAssetDataUrls(),
+      },
+    };
+
+    const entryBytes = entryEncodedBytes(entry);
+    if (entryBytes > CREATED_MAX_BYTES) {
+      els.meta.textContent = "Composition too large for browser storage";
+      return;
+    }
+
+    while (
+      state.createdPics.length >= CREATED_MAX_COUNT ||
+      createdEncodedBytes() + entryBytes > CREATED_MAX_BYTES
+    ) {
+      if (!state.createdPics.length) {
+        els.meta.textContent = "Composition too large for browser storage";
+        return;
+      }
+      state.createdPics.shift();
+    }
+
+    state.createdPics.push(entry);
+    saveCreatedPics();
+    renderCreatedPane();
+    state.createdPaneOpen = true;
+    saveCreatedPaneOpen();
+    syncCreatedPane();
+    els.meta.textContent = `Saved “${entry.label}” to Created`;
+  }
+
+  function removeCreatedPic(id) {
+    state.createdPics = state.createdPics.filter((p) => p.id !== id);
+    saveCreatedPics();
+    renderCreatedPane();
+  }
+
+  async function restoreComposition(pic) {
+    const comp = pic?.composition;
+    if (!isValidComposition(comp)) {
+      els.meta.textContent = "Saved composition is incomplete";
+      return;
+    }
+
+    try {
+      const bg = await loadImageUrl(comp.bgDataUrl);
+
+      for (const [assetId, dataUrl] of Object.entries(comp.assetDataUrls || {})) {
+        if (typeof dataUrl !== "string" || !dataUrl.startsWith("data:image/")) {
+          continue;
+        }
+        const img = await loadImageUrl(dataUrl);
+        assetImages.set(assetId, img);
+
+        if (assetId.startsWith("custom-")) {
+          const existing = state.customAssets.find((a) => a.id === assetId);
+          if (!existing) {
+            state.customAssets.push({
+              id: assetId,
+              label: "Restored asset",
+              dataUrl,
+            });
+          } else {
+            existing.dataUrl = dataUrl;
+          }
+        }
+      }
+
+      if (typeof comp.tintHex === "string" && parseHex(comp.tintHex)) {
+        state.tintHex = parseHex(comp.tintHex).hex;
+        if (comp.assetDataUrls?.[CUSTOM_COLOR_ID]) {
+          syncTintControls(state.tintHex);
+          const chipImg = document.querySelector(
+            `#chip-custom-color .asset-thumb img`
+          );
+          if (chipImg) chipImg.src = comp.assetDataUrls[CUSTOM_COLOR_ID];
+        } else {
+          applyTintColor(state.tintHex, { persist: false });
+        }
+      }
+
+      state.bgImage = bg;
+      state.presetKey =
+        Object.prototype.hasOwnProperty.call(PRESETS, comp.presetKey)
+          ? comp.presetKey
+          : "native";
+      if (els.preset) els.preset.value = state.presetKey;
+
+      state.overlays = (comp.overlays || []).map((o) => ({
+        id: nextId(),
+        assetId: o.assetId,
+        x: o.x,
+        y: o.y,
+        width: o.width,
+        height: o.height,
+      }));
+      state.selectedId = null;
+
+      recomputeCanvasSize();
+      fitCanvasElement();
+      saveCustomAssets();
+      renderCustomPane();
+      draw();
+      els.meta.textContent = `Restored “${pic.label}”`;
+    } catch (err) {
+      els.meta.textContent = err.message || "Could not restore composition";
+    }
+  }
+
+  function renderCreatedPane() {
+    if (!els.createdGrid) return;
+    els.createdGrid.replaceChildren();
+    for (const pic of [...state.createdPics].reverse()) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "asset-chip";
+      btn.title = `Restore ${pic.label}`;
+      btn.innerHTML = `
+        <span class="asset-thumb"><img alt="" /></span>
+        <span class="asset-label"></span>
+      `;
+      btn.querySelector("img").src = pic.thumbDataUrl;
+      btn.querySelector(".asset-label").textContent = pic.label;
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.className = "asset-chip-remove";
+      remove.title = "Remove from library";
+      remove.setAttribute("aria-label", `Remove ${pic.label}`);
+      remove.textContent = "×";
+      remove.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        removeCreatedPic(pic.id);
+      });
+      btn.appendChild(remove);
+
+      btn.addEventListener("click", () => {
+        restoreComposition(pic);
+      });
+      els.createdGrid.appendChild(btn);
+    }
+    if (els.createdEmpty) {
+      els.createdEmpty.hidden = state.createdPics.length > 0;
+    }
+  }
+
+  function bootCreatedPics() {
+    const stored = loadCreatedPicsFromStorage();
+    state.createdPics = stored;
+    try {
+      const raw = localStorage.getItem(CREATED_STORAGE_KEY);
+      const previous = raw ? JSON.parse(raw) : [];
+      if (Array.isArray(previous) && previous.length !== stored.length) {
+        saveCreatedPics();
+      }
+    } catch {
+      saveCreatedPics();
+    }
+    renderCreatedPane();
   }
 
   function buildAssetChip(asset, { removable = false } = {}) {
@@ -1044,12 +1531,41 @@
   });
 
   els.download.addEventListener("click", downloadPng);
+  if (els.save) {
+    els.save.addEventListener("click", saveCompositionToLibrary);
+  }
   els.clear.addEventListener("click", () => {
     state.overlays = [];
     state.selectedId = null;
     draw();
   });
   els.reset.addEventListener("click", resetSession);
+
+  if (els.gridToggle) {
+    els.gridToggle.addEventListener("click", () => {
+      state.showGrid = !state.showGrid;
+      saveShowGrid();
+      syncGridToggle();
+      draw();
+    });
+  }
+
+  if (els.gridInvert) {
+    els.gridInvert.addEventListener("click", () => {
+      state.gridInvert = !state.gridInvert;
+      saveGridInvert();
+      syncGridInvert();
+      draw();
+    });
+  }
+
+  if (els.createdToggle) {
+    els.createdToggle.addEventListener("click", () => {
+      state.createdPaneOpen = !state.createdPaneOpen;
+      saveCreatedPaneOpen();
+      syncCreatedPane();
+    });
+  }
 
   ["dragenter", "dragover"].forEach((type) => {
     els.stage.addEventListener(type, (e) => {
@@ -1177,6 +1693,13 @@
   }
 
   // —— Boot ——
+  state.showGrid = loadShowGrid();
+  state.gridInvert = loadGridInvert();
+  state.createdPaneOpen = loadCreatedPaneOpen();
+  syncGridToggle();
+  syncGridInvert();
+  syncCreatedPane();
+  bootCreatedPics();
   wireTintControls();
   Promise.all([preloadAssets(), bootCustomAssets()])
     .then(() => {
