@@ -61,7 +61,7 @@
 
   const HANDLE_SIZE = 10;
   const MIN_OVERLAY = 24;
-  const GRID_SIZE = 24;
+  const GRID_SIZE = 72;
   const CUSTOM_STORAGE_KEY = "glitch-social-composer-custom-assets";
   const CUSTOM_MAX_COUNT = 12;
   const CUSTOM_MAX_BYTES = 2 * 1024 * 1024;
@@ -69,6 +69,7 @@
   const CREATED_MAX_COUNT = 12;
   const CREATED_MAX_BYTES = 2 * 1024 * 1024;
   const GRID_STORAGE_KEY = "glitch-social-composer-show-grid";
+  const GRID_INVERT_STORAGE_KEY = "glitch-social-composer-grid-invert";
   const CREATED_PANE_STORAGE_KEY = "glitch-social-composer-created-pane-open";
   const TINT_STORAGE_KEY = "glitch-social-composer-tint-hex";
   const CUSTOM_COLOR_ID = "expenses-custom-color";
@@ -105,6 +106,7 @@
     clear: document.getElementById("btn-clear"),
     reset: document.getElementById("btn-reset"),
     gridToggle: document.getElementById("btn-grid"),
+    gridInvert: document.getElementById("btn-grid-invert"),
     meta: document.getElementById("meta"),
   };
 
@@ -137,6 +139,7 @@
     /** @type {Array<{id:string, label:string, thumbDataUrl:string, width:number, height:number, createdAt:number, composition:object}>} */
     createdPics: [],
     showGrid: true,
+    gridInvert: false,
     createdPaneOpen: false,
     tintHex: DEFAULT_TINT_HEX,
     tintPanelOpen: false,
@@ -176,6 +179,23 @@
     }
   }
 
+  function loadGridInvert() {
+    try {
+      const raw = localStorage.getItem(GRID_INVERT_STORAGE_KEY);
+      return raw === "1" || raw === "true";
+    } catch {
+      return false;
+    }
+  }
+
+  function saveGridInvert() {
+    try {
+      localStorage.setItem(GRID_INVERT_STORAGE_KEY, state.gridInvert ? "1" : "0");
+    } catch {
+      /* ignore */
+    }
+  }
+
   function loadCreatedPaneOpen() {
     try {
       const raw = localStorage.getItem(CREATED_PANE_STORAGE_KEY);
@@ -201,6 +221,17 @@
     els.gridToggle.setAttribute("aria-pressed", state.showGrid ? "true" : "false");
   }
 
+  function syncGridInvert() {
+    if (!els.gridInvert) return;
+    els.gridInvert.setAttribute(
+      "aria-pressed",
+      state.gridInvert ? "true" : "false"
+    );
+    els.gridInvert.title = state.gridInvert
+      ? "Gridlines: black (click for white)"
+      : "Gridlines: white (click for black)";
+  }
+
   function syncCreatedPane() {
     if (!els.createdPane || !els.createdToggle) return;
     els.createdPane.classList.toggle("is-collapsed", !state.createdPaneOpen);
@@ -220,16 +251,18 @@
   function drawGrid() {
     if (!state.showGrid || !state.width || !state.height) return;
     ctx.save();
-    ctx.strokeStyle = "rgba(245, 243, 238, 0.12)";
-    ctx.lineWidth = 1;
+    ctx.strokeStyle = state.gridInvert
+      ? "rgba(0, 0, 0, 0.55)"
+      : "rgba(255, 255, 255, 0.55)";
+    ctx.lineWidth = 2;
     ctx.beginPath();
     for (let x = GRID_SIZE; x < state.width; x += GRID_SIZE) {
-      ctx.moveTo(x + 0.5, 0);
-      ctx.lineTo(x + 0.5, state.height);
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, state.height);
     }
     for (let y = GRID_SIZE; y < state.height; y += GRID_SIZE) {
-      ctx.moveTo(0, y + 0.5);
-      ctx.lineTo(state.width, y + 0.5);
+      ctx.moveTo(0, y);
+      ctx.lineTo(state.width, y);
     }
     ctx.stroke();
     ctx.restore();
@@ -1517,6 +1550,15 @@
     });
   }
 
+  if (els.gridInvert) {
+    els.gridInvert.addEventListener("click", () => {
+      state.gridInvert = !state.gridInvert;
+      saveGridInvert();
+      syncGridInvert();
+      draw();
+    });
+  }
+
   if (els.createdToggle) {
     els.createdToggle.addEventListener("click", () => {
       state.createdPaneOpen = !state.createdPaneOpen;
@@ -1652,8 +1694,10 @@
 
   // —— Boot ——
   state.showGrid = loadShowGrid();
+  state.gridInvert = loadGridInvert();
   state.createdPaneOpen = loadCreatedPaneOpen();
   syncGridToggle();
+  syncGridInvert();
   syncCreatedPane();
   bootCreatedPics();
   wireTintControls();
