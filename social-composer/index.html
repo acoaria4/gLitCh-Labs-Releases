@@ -50,11 +50,23 @@
             </select>
           </label>
 
+          <button
+            id="btn-grid"
+            type="button"
+            class="btn btn-ghost"
+            aria-pressed="true"
+            title="Toggle placement grid"
+          >
+            Grid
+          </button>
           <button id="btn-clear" type="button" class="btn btn-ghost" disabled>
             Clear marks
           </button>
           <button id="btn-reset" type="button" class="btn btn-ghost" disabled>
             Clear Everything
+          </button>
+          <button id="btn-save" type="button" class="btn btn-ghost" disabled>
+            Save
           </button>
           <button id="btn-download" type="button" class="btn btn-primary" disabled>
             Download PNG
@@ -157,6 +169,30 @@
           </div>
           <p id="meta" class="meta"></p>
         </main>
+
+        <aside
+          id="pane-created"
+          class="pane pane-created is-collapsed"
+          aria-label="Created pics"
+        >
+          <button
+            id="btn-created-toggle"
+            type="button"
+            class="pane-edge-toggle"
+            aria-expanded="false"
+            aria-controls="pane-created-body"
+            title="Open created pics"
+          >
+            <span class="pane-edge-toggle-label">Created</span>
+          </button>
+          <div id="pane-created-body" class="pane-created-body">
+            <p class="brand-heading pane-created-heading">Created</p>
+            <div class="asset-grid" id="assets-created"></div>
+            <p id="created-empty" class="pane-hint">
+              Saved compositions appear here. Click to restore and edit.
+            </p>
+          </div>
+        </aside>
       </div>
     </div>
 
