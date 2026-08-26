@@ -1,0 +1,26 @@
+.footer {
+  border-top: 1px solid var(--line);
+  padding-block: var(--space-6);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.footer__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: var(--fs-meta);
+  color: var(--c-near-white);
+}
+
+.footer__brand img {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.3rem;
+}

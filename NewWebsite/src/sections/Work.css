@@ -1,0 +1,150 @@
+.work__header {
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+  max-width: 36rem;
+}
+
+.work__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.work-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  padding-block: var(--space-7);
+  border-top: 1px solid var(--line);
+  color: inherit;
+  transition: background var(--dur-ui) var(--ease-out);
+}
+
+.work-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.work-row__visual {
+  position: relative;
+  overflow: hidden;
+}
+
+.work-row__plate {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  min-height: 14rem;
+  background:
+    radial-gradient(70% 60% at 50% 42%, rgba(36, 39, 42, 0.65), transparent 70%),
+    linear-gradient(160deg, #141618 0%, #0b0c0d 55%, #070809 100%);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 1px var(--line),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: background 0.7s var(--ease-out);
+}
+
+.work-row__mark {
+  width: clamp(7rem, 22vw, 11rem);
+  height: clamp(7rem, 22vw, 11rem);
+  object-fit: contain;
+  border-radius: 1.35rem;
+  transform: scale(1);
+  transition: transform 1s var(--ease-cinematic);
+  filter: drop-shadow(0 14px 32px rgba(0, 0, 0, 0.5));
+}
+
+.work-row__badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: var(--c-cool-silver);
+  letter-spacing: 0.12em;
+}
+
+.work-row__line {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 1px;
+  width: 0;
+  background: var(--c-cool-silver);
+  transition: width 0.7s var(--ease-out);
+  z-index: 2;
+}
+
+.work-row:hover .work-row__mark,
+.work-row:focus-visible .work-row__mark {
+  transform: scale(1.06);
+}
+
+.work-row:hover .work-row__plate,
+.work-row:focus-visible .work-row__plate {
+  background:
+    radial-gradient(75% 65% at 48% 40%, rgba(55, 60, 66, 0.55), transparent 68%),
+    linear-gradient(160deg, #181a1c 0%, #0d0e10 55%, #070809 100%);
+}
+
+.work-row:hover .work-row__line,
+.work-row:focus-visible .work-row__line {
+  width: 100%;
+}
+
+.work-row__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.work-row__head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.work-row__title {
+  margin: 0 0 var(--space-4);
+  letter-spacing: -0.02em;
+}
+
+.work-row__cat {
+  margin: 0 0 var(--space-5);
+  color: var(--c-cool-silver);
+  letter-spacing: 0.1em;
+}
+
+.work-row__desc {
+  margin: 0 0 var(--space-6);
+  max-width: 32rem;
+  line-height: 1.65;
+}
+
+.work-row__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  opacity: 0.75;
+  transition: opacity var(--dur-ui) var(--ease-out);
+}
+
+.work-row:hover .work-row__meta {
+  opacity: 1;
+}
+
+@media (min-width: 900px) {
+  .work-row {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: var(--space-7);
+    align-items: stretch;
+    padding-block: var(--space-8);
+  }
+
+  .work-row__plate {
+    min-height: 18rem;
+  }
+}

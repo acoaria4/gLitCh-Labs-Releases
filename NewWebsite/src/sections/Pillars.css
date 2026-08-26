@@ -1,0 +1,134 @@
+.pillars__header {
+  max-width: 34rem;
+  display: grid;
+  gap: var(--space-4);
+  margin-bottom: var(--space-7);
+}
+
+.pillars__stage {
+  position: relative;
+  min-height: min(70vh, 40rem);
+  padding: clamp(1.5rem, 4vw, 2.75rem);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  overflow: hidden;
+}
+
+.pillars__crosshair {
+  position: absolute;
+  inset: 12%;
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.pillars__crosshair > span:nth-child(1),
+.pillars__crosshair > span:nth-child(2) {
+  position: absolute;
+  background: var(--line-strong);
+}
+
+.pillars__crosshair > span:nth-child(1) {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.pillars__crosshair > span:nth-child(2) {
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  transform: translateY(-50%);
+}
+
+.pillars__ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(42%, 14rem);
+  aspect-ratio: 1;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pillars__ring--outer {
+  width: min(68%, 22rem);
+  border-style: dashed;
+  opacity: 0.7;
+}
+
+.pillars__readout {
+  position: relative;
+  z-index: 1;
+  max-width: 28rem;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.pillars__active-id {
+  color: var(--c-cool-silver);
+}
+
+.pillars__active-title {
+  margin: var(--space-2) 0;
+}
+
+.pillars__nodes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  align-self: end;
+}
+
+.pillars__node {
+  background: rgba(5, 5, 5, 0.55);
+}
+
+.pillars__node-btn {
+  width: 100%;
+  text-align: left;
+  padding: var(--space-4);
+  display: grid;
+  gap: var(--space-2);
+  min-height: 5.5rem;
+  transition: background var(--dur-ui) var(--ease-out);
+}
+
+.pillars__node-title {
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+  color: var(--fg-muted);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+
+.pillars__node.is-active .pillars__node-btn,
+.pillars__node-btn:hover,
+.pillars__node-btn:focus-visible {
+  background: rgba(24, 26, 28, 0.9);
+}
+
+.pillars__node.is-active .pillars__node-title {
+  color: var(--c-pure-white);
+}
+
+@media (min-width: 960px) {
+  .pillars__stage {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: stretch;
+  }
+
+  .pillars__nodes {
+    grid-template-columns: 1fr;
+  }
+}

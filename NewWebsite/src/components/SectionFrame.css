@@ -1,0 +1,12 @@
+.section-frame {
+  position: relative;
+  padding-block: var(--pad-y);
+}
+
+.section-frame__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-6);
+  padding-top: var(--space-2);
+}

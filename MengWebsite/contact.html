@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Contact gLitCh Labs." />
+    <title>Contact — gLitCh Labs</title>
+    <link rel="icon" href="/assets/glitchlabs-mark.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,600;1,7..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <!--
+      THESIS: Contact as a precise intake — mailto with honest validation states.
+      OWN-WORLD: Same precision ledger system.
+      STORY: Visitor sends a message to glitchlabsio@gmail.com.
+      FIRST VIEWPORT: Brand-led title, lead, form.
+      FORM: editorial-tech. FINISH: production build + DESIGN.md + provenance.
+    -->
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-brand" href="/index.html">
+          <img src="/assets/glitchlabs-mark.png" alt="" width="32" height="32" />
+          <span>gLitCh Labs</span>
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="/expenses/index.html">Expenses</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a class="nav-cta" href="/contact.html" aria-current="page">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="section" data-hero aria-labelledby="contact-title">
+        <div class="wrap" style="padding-top: var(--space-7); margin-bottom: var(--space-6)">
+          <p class="kicker" data-reveal>Contact</p>
+          <p class="hero-brand" data-hero-brand style="font-size: clamp(2.2rem, 5vw, 3.6rem)">
+            Write to the studio
+          </p>
+          <h1 id="contact-title" class="sr-only">Contact gLitCh Labs</h1>
+          <p class="lead" data-hero-lead style="margin-top: var(--space-4)">
+            Product questions, collaborations, or press — send a note. We reply from
+            <a href="mailto:glitchlabsio@gmail.com">glitchlabsio@gmail.com</a>.
+          </p>
+        </div>
+
+        <form class="form-shell" data-contact-form data-reveal novalidate>
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required placeholder=" " />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder=" "
+            />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required placeholder=" "></textarea>
+          </div>
+          <p class="form-note">
+            Submitting opens your email client with a drafted message. Nothing is stored on this
+            site.
+          </p>
+          <p class="form-status" data-form-status role="status" aria-live="polite"></p>
+          <button class="btn btn-primary" type="submit">
+            Send message
+            <iconify-icon class="icon" icon="solar:letter-linear" aria-hidden="true"></iconify-icon>
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/assets/glitchlabs-mark.png" alt="" width="36" height="36" />
+          <div>
+            <strong>gLitCh Labs</strong>
+            <p>Focused, privacy-minded software — calm, useful, and unmistakably ours.</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Navigate</h3>
+          <ul>
+            <li><a href="/expenses/index.html">Expenses</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <ul>
+            <li>
+              <a href="mailto:glitchlabsio@gmail.com">glitchlabsio@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-meta">© gLitCh Labs</p>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

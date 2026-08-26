@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="gLitCh Labs — a small studio shipping focused, privacy-minded software."
+    />
+    <title>gLitCh Labs</title>
+    <link rel="icon" href="/assets/glitchlabs-mark.png" type="image/png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,500;0,7..72,600;1,7..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  </head>
+  <body>
+    <!--
+      THESIS: Precision ledger editorial for a privacy studio — cool paper, mineral teal, engineered restraint; refuses dark-glass gold luxury and generic SaaS card stacks.
+      OWN-WORLD: Cool stone paper field, deep ink Literata display, Satoshi body, JetBrains Mono kickers, thin rules, full-bleed media bands, mineral teal accent.
+      STORY: Visitor meets gLitCh Labs, understands calm privacy-minded software, and opens Expenses or Contact.
+      FIRST VIEWPORT: Full-bleed studio hero band; brand name hero-scale; one headline; one lead; Explore + Contact CTAs.
+      FORM: editorial-tech + Lenis/GSAP; Three.js none. FINISH: build ends with production build, DESIGN.md, asset provenance.
+    -->
+    <header class="site-header">
+      <nav class="nav" aria-label="Primary">
+        <a class="nav-brand" href="/index.html" aria-current="page">
+          <img src="/assets/glitchlabs-mark.png" alt="" width="32" height="32" />
+          <span>gLitCh Labs</span>
+        </a>
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+          aria-label="Open menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="/expenses/index.html">Expenses</a></li>
+          <li><a href="/about.html">About</a></li>
+          <li><a class="nav-cta" href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" data-hero id="top" aria-label="Studio introduction">
+        <div class="hero-media" data-hero-media>
+          <img
+            src="/assets/studio-hero.png"
+            alt="Quiet desk with an open ruled notebook in soft daylight"
+            width="1600"
+            height="900"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero-content">
+          <p class="kicker" data-reveal>Studio</p>
+          <p class="hero-brand" data-hero-brand>gLitCh Labs</p>
+          <h1 data-hero-title>Focused software that stays out of the way.</h1>
+          <p class="lead" data-hero-lead>
+            A small studio shipping privacy-minded apps — local-first where it matters,
+            calm by default, and built for everyday use.
+          </p>
+          <div class="btn-row" data-hero-cta>
+            <a class="btn btn-primary" href="#products">
+              Explore apps
+              <iconify-icon class="icon" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>
+            </a>
+            <a class="btn btn-secondary" href="/contact.html">Contact</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="products" aria-labelledby="products-title">
+        <div class="section-head wrap">
+          <p class="kicker">Products</p>
+          <h2 id="products-title" data-motion-text="words">What we’re shipping</h2>
+          <p class="lead" data-reveal>
+            One live product with a clear job. No clutter. No invented social proof.
+          </p>
+        </div>
+
+        <article class="product-entry" data-reveal-group>
+          <div class="product-entry-copy" data-reveal-item>
+            <div class="mark-row">
+              <img src="/assets/expenses-mark.png" alt="" width="44" height="44" />
+              <span class="beta">Beta</span>
+            </div>
+            <h3>Expenses</h3>
+            <p class="lead">
+              A private pocket ledger for personal and shared spending. Local-first first;
+              optional sign-in when you want to sync.
+            </p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="/expenses/index.html">
+                View Expenses
+                <iconify-icon class="icon" icon="solar:arrow-right-linear" aria-hidden="true"></iconify-icon>
+              </a>
+            </div>
+          </div>
+          <div class="product-entry-media" data-reveal-item data-image-reveal>
+            <img
+              src="/assets/expenses-hero.png"
+              alt="Pocket ledger and blank receipt slips on a cool paper desk"
+              width="1200"
+              height="675"
+              loading="lazy"
+            />
+          </div>
+        </article>
+      </section>
+
+      <figure class="editorial-band" data-image-reveal>
+        <img
+          src="/assets/studio-hero.png"
+          alt=""
+          width="1600"
+          height="900"
+          loading="lazy"
+          role="presentation"
+        />
+      </figure>
+
+      <section class="section" aria-labelledby="philosophy-title">
+        <div class="split">
+          <div class="split-meta" data-reveal>
+            <p class="kicker">Approach</p>
+            <h2 id="philosophy-title" data-motion-text="words">Built with restraint.</h2>
+          </div>
+          <div data-reveal>
+            <p class="lead">
+              Clarity over feature count. Privacy as a product fact, not a slogan.
+              Defaults that feel inevitable — “of course that’s how it should work.”
+            </p>
+            <div class="btn-row">
+              <a class="btn btn-secondary" href="/about.html">Read the studio principles</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="home-cta-title">
+        <div class="cta-panel" data-reveal>
+          <p class="kicker">Next</p>
+          <h2 id="home-cta-title">Have a question, or want to collaborate?</h2>
+          <p class="lead">Write to the studio. We read every message.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="/contact.html">Contact gLitCh Labs</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img src="/assets/glitchlabs-mark.png" alt="" width="36" height="36" />
+          <div>
+            <strong>gLitCh Labs</strong>
+            <p>Focused, privacy-minded software — calm, useful, and unmistakably ours.</p>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h3>Navigate</h3>
+          <ul>
+            <li><a href="/expenses/index.html">Expenses</a></li>
+            <li><a href="/about.html">About</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <ul>
+            <li>
+              <a href="mailto:glitchlabsio@gmail.com">glitchlabsio@gmail.com</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="footer-meta">© gLitCh Labs</p>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+  </body>
+</html>

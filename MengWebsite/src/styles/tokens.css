@@ -1,0 +1,35 @@
+:root {
+  --paper: #e9eeea;
+  --paper-deep: #dde4df;
+  --ink: #0e1412;
+  --ink-soft: #24302b;
+  --muted: #5a6560;
+  --accent: #0f6e63;
+  --accent-hover: #0b574f;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --line: color-mix(in srgb, var(--ink) 12%, transparent);
+  --line-strong: color-mix(in srgb, var(--ink) 22%, transparent);
+  --surface: #f3f6f3;
+  --focus: #0f6e63;
+  --danger: #8a2f2f;
+
+  --font-display: "Literata", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-body: "Satoshi", "Avenir Next", "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 7rem;
+
+  --wrap: min(1120px, calc(100% - 2.5rem));
+  --wrap-wide: min(1280px, calc(100% - 2rem));
+  --radius: 2px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-h: 4.25rem;
+}

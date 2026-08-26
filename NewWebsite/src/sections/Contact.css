@@ -1,0 +1,60 @@
+.contact {
+  padding-block: var(--space-6) var(--space-4);
+  display: grid;
+  gap: var(--space-7);
+}
+
+.contact__title {
+  max-width: 12ch;
+}
+
+.contact__line {
+  display: block;
+  overflow: hidden;
+}
+
+.contact__line > span {
+  display: inline-block;
+}
+
+.contact__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  width: fit-content;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line-strong);
+  transition: border-color var(--dur-ui) var(--ease-out);
+  will-change: transform;
+}
+
+.contact__cta:hover,
+.contact__cta:focus-visible {
+  border-color: var(--c-cool-silver);
+}
+
+.contact__cta-label {
+  font-size: var(--fs-display-sm);
+  font-weight: 500;
+  letter-spacing: var(--track-display);
+  color: var(--c-pure-white);
+}
+
+.contact__cta-arrow {
+  font-size: var(--fs-display-sm);
+  color: var(--c-cool-silver);
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+
+.contact__cta:hover .contact__cta-arrow {
+  transform: translateX(6px);
+}
+
+.contact__email a {
+  color: var(--fg-muted);
+  transition: color var(--dur-ui) var(--ease-out);
+}
+
+.contact__email a:hover {
+  color: var(--c-near-white);
+}
