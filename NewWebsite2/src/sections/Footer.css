@@ -1,0 +1,32 @@
+.footer {
+  padding: 2.5rem var(--pad-x) 2.75rem;
+  border-top: 1px solid var(--rule);
+  background: var(--void-deep);
+}
+
+.footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.footer__wordmark {
+  width: min(180px, 48vw);
+  height: auto;
+  opacity: 0.95;
+  mix-blend-mode: screen;
+}
+
+.footer__meta {
+  display: grid;
+  gap: 0.45rem;
+  justify-items: end;
+}
+
+@media (max-width: 560px) {
+  .footer__meta {
+    justify-items: start;
+  }
+}

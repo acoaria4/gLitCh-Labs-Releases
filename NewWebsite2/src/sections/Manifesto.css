@@ -1,0 +1,49 @@
+.manifesto {
+  position: relative;
+  padding: var(--pad-y) var(--pad-x);
+  background:
+    linear-gradient(180deg, transparent, rgba(17, 19, 21, 0.55) 30%, transparent),
+    var(--void);
+}
+
+.manifesto__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 3.5rem);
+}
+
+.manifesto__title {
+  font-size: clamp(2rem, 6.2vw, 4.75rem);
+  max-width: 14ch;
+}
+
+.manifesto__copy {
+  display: grid;
+  gap: 1.25rem;
+  border-left: 1px solid var(--rule);
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+  max-width: 40rem;
+}
+
+@media (min-width: 960px) {
+  .manifesto__grid {
+    grid-template-columns: 8rem 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 3rem;
+  }
+
+  .manifesto__grid > .tech-label {
+    grid-column: 1;
+    grid-row: 1;
+    padding-top: 0.55rem;
+  }
+
+  .manifesto__title {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .manifesto__copy {
+    grid-column: 2;
+    grid-row: 2;
+  }
+}

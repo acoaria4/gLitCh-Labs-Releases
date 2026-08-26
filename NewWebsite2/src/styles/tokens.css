@@ -1,0 +1,44 @@
+:root {
+  /* Color — matte black instrument world */
+  --void: #050505;
+  --void-deep: #030303;
+  --surface: #0a0b0c;
+  --graphite: #111315;
+  --gunmetal: #191c1f;
+  --metal: #292d30;
+  --silver-mute: #73787c;
+  --silver: #a9adb0;
+  --text: #e7e8e6;
+  --white: #f4f4f1;
+
+  /* Type */
+  --font-sans: "Geist Sans", "Inter Tight", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Space */
+  --pad-x: clamp(1.25rem, 4vw, 3.5rem);
+  --pad-y: clamp(4rem, 12vh, 9rem);
+  --rail: min(1120px, calc(100% - 2 * var(--pad-x)));
+
+  /* Motion — Emil curves */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --duration-fast: 160ms;
+  --duration-mid: 320ms;
+  --duration-slow: 720ms;
+
+  /* Material */
+  --grain-opacity: 0.045;
+  --rule: color-mix(in srgb, var(--metal) 70%, transparent);
+  --focus: 0 0 0 1px var(--void), 0 0 0 2px var(--silver);
+
+  color-scheme: dark;
+  --cursor-mix: difference;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --pad-x: 1.15rem;
+  }
+}
