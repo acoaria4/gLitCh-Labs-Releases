@@ -23,6 +23,7 @@ Studio site and public store assets for gLitCh Labs apps.
 | Expenses delete account | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/delete-account.html` |
 | Expenses support | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/support.html` |
 | AURA | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/` |
+| AURA Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/get/` |
 | AURA privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/privacy.html` |
 
 ### Store / console URLs
