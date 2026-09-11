@@ -1,0 +1,120 @@
+---
+description: Release ritual when the user says Going for Release or Prep for release
+alwaysApply: true
+---
+
+<!--
+Portable source of truth for other machines. This path is not auto-applied.
+
+Install: cp .cursor/user-rule-templates/going-for-release.mdc ~/.cursor/rules/
+
+Do not copy into .cursor/rules/ if you already use the ~/.cursor/rules copy
+(avoids applying the rule twice).
+-->
+
+# Going for Release
+
+When the user says **Going for Release**, **Prep for release**, or a clear equivalent, run this ritual. Do **not** run it on ordinary commits or PRs.
+
+## Versioning (hard rules — every prep)
+
+These apply to **every** prep, including repeats on the same branch:
+
+1. **Marketing version = branch semver.** Parse the leading `X.Y.Z` from the current branch name (`0.7.2-calendar-full-swipe` → `0.7.2`, `1.5.18-individualFixes` → `1.5.18`). Set Android `versionName` and iOS `MARKETING_VERSION` to that string. If the branch has no leading semver, ask once and stop.
+2. **Always bump `versionCode`.** Increment Android `versionCode` and iOS `CURRENT_PROJECT_VERSION` by **+1** from whatever is currently in the project — even when `versionName` is unchanged. Never rebuild/upload with the same `versionCode` as the previous prep. Play accepts any `versionName`; only `versionCode` must rise.
+
+Do not skip the bump because “we already prepped this branch” or “only rebuilding the AAB.”
+
+## Steps (fixed order — stop on failure)
+
+| Step | Action | Stop if |
+| ---- | ------ | ------- |
+| 1 | Apply **Versioning** above (branch → `versionName` / `MARKETING_VERSION`; always `versionCode` / `CURRENT_PROJECT_VERSION` +1). Prefer the project’s bump script when present (`npm run bump -- <X.Y.Z>` on Expenses — also writes `releases/vX.Y.Z.md`). Otherwise edit Android/iOS version fields directly and update store docs if the repo tracks them. | No semver and user did not supply one |
+| 2 | Project CI / verify if defined (`npm run ci` on Expenses). Skip only when the repo has no equivalent. | Fails |
+| 3 | Build signed release AAB with **host Gradle cache** (Expenses: `npm run release:aab`; Aura: `python3 run.py --aab` or `GRADLE_USER_HOME=$HOME/.gradle ./gradlew bundleRelease` after Fly-backed `build:mobile`). Use agent `required_permissions: ["all"]`. | Gradle/signing/verify error |
+| 4 | **Release notes (when the repo has them):** confirm `releases/vX.Y.Z.md` exists; in the chat reply show both store paste blocks — **Android / Play Console** (`<en-US>…</en-US>`) and **iOS / App Store “What’s New”**. Do not paste the whole markdown file. On Aura (no `releases/` artifact yet), summarize user-facing changes in chat instead. | Expenses: missing `releases/vX.Y.Z.md` or empty store blocks |
+| 5 | Before iOS ASC upload (Expenses): `npm run release:verify-ios-icon` (included in `npm run ci`) | Alpha channel on marketing icon |
+
+## Release notes (Android + iOS)
+
+When the project ships `releases/vX.Y.Z.md` (Expenses):
+
+| Deliverable | Where |
+| ----------- | ----- |
+| Artifact | `releases/vX.Y.Z.md` (created by `npm run bump` via `scripts/release-notes.mjs`; see `releases/README.md`) |
+| Shown in chat | Paste-ready **Play Console** block (Android) and **App Store What’s New** block (iOS) from that file |
+
+If the artifact is missing after bump, run `npm run release:notes` and fix before finishing the ritual. Prefer user-facing bullets when editing notes; keep Play body ≤ 500 characters inside the language tags.
+
+**Commit / push:** only when the user asks. If they do, run project CI first when defined. Include `releases/vX.Y.Z.md` in that commit when present.
+
+## AD_ID gate (Expenses — required)
+
+**Why:** Social Login / Play services merge ad permissions even though Expenses does not use ads.
+
+**Source strip (keep):** `android/app/src/main/AndroidManifest.xml` must still have `tools:node="remove"` on:
+
+- `com.google.android.gms.permission.AD_ID`
+- `android.permission.ACCESS_ADSERVICES_AD_ID`
+- `android.permission.ACCESS_ADSERVICES_ATTRIBUTION`
+- `android.permission.ACCESS_ADSERVICES_CUSTOM_AUDIENCE`
+- `android.permission.ACCESS_ADSERVICES_TOPICS`
+
+**After AAB build:** `npm run release:verify-ad-id` (or step 3 above) must pass — merged release manifest and AAB manifest contain **none** of those permissions.
+
+- **Pass** → Play Data safety can stay **No advertising ID**.
+- **Fail** → stop; fix strip lines or deps, rebuild.
+- **Do not fail** solely because DEX still references `AdvertisingIdClient` (Social Login).
+
+## Gradle execution policy (agent)
+
+**Don’t AAB in the sandbox; do AAB with `all`.** That is the way around re-downloading Gradle every time.
+
+- Run release AAB / `./gradlew` with **`required_permissions: ["all"]`** so `GRADLE_USER_HOME` (`~/.gradle`) persists.
+- Prefer project wrappers (`android/gradlew`, or Aura `python3 run.py --aab` which forces `~/.gradle`).
+- Always use the project `gradlew` (never bare `gradle` or re-init wrapper).
+- **Do not** run `bundleRelease` in the default sandbox.
+
+### Gradle download matrix
+
+| What | Where | First run | Repeat (same Mac) | Agent sandbox | Agent `all` + `gradlew` |
+| ---- | ----- | --------- | ----------------- | --------------- | ----------------------- |
+| Wrapper (`gradle-*-all.zip`) | `~/.gradle/wrapper/dists/` | Once | Reused | Re-downloads each session | Reused |
+| Maven / Google deps | `~/.gradle/caches/` | As needed | Mostly reused | Not persisted | Reused |
+| Daemon JVM | Host background | Cold | Warm (`org.gradle.daemon=true`) | N/A | Warm after first build |
+| Task outputs | `android/app/build/` + build cache | Full | Incremental | Thrown away | Persists |
+
+**Symptom → cause:**
+
+| You see | Likely cause |
+| ------- | ------------ |
+| “Downloading gradle-…-all.zip” every agent turn | Sandbox without `all`, or wrong `GRADLE_USER_HOME` |
+| Slow, no wrapper download | Cold daemon, clean build, or dependency change |
+| Android Studio fast, agent slow | Studio uses host cache; agent was sandboxed |
+
+**Required:**
+
+```sh
+export GRADLE_USER_HOME="${GRADLE_USER_HOME:-$HOME/.gradle}"
+cd android && ./gradlew bundleRelease
+```
+
+**Never:** bare `gradle`, re-init wrapper, or release builds in default sandbox.
+
+**Sanity check:** `ls ~/.gradle/wrapper/dists/` shows the project’s wrapper dist after one successful build.
+
+## iOS app icon gate (Expenses — required before ASC upload)
+
+**Why:** App Store Connect rejects the 1024×1024 marketing icon if it has transparency or an alpha channel (error **90717**).
+
+**Asset:** `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` must be **opaque RGB** (no alpha, no transparent pixels).
+
+**Verify:** `npm run release:verify-ios-icon` (runs in `npm run ci`).
+
+**Fix after updating icon art:** `npm run ios:flatten-icon` — composites onto plate color `#080814`, then re-verify.
+
+**After icon fix:** Xcode **Product → Clean Build Folder**, re-**Archive**, upload (old archives still embed the bad icon).
+
+## Out of scope (unless the user also asks)
+
+Play Console upload, git tag, iOS archive/TestFlight, full ship-doc smoke.
