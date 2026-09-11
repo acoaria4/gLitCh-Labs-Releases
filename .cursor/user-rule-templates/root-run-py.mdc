@@ -1,0 +1,31 @@
+---
+description: Every maintained project has a repo-root run.py as the advertised way to run it
+alwaysApply: true
+---
+
+<!--
+Portable source of truth for other machines. This path is not auto-applied.
+
+Install: cp .cursor/user-rule-templates/root-run-py.mdc ~/.cursor/rules/
+
+Do not copy into .cursor/rules/ if you already use the ~/.cursor/rules copy
+(avoids applying the rule twice).
+-->
+
+# Root run.py
+
+Treat repo-root `run.py` as the advertised way to **run** the project. Discover flags with `python3 run.py --help` instead of inventing a second launcher.
+
+## Flags are project-specific
+
+Do not copy one repo’s CLI into another. Lattice’s default is Operate only (lab/tests stay under `scripts/`). Aura uses `python3 run.py --aab`. Expenses may keep `npm run` for release; if it has a `run.py`, use that for local run.
+
+## When missing
+
+If a **maintained** repo has no root `run.py` and the user asks to run it (or you are scaffolding), add one: argparse, `--help` as the catalog, default = the everyday local run. Implementation may still live under `scripts/`; the root file is the entry.
+
+Do **not** add `run.py` to throwaway clones, third-party trees you are only reading, or generated output folders.
+
+## Execution
+
+When `run.py` shells out to npm, uv, Gradle, or Docker, follow `host-caches-no-redownload.mdc`: run with `required_permissions: ["all"]`. Never put secrets in `run.py`. Never skip hooks. Never force-push.
