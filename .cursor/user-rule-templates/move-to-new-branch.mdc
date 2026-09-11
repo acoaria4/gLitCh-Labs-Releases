@@ -1,0 +1,27 @@
+---
+description: Naming when the user says Move to a new branch
+alwaysApply: true
+---
+
+<!--
+Portable source of truth for other machines. This path is not auto-applied.
+
+Install: cp .cursor/user-rule-templates/move-to-new-branch.mdc ~/.cursor/rules/
+
+Do not copy into .cursor/rules/ if you already use the ~/.cursor/rules copy
+(avoids applying the rule twice).
+-->
+
+# Move to a new branch
+
+When the user says **Move to a new branch** (or a clear equivalent such as “do this on a new branch”):
+
+1. Read the current branch’s leading semver (`1.5.18-individualFixes` → `1.5.18`). If the current branch has no leading `x.y.z`, use `package.json` `version`.
+2. Increment the **patch** (`z`) by **1** → `x.y.(z+1)`.
+3. Append a short camelCase / PascalCase slug for the work after a hyphen.
+4. Create and check out: `x.y.z+1-BranchName` (example: `1.5.19-brandedSplash`).
+5. Call `SetActiveBranch` for the new name.
+
+Do **not** bump `package.json` / native version codes just because of the branch rename — version bumps stay with **Going for Release** / `npm run bump`.
+
+Do **not** use this rule for ordinary feature work when the user did not ask for a new branch.

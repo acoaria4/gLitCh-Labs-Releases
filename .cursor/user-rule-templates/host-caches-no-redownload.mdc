@@ -1,0 +1,35 @@
+---
+description: Never re-download Gradle, npm, pip, Docker, or Fly caches — run those commands outside the sandbox
+alwaysApply: true
+---
+
+<!--
+Portable source of truth for other machines. This path is not auto-applied.
+
+Install: cp .cursor/user-rule-templates/host-caches-no-redownload.mdc ~/.cursor/rules/
+
+Do not copy into .cursor/rules/ if you already use the ~/.cursor/rules copy
+(avoids applying the rule twice).
+-->
+
+# Host caches — do not re-download
+
+The default agent sandbox **does not persist** `~/.gradle`, `~/.npm`, pip, Cargo, Docker layers, or Fly builder state. Sandboxed builds look like a cold machine and re-download wrappers, Maven, node_modules, wheels, and images.
+
+**If a command would hit a package registry, wrapper dist, container registry, or tool cache that already exists on this Mac, run it with `required_permissions: ["all"]`.** Do not wait for a sandbox failure.
+
+## Always `all` (never default sandbox)
+
+- Gradle / Android: `./gradlew`, `bundleRelease`, `assembleRelease`, `python3 run.py --aab` — `GRADLE_USER_HOME=$HOME/.gradle`, project `gradlew` only (never bare `gradle`, never re-init wrapper)
+- Node: `npm install` / `ci` / `run build` / Capacitor when it would fetch
+- Python: `pip install`, `pytest` after missing wheels, ephemeral venv creates
+- Fly / Docker: `fly deploy --local-only` (host Docker layer cache). Never default remote builder — it re-downloads apt/pip/base images. Start Docker Desktop if the daemon is down. Do not pass `--no-cache`.
+- Rust/Go/other: cargo, go mod, brew, when the cache is already on disk
+
+## Never
+
+- Re-download Gradle wrapper zip, Maven/Google deps, npm packuments, pip wheels, or base images “to be safe”
+- Treat a sandbox cache miss as “need a fresh install” — retry **once** with `all` instead
+- `gradle wrapper` / wrapper re-init unless the user asked
+
+Symptom: “Downloading gradle-…-all.zip”, empty `~/.npm/_cacache` hits, pip collecting everything, Docker `FROM` pulling every layer → sandbox. Fix: `all` + host home caches.

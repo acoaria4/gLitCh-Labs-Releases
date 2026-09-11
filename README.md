@@ -23,6 +23,7 @@ Studio site and public store assets for gLitCh Labs apps.
 | Expenses delete account | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/delete-account.html` |
 | Expenses support | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/support.html` |
 | AURA | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/` |
+| AURA Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/get/` |
 | AURA privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/privacy.html` |
 
 ### Store / console URLs
@@ -33,3 +34,15 @@ Studio site and public store assets for gLitCh Labs apps.
 - Group invites open `expenses/invite.html?t=<token>` (or `?token=`), which deep-links into the Expenses app.
 
 Store policy paths are unchanged after promoting the studio site to root.
+
+## Cursor user rules (new computer)
+
+These are global Cursor user rules (`~/.cursor/rules/`), not project rules. Templates live in [`.cursor/user-rule-templates/`](.cursor/user-rule-templates/).
+
+On a new Mac, clone this repo and run:
+
+```bash
+./scripts/install-cursor-rules.sh
+```
+
+Then start a **new** Cursor chat (existing sessions may not pick up new `alwaysApply` files). See [`.cursor/user-rule-templates/README.md`](.cursor/user-rule-templates/README.md).
