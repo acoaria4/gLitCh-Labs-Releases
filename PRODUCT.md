@@ -22,7 +22,7 @@ A private pocket ledger that stays out of the way — local-first first, sync op
 
 ## Operating Context
 
-Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.io/gLitCh-Labs-Releases`). Instagram in-app browser is the primary viewport for `expenses/get/` and `aura/get/`. Store consoles point at stable policy/support/deletion/invite paths under `expenses/` and `aura/privacy.html`.
+Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.io/gLitCh-Labs-Releases`). Instagram in-app browser is the primary viewport for `expenses/get/` and `aura/get/`. Store consoles point at stable policy/support/deletion/invite paths under `expenses/`, `aura/privacy.html`, and `lumen/privacy.html`.
 
 ## Capabilities and Constraints
 

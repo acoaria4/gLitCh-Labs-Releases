@@ -26,12 +26,14 @@ Studio site and public store assets for gLitCh Labs apps.
 | AURA Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/get/` |
 | AURA privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/privacy.html` |
 | Lumen | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/` |
+| Lumen privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/privacy.html` |
 
 ### Store / console URLs
 
 - Use the **Expenses privacy** URL in Google Play Console → App content → Privacy policy.
 - Use the **Expenses support** URL as the App Store Connect / Play Support URL.
 - Use the **Expenses delete account** URL for App Store / Play account-deletion URL requirements.
+- Use the **Lumen privacy** URL for Lumen’s store privacy-policy field when listings go live.
 - Group invites open `expenses/invite.html?t=<token>` (or `?token=`), which deep-links into the Expenses app.
 
 Store policy paths are unchanged after promoting the studio site to root.
