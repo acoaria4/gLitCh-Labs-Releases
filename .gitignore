@@ -28,3 +28,6 @@ new_website*/
 
 # Impeccable local review captures
 .impeccable/review/
+
+# Local icon generation archives (not published)
+assets/generations/

@@ -9,7 +9,7 @@
         {
           id: "expenses-champagne-on-obsidian",
           label: "Champagne on Obsidian",
-          src: "../assets/expenses-champagne-on-obsidian.png",
+          src: "../assets/finalized-icons/expenses-champagne-on-obsidian.png",
         },
         {
           id: "expenses-icon-wordmark",
