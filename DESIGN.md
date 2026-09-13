@@ -232,6 +232,7 @@ Studio mark + © year (`#year` filled by `main.js`) + sparse product/privacy/Git
 | `assets/glitchlabs-wordmark.png` | Home hero |
 | `assets/expenses-icon.png` | Nav product crumb, product grid |
 | `assets/aura-icon.png` | AURA favicon, nav crumb, product grid, AURA hero mark |
+| `assets/lumen-icon.png` | Lumen favicon, nav crumb, product grid, Lumen hero mark |
 | `aura/get/aura-mark.png` | AURA Instagram bio compass (transparent, from the AURA app) |
 | `assets/expenses-wordmark.png` | Expenses hero |
 | `assets/expenses-logo.png` | Legacy / invite mark under `expenses/assets/` also kept for store pages |
@@ -269,7 +270,7 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 | `js/theme.js` | Accent themes + picker |
 | `js/main.js` | Nav, year, reveals, contact mailto, soon-button guard |
 | `assets/` | Studio + product imagery |
-| `expenses/*`, `aura/*` | Product + store-facing pages |
+| `expenses/*`, `aura/*`, `lumen/*` | Product + store-facing pages |
 | `expenses/get/` | Instagram bio landing — inherits `css/styles.css` tokens; layout in `get.css`; unlinked from nav |
 | `aura/get/` | AURA Instagram bio — sibling of `expenses/get/`; ink `#05060f` / gold `#d4af37` / hover `#f0cd6a`; Cinzel wordmark; compass `aura/get/aura-mark.png`; Play blocked until Open testing; TestFlight live; unlinked from nav |
 

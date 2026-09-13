@@ -15,6 +15,7 @@ mkdir -p ~/.cursor/rules
 cp .cursor/user-rule-templates/move-to-new-branch.mdc ~/.cursor/rules/
 cp .cursor/user-rule-templates/going-for-release.mdc ~/.cursor/rules/
 cp .cursor/user-rule-templates/host-caches-no-redownload.mdc ~/.cursor/rules/
+cp .cursor/user-rule-templates/root-run-py.mdc ~/.cursor/rules/
 ```
 
 Then start a **new** Cursor chat (existing sessions may not pick up new `alwaysApply` files).
