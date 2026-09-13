@@ -8,11 +8,11 @@ web
 
 ## Users
 
-People who find Expenses or AURA on Instagram and tap the bio link to install the app. Secondary: store reviewers and invitees who land on policy, support, and group-invite URLs.
+People who find Expenses, AURA, or Lumen on Instagram and tap the bio link to install the app. Secondary: store reviewers and invitees who land on policy, support, and group-invite URLs.
 
 ## Product Purpose
 
-gLitCh Labs is a small studio shipping focused, privacy-minded software. This repository is the public studio site and store-facing assets on GitHub Pages. Expenses is the live product: local-first personal and shared expense tracking, with optional sign-in to sync. AURA is Vedic astrology — charts, predictions, Porutham, and Tamil calendar.
+gLitCh Labs is a small studio shipping focused, privacy-minded software. This repository is the public studio site and store-facing assets on GitHub Pages. Expenses is the live product: local-first personal and shared expense tracking, with optional sign-in to sync. AURA is Vedic astrology — charts, predictions, Porutham, and Tamil calendar. Lumen is quiz-based school revision for grades 9–12 (NCERT / CBSE).
 
 Success for an Instagram bio page: a visitor understands which product this is and reaches a live store tap in one gesture.
 
@@ -30,6 +30,7 @@ Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.i
 - Expenses iOS: TestFlight join URL `https://testflight.apple.com/join/HnCTs7QU` (beta). There is no `apps.apple.com` listing in this repo.
 - AURA iOS: TestFlight join URL `https://testflight.apple.com/join/xzZr5UCK` (beta). There is no `apps.apple.com` listing in this repo.
 - AURA Android: Play Open testing is not unlocked; the bio page’s Play control stays blocked until a listing URL exists.
+- Lumen app identity: `com.glitchlabs.lumen`. No Play or TestFlight URLs are published in this repo yet.
 - Deep links: `com.glitchlabs.expenses://invite/…` via `expenses/invite.html`.
 - Stack is already static HTML/CSS/JS; no build step.
 - Instagram landings must not be linked from the studio or product marketing pages.
@@ -38,14 +39,14 @@ Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.i
 ## Brand Commitments
 
 - Studio name: `gLitCh Labs` (exact casing).
-- Product names: Expenses, AURA.
+- Product names: Expenses, AURA, Lumen.
 - Voice: calm, precise, unhurried — product-first, not hype. Prefer “local-first”, “optional”, “calm”.
-- Assets: `assets/expenses-icon.png`, `assets/expenses-wordmark.png`, `assets/glitchlabs-icon.png`, `assets/aura-icon.png`, `aura/get/aura-mark.png`.
+- Assets: `assets/expenses-icon.png`, `assets/expenses-wordmark.png`, `assets/glitchlabs-icon.png`, `assets/aura-icon.png`, `aura/get/aura-mark.png`, `assets/lumen-icon.png`.
 - Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ink `#05060f`, gold `#d4af37`, Cinzel wordmark).
 
 ## Evidence on Hand
 
-- Product copy on `expenses/index.html`, `aura/index.html`, and `index.html`.
+- Product copy on `expenses/index.html`, `aura/index.html`, `lumen/index.html`, and `index.html`.
 - Live store URLs on `expenses/index.html` and `aura/get/` (AURA TestFlight).
 - Marks in `assets/` and `aura/get/aura-mark.png`. No testimonials, ratings, or download counts — do not invent them.
 
