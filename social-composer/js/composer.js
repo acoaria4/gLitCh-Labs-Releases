@@ -7,6 +7,11 @@
       container: "assets-expenses",
       assets: [
         {
+          id: "expenses-champagne-on-obsidian",
+          label: "Champagne on Obsidian",
+          src: "../assets/finalized-icons/expenses-champagne-on-obsidian.png",
+        },
+        {
           id: "expenses-icon-wordmark",
           label: "Icon + Wordmark",
           src: "brands/expenses-icon-wordmark.png",
