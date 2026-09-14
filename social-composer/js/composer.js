@@ -43,6 +43,11 @@
       container: "assets-glitch",
       assets: [
         {
+          id: "glitchlabs-polished-platinum",
+          label: "Polished Platinum",
+          src: "../assets/finalized-icons/glitchlabs-polished-platinum.png",
+        },
+        {
           id: "glitchlabs-logo",
           label: "Logo",
           src: "brands/glitchlabs-logo.png",
