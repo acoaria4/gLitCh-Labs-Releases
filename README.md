@@ -1,52 +1,49 @@
-# gLitCh Labs
+# gLitCh Labs — Website
 
-Studio site and public store assets for gLitCh Labs apps.
+A standalone static website. All implementation and assets are contained in this folder. No build or install required. Product links open the individual pages in `expenses/`, `aura/`, and `lumen/`. About, support, and privacy pages are hosted locally within this site. Store links and availability were copied from the previous site’s `/get` pages. Product colors live in `product-themes.css`.
 
-## GitHub Pages
+Preview: open `index.html` directly, or run `python3 -m http.server 8088` from this folder and visit http://localhost:8088.
 
-1. Repo **Settings → Pages**
-2. Source: **Deploy from a branch**
-3. Branch: `main` (or your Pages branch), folder: **`/` (root)** → Save
+## Hero video
 
-### Live URLs (after Pages is enabled)
+The cinematic logo treatment works without video. To add your exported background:
 
-| Page | URL |
-|------|-----|
-| Studio home | `https://acoaria4.github.io/gLitCh-Labs-Releases/` |
-| Social Composer | `https://acoaria4.github.io/gLitCh-Labs-Releases/social-composer/` |
-| About | `https://acoaria4.github.io/gLitCh-Labs-Releases/about.html` |
-| Contact | `https://acoaria4.github.io/gLitCh-Labs-Releases/contact.html` |
-| Expenses | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/` |
-| Expenses Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/get/` |
-| Expenses privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/privacy.html` |
-| Expenses group invite | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/invite.html` |
-| Expenses delete account | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/delete-account.html` |
-| Expenses support | `https://acoaria4.github.io/gLitCh-Labs-Releases/expenses/support.html` |
-| AURA | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/` |
-| AURA Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/get/` |
-| AURA privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/privacy.html` |
-| Lumen | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/` |
-| Lumen Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/get/` |
-| Lumen privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/privacy.html` |
+1. Save the video as `assets/hero.mp4`.
+2. In `index.html`, change the video element's `data-src=""` to `data-src="assets/hero.mp4"`.
 
-### Store / console URLs
+The video is decorative, muted, looping, and covered to fill the hero. The existing logo and text remain overlaid; generate a background without a second logo. Playback pauses offscreen, in a hidden tab, and when the visitor pauses motion. Reduced-motion preferences default to paused. If the video fails, the original background remains. Export a short, compressed H.264 MP4; a landscape composition with a clear central area also accommodates mobile cropping.
 
-- Use the **Expenses privacy** URL in Google Play Console → App content → Privacy policy.
-- Use the **Expenses support** URL as the App Store Connect / Play Support URL.
-- Use the **Expenses delete account** URL for App Store / Play account-deletion URL requirements.
-- Use the **Lumen privacy** URL for Lumen’s store privacy-policy field when listings go live.
-- Group invites open `expenses/invite.html?t=<token>` (or `?token=`), which deep-links into the Expenses app.
+See `RUNWAY-PROMPT.md` for the creative brief.
 
-Store policy paths are unchanged after promoting the studio site to root.
+## Shared product identity
 
-## Cursor user rules (new computer)
+`typography.css` owns font families, product-name scale, heading styles, and accented dots for **both** homepage sections and individual product pages. `product-themes.css` owns the matching palettes and buttons. Change these shared files to update an identity everywhere; avoid page-specific identity overrides.
 
-These are global Cursor user rules (`~/.cursor/rules/`), not project rules. Templates live in [`.cursor/user-rule-templates/`](.cursor/user-rule-templates/).
+- Expenses: Manrope, champagne on charcoal.
+- AURA: Cormorant Garamond headings, DM Sans body, bronze on ivory.
+- Lumen: Outfit, dark plum text on pale blush (#F8E7ED), icon-pink (#FC4177) action buttons with white text, and gold product-name dots.
 
-On a new Mac, clone this repo and run:
+Fonts are self-hosted in `assets/fonts/`, with open-source licenses included. No font-provider request is needed at runtime.
 
-```bash
-./scripts/install-cursor-rules.sh
-```
+## Supporting pages
 
-Then start a **new** Cursor chat (existing sessions may not pick up new `alwaysApply` files). See [`.cursor/user-rule-templates/README.md`](.cursor/user-rule-templates/README.md).
+Each product has local privacy, support, and `/get/` pages. Expenses also has account deletion and group invitations. AURA and Lumen have data-control pages. Studio About and Contact are local too.
+
+Edit supporting-page copy in `content/<product>/`, then run `python3 scripts/build-pages.py` from this folder. The builder reuses the shared shell and regenerates `/get/` pages from each product landing page's download controls. It never writes outside this folder. Privacy wording and original dates were preserved from the reference files; support and data-control copy follows those policies. No new legal terms or data-processing promises were added.
+
+Run `python3 scripts/check-pages.py` to check local destinations, anchors, assets, page headings, and that generated policies preserve their content source.
+
+Invite links accept `?t=...` or `?token=...` and open the Expenses deep link only when the visitor selects Open in Expenses. Missing-token links show an explanation without an active app link.
+
+## Navigation and scrolling
+
+`navigation.css` shares readable header/footer typography and 44px touch targets across the site. Mobile navigation uses two rows so all main links remain visible. On the main site, Arrow Up/Down and Page Up/Down move one section per press; Home/End select the first/last section. Held-key repeats are ignored. Previous/Next buttons offer the same behavior on touchscreens. Native touch/wheel scrolling remains available within longer sections. Reduced-motion users receive immediate section jumps. Supporting pages retain normal document scrolling.
+
+## GitHub Pages and local archives
+
+The repository root is the live website source. GitHub Pages is configured to deploy the `main` branch at `/` (root). `.nojekyll` serves this as plain static files. Publish by committing the root changes and merging/pushing them to `main`.
+
+- `old_main_website/` preserves the previous root website and its supporting files.
+- `glitch-labs-website/` preserves the pre-promotion copy of the new site.
+
+Both directories are local, ignored backups and must remain untracked. Make ongoing changes at root; the backups are snapshots, not synchronized copies. Repository metadata and editor configuration remain at root. The Google verification file retains its original root URL.

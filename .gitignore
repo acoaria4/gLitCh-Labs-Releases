@@ -31,3 +31,7 @@ new_website*/
 
 # Local icon generation archives (not published)
 assets/generations/
+
+# Local website backups — root is the published site
+/old_main_website/
+/glitch-labs-website/

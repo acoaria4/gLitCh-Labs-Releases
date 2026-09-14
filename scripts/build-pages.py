@@ -1,4 +1,4 @@
-"""Build shared page shells from local content; never writes outside glitch-labs-website."""
+"""Build shared page shells from local content; writes the live site at the repository root."""
 from pathlib import Path
 import re, html
 ROOT=Path(__file__).resolve().parents[1]
