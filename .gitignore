@@ -35,3 +35,6 @@ assets/generations/
 # Local website backups — root is the published site
 /old_main_website/
 /glitch-labs-website/
+
+# Local Play Store listing copy and artwork
+/play-store-listings/
