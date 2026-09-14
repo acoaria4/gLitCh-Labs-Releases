@@ -26,6 +26,7 @@ Studio site and public store assets for gLitCh Labs apps.
 | AURA Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/get/` |
 | AURA privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/aura/privacy.html` |
 | Lumen | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/` |
+| Lumen Instagram bio | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/get/` |
 | Lumen privacy | `https://acoaria4.github.io/gLitCh-Labs-Releases/lumen/privacy.html` |
 
 ### Store / console URLs
