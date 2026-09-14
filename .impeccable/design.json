@@ -1,92 +1,218 @@
 {
   "schemaVersion": 2,
   "generatedAt": "2026-09-14T04:00:00Z",
-  "title": "gLitCh Labs — Design Language",
+  "title": "gLitCh Labs \u2014 Design Language",
   "extensions": {
     "colorMeta": {
       "bg": {
         "role": "neutral",
         "displayName": "Near Black",
         "canonical": "#0b0b12",
-        "tonalRamp": ["#07070c", "#0b0b12", "#14141f", "#1e1e2a", "#3a3a48", "#6e6d7a", "#a8a6b3", "#f5f3ee"]
+        "tonalRamp": [
+          "#07070c",
+          "#0b0b12",
+          "#14141f",
+          "#1e1e2a",
+          "#3a3a48",
+          "#6e6d7a",
+          "#a8a6b3",
+          "#f5f3ee"
+        ]
       },
       "bg-deep": {
         "role": "neutral",
         "displayName": "Depth Black",
         "canonical": "#07070c",
-        "tonalRamp": ["#050508", "#07070c", "#0b0b12", "#16161f", "#2a2a36", "#5c5b68", "#a8a6b3", "#f5f3ee"]
+        "tonalRamp": [
+          "#050508",
+          "#07070c",
+          "#0b0b12",
+          "#16161f",
+          "#2a2a36",
+          "#5c5b68",
+          "#a8a6b3",
+          "#f5f3ee"
+        ]
       },
       "text": {
         "role": "neutral",
         "displayName": "Cream",
         "canonical": "#f5f3ee",
-        "tonalRamp": ["#2a2924", "#4a4840", "#7a776c", "#a8a6b3", "#cfcbc2", "#e4e1da", "#f5f3ee", "#fbfaf7"]
+        "tonalRamp": [
+          "#2a2924",
+          "#4a4840",
+          "#7a776c",
+          "#a8a6b3",
+          "#cfcbc2",
+          "#e4e1da",
+          "#f5f3ee",
+          "#fbfaf7"
+        ]
       },
       "muted": {
         "role": "neutral",
         "displayName": "Muted Lilac Gray",
         "canonical": "#a8a6b3",
-        "tonalRamp": ["#2c2b33", "#45444e", "#6c6a76", "#8a8894", "#a8a6b3", "#c4c2cc", "#dddce3", "#f3f2f6"]
+        "tonalRamp": [
+          "#2c2b33",
+          "#45444e",
+          "#6c6a76",
+          "#8a8894",
+          "#a8a6b3",
+          "#c4c2cc",
+          "#dddce3",
+          "#f3f2f6"
+        ]
       },
       "accent": {
         "role": "primary",
         "displayName": "Soft Gold",
         "canonical": "#d8c4a0",
-        "tonalRamp": ["#3d3428", "#5c4e3a", "#8a7354", "#b89a70", "#d8c4a0", "#e4d2b2", "#efe4d0", "#f7f1e6"]
+        "tonalRamp": [
+          "#3d3428",
+          "#5c4e3a",
+          "#8a7354",
+          "#b89a70",
+          "#d8c4a0",
+          "#e4d2b2",
+          "#efe4d0",
+          "#f7f1e6"
+        ]
       },
       "accent-hover": {
         "role": "primary",
         "displayName": "Gold Hover",
         "canonical": "#e4d2b2",
-        "tonalRamp": ["#3d3428", "#5c4e3a", "#8a7354", "#c4ae88", "#d8c4a0", "#e4d2b2", "#efe4d0", "#f7f1e6"]
+        "tonalRamp": [
+          "#3d3428",
+          "#5c4e3a",
+          "#8a7354",
+          "#c4ae88",
+          "#d8c4a0",
+          "#e4d2b2",
+          "#efe4d0",
+          "#f7f1e6"
+        ]
       },
       "line": {
         "role": "neutral",
         "displayName": "Hairline",
         "canonical": "rgba(255,255,255,0.1)",
-        "tonalRamp": ["#0b0b12", "#14141c", "#1c1c26", "#2a2a36", "#3a3a48", "#5a5966", "#a8a6b3", "#f5f3ee"]
+        "tonalRamp": [
+          "#0b0b12",
+          "#14141c",
+          "#1c1c26",
+          "#2a2a36",
+          "#3a3a48",
+          "#5a5966",
+          "#a8a6b3",
+          "#f5f3ee"
+        ]
       },
       "glass": {
         "role": "neutral",
         "displayName": "Glass Fill",
         "canonical": "rgba(255,255,255,0.045)",
-        "tonalRamp": ["#0b0b12", "#12121a", "#181822", "#22222e", "#323240", "#5a5966", "#a8a6b3", "#f5f3ee"]
+        "tonalRamp": [
+          "#0b0b12",
+          "#12121a",
+          "#181822",
+          "#22222e",
+          "#323240",
+          "#5a5966",
+          "#a8a6b3",
+          "#f5f3ee"
+        ]
       },
       "glass-strong": {
         "role": "neutral",
         "displayName": "Glass Strong",
         "canonical": "rgba(255,255,255,0.07)",
-        "tonalRamp": ["#0b0b12", "#14141c", "#1a1a24", "#262632", "#383846", "#5a5966", "#a8a6b3", "#f5f3ee"]
+        "tonalRamp": [
+          "#0b0b12",
+          "#14141c",
+          "#1a1a24",
+          "#262632",
+          "#383846",
+          "#5a5966",
+          "#a8a6b3",
+          "#f5f3ee"
+        ]
       },
       "glass-border": {
         "role": "neutral",
         "displayName": "Glass Edge",
         "canonical": "rgba(255,255,255,0.14)",
-        "tonalRamp": ["#0b0b12", "#16161e", "#22222c", "#333340", "#4a4a58", "#6e6d7a", "#a8a6b3", "#f5f3ee"]
+        "tonalRamp": [
+          "#0b0b12",
+          "#16161e",
+          "#22222c",
+          "#333340",
+          "#4a4a58",
+          "#6e6d7a",
+          "#a8a6b3",
+          "#f5f3ee"
+        ]
       },
       "aura-bronze": {
         "role": "primary",
         "displayName": "Ivory Bronze",
         "canonical": "#ba7f46",
-        "tonalRamp": ["#844b1c", "#9a6230", "#ba7f46", "#c99d71", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6"]
+        "tonalRamp": [
+          "#844b1c",
+          "#9a6230",
+          "#ba7f46",
+          "#c99d71",
+          "#e7bb85",
+          "#f2ede5",
+          "#f7f1e8",
+          "#fcfaf6"
+        ]
       },
       "aura-bronze-hover": {
         "role": "primary",
         "displayName": "Ivory Bronze Hover",
         "canonical": "#e7bb85",
-        "tonalRamp": ["#844b1c", "#ba7f46", "#c99d71", "#d9b793", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6"]
+        "tonalRamp": [
+          "#844b1c",
+          "#ba7f46",
+          "#c99d71",
+          "#d9b793",
+          "#e7bb85",
+          "#f2ede5",
+          "#f7f1e8",
+          "#fcfaf6"
+        ]
       },
       "aura-plate": {
         "role": "neutral",
         "displayName": "Ivory Plate",
         "canonical": "#f2ede5",
-        "tonalRamp": ["#844b1c", "#ba7f46", "#c9b8a4", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6", "#ffffff"]
+        "tonalRamp": [
+          "#844b1c",
+          "#ba7f46",
+          "#c9b8a4",
+          "#e7bb85",
+          "#f2ede5",
+          "#f7f1e8",
+          "#fcfaf6",
+          "#ffffff"
+        ]
       },
       "aura-muted": {
         "role": "neutral",
         "displayName": "Warm Cream Muted",
         "canonical": "#c9b8a4",
-        "tonalRamp": ["#844b1c", "#8c6443", "#a89880", "#c9b8a4", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6"]
+        "tonalRamp": [
+          "#844b1c",
+          "#8c6443",
+          "#a89880",
+          "#c9b8a4",
+          "#e7bb85",
+          "#f2ede5",
+          "#f7f1e8",
+          "#fcfaf6"
+        ]
       }
     },
     "typographyMeta": {
@@ -96,7 +222,7 @@
       },
       "display": {
         "displayName": "Instrument Serif",
-        "purpose": "Studio heroes, page titles, product headlines. Not loaded on expenses/get/ or aura/get/."
+        "purpose": "Studio heroes, page titles, product headlines. Not loaded on expenses/get/, aura/get/, or lumen/get/."
       }
     },
     "shadows": [
@@ -116,9 +242,9 @@
         "purpose": "Soft gold halo under the Expenses wordmark on the bio landing. Nav product icons use a lighter version of the same idea."
       },
       {
-        "name": "aura-ivory-mark",
-        "value": "drop-shadow(0 14px 28px color-mix(in srgb, #844b1c 55%, transparent)) drop-shadow(0 0 18px color-mix(in srgb, #ba7f46 22%, transparent))",
-        "purpose": "Bronze shadow plus ivory-bronze halo under the AURA solar-embrace squircle on aura/get/."
+        "name": "lumen-enamel-mark",
+        "value": "drop-shadow(0 12px 24px color-mix(in srgb, #8c5a20 22%, transparent)) drop-shadow(0 0 14px color-mix(in srgb, #d3a348 18%, transparent))",
+        "purpose": "Soft gold shadow under the Lumen metallic-enamel squircle on the magenta plate field (lumen/get/)."
       }
     ],
     "motion": [
@@ -129,13 +255,13 @@
       },
       {
         "name": "rise",
-        "value": "opacity 0→1, translateY(22px)→0",
+        "value": "opacity 0\u21921, translateY(22px)\u21920",
         "purpose": "Entrance for copy and CTAs. Bio landings: lead 0.28s, CTAs 0.44s, credit 0.58s."
       },
       {
         "name": "rise-logo",
         "value": "0.95s var(--ease) 0.08s forwards",
-        "purpose": "Entrance for the bio mark (Expenses champagne squircle, AURA ivory squircle); slightly longer than copy rise."
+        "purpose": "Entrance for the bio mark (Expenses champagne, AURA ivory, Lumen enamel squircles); slightly longer than copy rise."
       },
       {
         "name": "button-hover",
@@ -144,10 +270,22 @@
       }
     ],
     "breakpoints": [
-      { "name": "nav-compact", "value": "560px" },
-      { "name": "product-stack", "value": "860px" },
-      { "name": "grid-collapse", "value": "960px" },
-      { "name": "bio-short-viewport", "value": "720px" }
+      {
+        "name": "nav-compact",
+        "value": "560px"
+      },
+      {
+        "name": "product-stack",
+        "value": "860px"
+      },
+      {
+        "name": "grid-collapse",
+        "value": "960px"
+      },
+      {
+        "name": "bio-short-viewport",
+        "value": "720px"
+      }
     ]
   },
   "components": [
@@ -171,7 +309,7 @@
       "name": "Glass",
       "kind": "card",
       "refersTo": "glass",
-      "description": "Blurred translucent surface for interaction blocks — product panels, link cards, contact form, invite panel. Not every paragraph.",
+      "description": "Blurred translucent surface for interaction blocks \u2014 product panels, link cards, contact form, invite panel. Not every paragraph.",
       "html": "<div class=\"ds-glass\">A distinct content block</div>",
       "css": ".ds-glass { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius); backdrop-filter: blur(22px) saturate(140%); -webkit-backdrop-filter: blur(22px) saturate(140%); box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 24px 60px rgba(0, 0, 0, 0.28); padding: 24px 26px; color: var(--text); font-family: var(--font-sans); }"
     },
@@ -187,8 +325,8 @@
       "name": "Instagram Bio Column",
       "kind": "custom",
       "refersTo": "get-page",
-      "description": "expenses/get/ and aura/get/: phone-width stacked store taps under one muted sentence. No nav, no footer, no theme picker. Unlinked from studio chrome.",
-      "html": "<div class=\"ds-get\"><p class=\"ds-get-lead\">Local-first personal and shared expense tracking — with optional sign-in to sync when you’re ready.</p><div class=\"ds-get-cta\"><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Get on Google Play <span class=\"ds-soon-label\">Beta</span></a><a class=\"ds-btn-secondary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
+      "description": "expenses/get/, aura/get/, and lumen/get/: phone-width stacked store taps under one muted sentence. No nav, no footer, no theme picker. Unlinked from studio chrome.",
+      "html": "<div class=\"ds-get\"><p class=\"ds-get-lead\">Local-first personal and shared expense tracking \u2014 with optional sign-in to sync when you\u2019re ready.</p><div class=\"ds-get-cta\"><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Get on Google Play <span class=\"ds-soon-label\">Beta</span></a><a class=\"ds-btn-secondary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
       "css": ".ds-get { display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-sans); width: min(400px, 100%); margin: 0 auto; } .ds-get-lead { margin: 4px 0 0; max-width: 34ch; color: var(--muted); font-size: 1.05rem; font-weight: 400; line-height: 1.5; } .ds-get-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 28px; } .ds-get-store { width: 100%; min-height: 58px; padding: 0 20px; font-size: 0.98rem; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-family: var(--font-sans); font-weight: 600; text-decoration: none; cursor: pointer; } .ds-btn-primary { background: var(--accent); color: var(--bg); border: 1px solid transparent; } .ds-btn-primary:hover { background: var(--accent-hover); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); transform: translateY(-2px); } .ds-btn-secondary { background: var(--glass); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); backdrop-filter: blur(12px); } .ds-btn-secondary:hover { background: var(--accent-soft); border-color: var(--accent); transform: translateY(-2px); } .ds-get-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; } .ds-get-credit { margin: 36px 0 0; color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; }"
     },
     {
@@ -196,18 +334,26 @@
       "kind": "custom",
       "refersTo": "get-page-aura",
       "description": "aura/get/ only: studio near-black field retinted to ivory bronze, Satoshi brand name, Play blocked/Soon then App Store bronze/Beta (TestFlight). Mark is assets/finalized-icons/aura-solar-embrace-ivory.png.",
-      "html": "<div class=\"ds-get-aura\"><span class=\"ds-get-brand-name\">AURA</span><p class=\"ds-get-lead\">Vedic astrology — charts, predictions, Porutham, and Tamil calendar.</p><div class=\"ds-get-cta\"><span class=\"ds-btn-secondary ds-get-store ds-btn-soon\">Get on Google Play <span class=\"ds-soon-label\">Soon</span></span><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
+      "html": "<div class=\"ds-get-aura\"><span class=\"ds-get-brand-name\">AURA</span><p class=\"ds-get-lead\">Vedic astrology \u2014 charts, predictions, Porutham, and Tamil calendar.</p><div class=\"ds-get-cta\"><span class=\"ds-btn-secondary ds-get-store ds-btn-soon\">Get on Google Play <span class=\"ds-soon-label\">Soon</span></span><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
       "css": ".ds-get-aura { --accent: #ba7f46; --accent-hover: #e7bb85; --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent); --text: #f7f1e8; --muted: #c9b8a4; display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-sans, Satoshi, sans-serif); width: min(400px, 100%); margin: 0 auto; color: var(--text); padding: 28px 20px; } .ds-get-brand-name { display: block; margin: 0 0 16px; font-size: 1.8rem; font-weight: 500; letter-spacing: 0.08em; } .ds-get-lead { margin: 4px 0 0; max-width: 34ch; color: var(--muted); font-size: 1.05rem; font-weight: 400; line-height: 1.5; } .ds-get-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 28px; } .ds-get-store { width: 100%; min-height: 58px; padding: 0 20px; font-size: 0.98rem; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-family: var(--font-sans, Satoshi, sans-serif); font-weight: 600; text-decoration: none; } .ds-btn-primary { background: var(--accent); color: var(--bg, #0b0b12); border: 1px solid transparent; cursor: pointer; } .ds-btn-primary:hover { background: var(--accent-hover); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); transform: translateY(-2px); } .ds-btn-secondary { background: rgba(255,255,255,0.045); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); } .ds-btn-soon { pointer-events: none; user-select: none; cursor: default; opacity: 0.62; } .ds-get-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; } .ds-get-credit { margin: 36px 0 0; color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; }"
+    },
+    {
+      "name": "Lumen Instagram Bio",
+      "kind": "custom",
+      "refersTo": "get-page-lumen",
+      "description": "lumen/get/ only: magenta plate field (#fc4177) with enamel-gold accents (AURA plate-field pattern), Satoshi brand name, Play and App Store both blocked/Soon. Mark is assets/finalized-icons/lumen-metallic-enamel.png.",
+      "html": "<div class=\"ds-get-lumen\"><span class=\"ds-get-brand-name\">Lumen</span><p class=\"ds-get-lead\">Quiz-based school revision for grades 9\u201312 (NCERT / CBSE).</p><div class=\"ds-get-cta\"><span class=\"ds-btn-primary ds-get-store ds-btn-soon\">Get on Google Play <span class=\"ds-soon-label\">Soon</span></span><span class=\"ds-btn-secondary ds-get-store ds-btn-soon\">Download on the App Store <span class=\"ds-soon-label\">Soon</span></span></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
+      "css": ".ds-get-lumen { --bg: #fc4177; --bg-deep: #e22a5f; --accent: #d3a348; --accent-hover: #e8c56a; --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent); --text: #f7f1e8; --muted: #f5c9d6; display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-sans, Satoshi, sans-serif); width: min(400px, 100%); margin: 0 auto; color: var(--text); padding: 28px 20px; background: var(--bg); } .ds-get-brand-name { display: block; margin: 0 0 16px; font-size: 1.8rem; font-weight: 500; letter-spacing: 0.08em; } .ds-get-lead { margin: 4px 0 0; max-width: 34ch; color: var(--muted); font-size: 1.05rem; font-weight: 400; line-height: 1.5; } .ds-get-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 28px; } .ds-get-store { width: 100%; min-height: 58px; padding: 0 20px; font-size: 0.98rem; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-family: var(--font-sans, Satoshi, sans-serif); font-weight: 600; text-decoration: none; } .ds-btn-primary { background: var(--accent); color: #3d1224; border: 1px solid transparent; } .ds-btn-secondary { background: color-mix(in srgb, #d3a348 12%, #ffffff); color: #3d1224; border: 1px solid color-mix(in srgb, #d3a348 48%, transparent); } .ds-btn-soon { pointer-events: none; user-select: none; cursor: default; opacity: 0.62; } .ds-get-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; } .ds-get-credit { margin: 36px 0 0; color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; }"
     }
   ],
   "narrative": {
     "northStar": "Marks lead; headlines support",
-    "overview": "Atmosphere over flat fill: soft accent glows and grain over solid black. Glass, not cards-for-cards’ sake. Dark by default — cream Satoshi UI on near-black, with Instrument Serif reserved for studio heroes. Brand and product marks lead; headlines support, never overpower. Instagram bios are a shell-off exception of the same world: token inheritance, no studio nav, unlinked from product chrome. aura/get/ retints those tokens to solar-embrace ivory bronze and uses a Satoshi brand name under the finalized squircle; it is a sibling of expenses/get/, not a second studio.",
+    "overview": "Atmosphere over flat fill: soft accent glows and grain over solid black. Glass, not cards-for-cards\u2019 sake. Dark by default \u2014 cream Satoshi UI on near-black, with Instrument Serif reserved for studio heroes. Brand and product marks lead; headlines support, never overpower. Instagram bios are a shell-off exception of the same world: token inheritance, no studio nav, unlinked from product chrome. aura/get/ and lumen/get/ use the plate-field pattern \u2014 page field matches the icon plate (ivory / magenta), metal accents from the mark \u2014 as siblings of expenses/get/.",
     "keyCharacteristics": [
       "Atmosphere over flat fill",
-      "Glass, not cards-for-cards’ sake",
+      "Glass, not cards-for-cards\u2019 sake",
       "One job per section",
-      "Real product imagery — wordmarks and icons, not stock collages",
+      "Real product imagery \u2014 wordmarks and icons, not stock collages",
       "Dark by default; cream text on near-black",
       "Accent is a CSS variable, never a hard-coded gold on studio chrome",
       "Product bios may retint the same variables on body.get-page"
@@ -220,36 +366,37 @@
       },
       {
         "name": "The Accent Variable Rule",
-        "body": "Do not hard-code gold into new studio components — use var(--accent). Accent drives CTAs, doc links, soft glows, and atmospheric radials. Bios retint the variable on body.get-page, then keep using it.",
+        "body": "Do not hard-code gold into new studio components \u2014 use var(--accent). Accent drives CTAs, doc links, soft glows, and atmospheric radials. Bios retint the variable on body.get-page, then keep using it.",
         "section": "colors"
       },
       {
         "name": "The Glass-When-It-Earns-It Rule",
-        "body": "Use .glass when a surface holds interaction or a distinct content block — not for every paragraph.",
+        "body": "Use .glass when a surface holds interaction or a distinct content block \u2014 not for every paragraph.",
         "section": "elevation"
       },
       {
         "name": "The Unlinked Bio Rule",
-        "body": "expenses/get/ and aura/get/ inherit tokens from css/styles.css (AURA retints ivory bronze on body.get-page) and must not appear in studio or product navigation.",
+        "body": "expenses/get/, aura/get/, and lumen/get/ inherit tokens from css/styles.css (product bios retint on body.get-page; AURA and Lumen use plate-field) and must not appear in studio or product navigation.",
         "section": "layout"
       }
     ],
     "dos": [
-      "Do use CSS variables from css/styles.css — no one-off hex for accent, text, or background on studio-shell pages.",
-      "Do retint body.get-page on product bios (AURA: #ba7f46 / #e7bb85), then keep using the variables.",
-      "Do keep store CTAs as stacked full-width .get-store plates; AURA Play stays .btn-secondary.btn-soon until Open testing.",
-      "Do treat expenses/get/ and aura/get/ as studio-shell exceptions: Satoshi + styles.css + get.css only.",
+      "Do use CSS variables from css/styles.css \u2014 no one-off hex for accent, text, or background on studio-shell pages.",
+      "Do retint body.get-page on product bios (AURA: ivory plate + #ba7f46 / #e7bb85; Lumen: magenta plate #fc4177 + #d3a348 / #e8c56a), then keep using the variables.",
+      "Do keep store CTAs as stacked full-width .get-store plates; blocked taps stay .btn-soon until listing URLs exist.",
+      "Do treat expenses/get/, aura/get/, and lumen/get/ as studio-shell exceptions: Satoshi + styles.css + get.css only.",
       "Do keep store-linked paths intact (privacy, support, delete-account, invite).",
-      "Do source the AURA bio mark from assets/finalized-icons/aura-solar-embrace-ivory.png."
+      "Do source the AURA bio mark from assets/finalized-icons/aura-solar-embrace-ivory.png and the Lumen bio mark from assets/finalized-icons/lumen-metallic-enamel.png."
     ],
     "donts": [
-      "Don’t add expenses/get/ or aura/get/ to studio or product nav.",
-      "Don’t drop the bio landing into the nav-hero-resources template.",
-      "Don’t invent a parallel palette on a studio-shell or policy page.",
-      "Don’t paint AURA’s bio with studio champagne, or studio chrome with ivory bronze.",
-      "Don’t load a theme picker on a bio page.",
-      "Don’t treat AURA Play as a live link until Open testing has a listing URL.",
-      "Don’t stuff stats, schedules, promo chips, or secondary marketing into a first viewport."
+      "Don\u2019t add expenses/get/, aura/get/, or lumen/get/ to studio or product nav.",
+      "Don\u2019t drop the bio landing into the nav-hero-resources template.",
+      "Don\u2019t invent a parallel palette on a studio-shell or policy page.",
+      "Don\u2019t paint Lumen\u2019s plate-field bio with a muddy dark glow, or studio chrome with product retints.",
+      "Don\u2019t load a theme picker on a bio page.",
+      "Don\u2019t treat blocked bio store taps as live links until listing URLs exist.",
+      "Don\u2019t invent ratings, download counts, or store URLs that are not in PRODUCT.md.",
+      "Don\u2019t stuff stats, schedules, promo chips, or secondary marketing into a first viewport."
     ]
   }
 }

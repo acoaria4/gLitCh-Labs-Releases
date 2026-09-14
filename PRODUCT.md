@@ -22,7 +22,7 @@ A private pocket ledger that stays out of the way — local-first first, sync op
 
 ## Operating Context
 
-Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.io/gLitCh-Labs-Releases`). Instagram in-app browser is the primary viewport for `expenses/get/` and `aura/get/`. Store consoles point at stable policy/support/deletion/invite paths under `expenses/`, `aura/privacy.html`, and `lumen/privacy.html`.
+Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.io/gLitCh-Labs-Releases`). Instagram in-app browser is the primary viewport for `expenses/get/`, `aura/get/`, and `lumen/get/`. Store consoles point at stable policy/support/deletion/invite paths under `expenses/`, `aura/privacy.html`, and `lumen/privacy.html`.
 
 ## Capabilities and Constraints
 
@@ -42,7 +42,7 @@ Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.i
 - Product names: Expenses, AURA, Lumen.
 - Voice: calm, precise, unhurried — product-first, not hype. Prefer “local-first”, “optional”, “calm”.
 - Assets: `assets/glitchlabs-icon.png`, `assets/finalized-icons/expenses-champagne-on-obsidian.png`, `assets/finalized-icons/aura-solar-embrace-ivory.png`, `assets/finalized-icons/lumen-metallic-enamel.png`.
-- Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ivory bronze `#ba7f46` / `#e7bb85`).
+- Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ivory plate + bronze `#ba7f46` / `#e7bb85`; Lumen: magenta plate `#fc4177` + enamel gold `#d3a348` / `#e8c56a`).
 
 ## Evidence on Hand
 

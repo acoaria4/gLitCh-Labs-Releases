@@ -1,0 +1,196 @@
+/* Instagram bio landing — magenta plate field, enamel-gold metal (AURA plate pattern) */
+
+body.get-page {
+  color-scheme: light;
+  --bg: #fc4177;
+  --bg-deep: #e22a5f;
+  --accent: #d3a348;
+  --accent-hover: #e8c56a;
+  --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
+  --text: #f7f1e8;
+  --muted: #f5c9d6;
+  --glass: color-mix(in srgb, #d3a348 10%, #ffffff);
+  --glass-strong: color-mix(in srgb, #d3a348 16%, #ffffff);
+  --glass-border: color-mix(in srgb, #d3a348 36%, transparent);
+  min-height: 100dvh;
+  min-height: 100svh;
+  overflow-x: hidden;
+  color: var(--text);
+  background: var(--bg);
+  scrollbar-color: color-mix(in srgb, var(--accent) 55%, transparent) var(--bg-deep);
+}
+
+body.get-page::before {
+  background:
+    radial-gradient(
+      ellipse 70% 48% at 50% 26%,
+      color-mix(in srgb, #e8c56a 28%, transparent),
+      color-mix(in srgb, #d3a348 12%, transparent) 38%,
+      color-mix(in srgb, #8c5a20 6%, transparent) 58%,
+      transparent 72%
+    ),
+    radial-gradient(ellipse 40% 28% at 100% 88%, color-mix(in srgb, #d3a348 8%, transparent), transparent 52%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
+}
+
+body.get-page::after {
+  opacity: 0.1;
+  mix-blend-mode: multiply;
+}
+
+body.get-page ::selection {
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.get {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  min-height: 100svh;
+  width: min(400px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: calc(28px + env(safe-area-inset-top, 0px)) 0
+    calc(28px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+}
+
+.get-mark-wrap {
+  margin: 0;
+  width: min(240px, 62vw);
+}
+
+.get-brand-name {
+  display: block;
+  margin: 0 0 16px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+
+.get-mark {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  animation: rise-logo 0.95s var(--ease) 0.08s forwards;
+  filter:
+    drop-shadow(0 12px 24px color-mix(in srgb, #8c5a20 22%, transparent))
+    drop-shadow(0 0 14px color-mix(in srgb, #d3a348 18%, transparent));
+}
+
+.get-lead {
+  margin: 4px 0 0;
+  max-width: 34ch;
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.28s forwards;
+}
+
+.get-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-top: 28px;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.44s forwards;
+}
+
+.get-store {
+  width: 100%;
+  min-height: 58px;
+  padding: 0 20px;
+  font-size: 0.98rem;
+  box-sizing: border-box;
+}
+
+body.get-page .btn-primary {
+  color: #3d1224;
+}
+
+body.get-page .btn-secondary {
+  background: color-mix(in srgb, #d3a348 12%, #ffffff);
+  color: #3d1224;
+  border-color: color-mix(in srgb, #d3a348 48%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+body.get-page .btn-secondary:hover:not(.btn-soon) {
+  background: color-mix(in srgb, #d3a348 22%, #ffffff);
+  border-color: var(--accent);
+}
+
+.get-store:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.get-store-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+body.get-page .btn-soon {
+  pointer-events: none;
+  user-select: none;
+}
+
+.get-credit {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 36px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: rise 0.9s var(--ease) 0.58s forwards;
+}
+
+.get-credit img {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, #8c5a20 18%, transparent));
+}
+
+@media (max-height: 720px) {
+  .get-mark-wrap {
+    width: min(240px, 64vw);
+  }
+
+  .get-lead {
+    font-size: 0.98rem;
+  }
+
+  .get-cta {
+    margin-top: 20px;
+  }
+
+  .get-credit {
+    margin-top: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .get-mark,
+  .get-lead,
+  .get-cta,
+  .get-credit {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
