@@ -41,14 +41,14 @@ Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.i
 - Studio name: `gLitCh Labs` (exact casing).
 - Product names: Expenses, AURA, Lumen.
 - Voice: calm, precise, unhurried — product-first, not hype. Prefer “local-first”, “optional”, “calm”.
-- Assets: `assets/expenses-icon.png`, `assets/expenses-wordmark.png`, `assets/glitchlabs-icon.png`, `assets/aura-icon.png`, `aura/get/aura-mark.png`, `assets/lumen-icon.png`.
-- Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ink `#05060f`, gold `#d4af37`, Cinzel wordmark).
+- Assets: `assets/glitchlabs-icon.png`, `assets/finalized-icons/expenses-champagne-on-obsidian.png`, `assets/finalized-icons/aura-solar-embrace-ivory.png`, `assets/finalized-icons/lumen-metallic-enamel.png`.
+- Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ivory bronze `#ba7f46` / `#e7bb85`).
 
 ## Evidence on Hand
 
 - Product copy on `expenses/index.html`, `aura/index.html`, `lumen/index.html`, and `index.html`.
 - Live store URLs on `expenses/index.html` and `aura/get/` (AURA TestFlight).
-- Marks in `assets/` and `aura/get/aura-mark.png`. No testimonials, ratings, or download counts — do not invent them.
+- Marks in `assets/` and `assets/finalized-icons/`. No testimonials, ratings, or download counts — do not invent them.
 
 ## Product Principles
 

@@ -1,14 +1,10 @@
-/* Instagram bio landing — AURA ink + temple gold, scoped so studio champagne stays put */
+/* Instagram bio landing — solar-embrace ivory bronze, scoped so studio gold stays put */
 
 body.get-page {
-  --bg: #05060f;
-  --bg-deep: #03040a;
-  --accent: #d4af37;
-  --accent-hover: #f0cd6a;
-  --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent);
-  --text: #f2e8d4;
-  --muted: #d4c8b4;
-  --font-display: "Cinzel", Georgia, "Times New Roman", serif;
+  --accent: #ba7f46;
+  --accent-hover: #e7bb85;
+  --text: #f7f1e8;
+  --muted: #c9b8a4;
   min-height: 100dvh;
   min-height: 100svh;
   overflow-x: hidden;
@@ -19,19 +15,19 @@ body.get-page {
 body.get-page::before {
   background:
     radial-gradient(
-      ellipse 70% 48% at 50% 22%,
-      color-mix(in srgb, #f0cd6a 20%, transparent),
-      color-mix(in srgb, #d4af37 12%, transparent) 38%,
-      color-mix(in srgb, #9a7b1e 10%, transparent) 58%,
+      ellipse 70% 48% at 50% 26%,
+      color-mix(in srgb, #f2ede5 22%, transparent),
+      color-mix(in srgb, #ba7f46 12%, transparent) 38%,
+      color-mix(in srgb, #844b1c 10%, transparent) 58%,
       transparent 72%
     ),
-    radial-gradient(ellipse 40% 28% at 100% 88%, color-mix(in srgb, #d4af37 8%, transparent), transparent 52%),
+    radial-gradient(ellipse 40% 28% at 100% 88%, color-mix(in srgb, #ba7f46 8%, transparent), transparent 52%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
 }
 
 body.get-page ::selection {
-  background: color-mix(in srgb, var(--accent) 35%, transparent);
-  color: #fff8e0;
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .get {
@@ -51,47 +47,38 @@ body.get-page ::selection {
 }
 
 .get-mark-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   margin: 0;
-  width: min(300px, 78vw);
+  width: min(240px, 62vw);
+}
+
+.get-brand-name {
+  display: block;
+  margin: 0 0 16px;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
 }
 
 .get-mark {
-  width: min(220px, 58vw);
+  width: 100%;
   height: auto;
   object-fit: contain;
   opacity: 0;
   animation: rise-logo 0.95s var(--ease) 0.08s forwards;
   filter:
-    drop-shadow(0 14px 28px color-mix(in srgb, #05060f 70%, transparent))
-    drop-shadow(0 0 22px color-mix(in srgb, #d4af37 28%, transparent));
-}
-
-.get-wordmark {
-  display: block;
-  margin: 10px 0 0 0.28em;
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 9vw, 2.75rem);
-  font-weight: 700;
-  letter-spacing: 0.28em;
-  line-height: 1.1;
-  color: color-mix(in srgb, var(--accent) 92%, #fff9ec);
-  filter: drop-shadow(0 2px 20px color-mix(in srgb, var(--accent) 25%, transparent));
-  opacity: 0;
-  animation: rise 0.9s var(--ease) 0.2s forwards;
+    drop-shadow(0 14px 28px color-mix(in srgb, #844b1c 55%, transparent))
+    drop-shadow(0 0 18px color-mix(in srgb, #ba7f46 22%, transparent));
 }
 
 .get-lead {
-  margin: 12px 0 0;
+  margin: 4px 0 0;
   max-width: 34ch;
   color: var(--muted);
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.5;
   opacity: 0;
-  animation: rise 0.9s var(--ease) 0.32s forwards;
+  animation: rise 0.9s var(--ease) 0.28s forwards;
 }
 
 .get-cta {
@@ -153,15 +140,6 @@ body.get-page .btn-soon {
     width: min(240px, 64vw);
   }
 
-  .get-mark {
-    width: min(168px, 46vw);
-  }
-
-  .get-wordmark {
-    font-size: clamp(1.7rem, 7vw, 2.2rem);
-    margin-top: 6px;
-  }
-
   .get-lead {
     font-size: 0.98rem;
   }
@@ -177,7 +155,6 @@ body.get-page .btn-soon {
 
 @media (prefers-reduced-motion: reduce) {
   .get-mark,
-  .get-wordmark,
   .get-lead,
   .get-cta,
   .get-credit {

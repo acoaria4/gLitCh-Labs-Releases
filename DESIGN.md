@@ -72,14 +72,14 @@ Accent drives CTAs, links in docs, soft glows, and atmospheric radials. Do not h
 
 ### Instagram bio retints (`body.get-page` in each `get.css`)
 
-Same token names as the studio sheet; values are product-scoped so champagne Morning gold never leaks onto a bio, and AURA temple gold never leaks onto studio chrome.
+Same token names as the studio sheet; values are product-scoped so champagne Morning gold never leaks onto a bio, and AURA ivory bronze never leaks onto studio chrome.
 
 | Surface | `--bg` / `--bg-deep` | `--accent` / `--accent-hover` | `--text` / `--muted` | Display face |
 |---------|----------------------|-------------------------------|----------------------|--------------|
-| `expenses/get/` | studio `#0b0b12` / `#07070c` | `#ddbeaa` / `#f0d6c6` (lockup rose-gold) | `#f3ebe6` / `#c4b4aa` | none — lockup PNG is the mark |
-| `aura/get/` | `#05060f` / `#03040a` (AURA ink) | `#d4af37` / `#f0cd6a` (temple gold) | `#f2e8d4` / `#d4c8b4` (warm parchment) | **Cinzel** 700 via `--font-display` |
+| `expenses/get/` | studio `#0b0b12` / `#07070c` | `#d9b793` / `#f7e0bd` (champagne-on-obsidian) | `#f7f1e8` / `#c9b8a4` | none — finalized squircle is the mark |
+| `aura/get/` | studio `#0b0b12` / `#07070c` | `#ba7f46` / `#e7bb85` (solar-embrace ivory bronze) | `#f7f1e8` / `#c9b8a4` | none — Satoshi `.get-brand-name` under the squircle |
 
-AURA’s atmospheric glow is temple gold from the compass (`#f0cd6a` → `#d4af37`), not studio champagne. `theme-color` on `aura/get/` is `#05060f`.
+AURA’s atmospheric glow is ivory bronze from the finalized mark (`#f2ede5` → `#ba7f46` → `#844b1c`), not studio champagne. `theme-color` on `aura/get/` is `#0b0b12`.
 
 ---
 
@@ -87,13 +87,12 @@ AURA’s atmospheric glow is temple gold from the compass (`#f0cd6a` → `#d4af3
 
 | Role | Family | Usage |
 |------|--------|--------|
-| UI / body | **Satoshi** (`--font-sans`) | Nav, buttons, prose, meta, bio lead + store plates |
+| UI / body | **Satoshi** (`--font-sans`) | Nav, buttons, prose, meta, bio lead + store plates + bio brand names |
 | Display | **Instrument Serif** (`--font-display`) | Studio heroes, page titles, product headlines |
-| AURA wordmark | **Cinzel** 700 (`--font-display` on `aura/get/` only) | Tracked “AURA” under the compass; not used on studio or Expenses |
 
-**Load:** Google Fonts (Instrument Serif; Cinzel 700 on `aura/get/` only) + Fontshare (Satoshi 400–700).
+**Load:** Google Fonts (Instrument Serif) + Fontshare (Satoshi 400–700). Instagram bios load Satoshi only.
 
-AURA wordmark: `clamp(2rem, 9vw, 2.75rem)`, weight 700, `letter-spacing: 0.28em`, line-height 1.1, gold mixed toward parchment. Short viewports (`max-height: 720px`) drop to `clamp(1.7rem, 7vw, 2.2rem)`.
+Bio brand name (`.get-brand-name`): Satoshi, `1.8rem`, weight 500, `letter-spacing: 0.08em`, under the finalized squircle on both Expenses and AURA.
 
 ### Scale habits
 
@@ -136,7 +135,7 @@ Path depth:
 | Invite landing | `.invite-panel.glass` + deep-link JS | `expenses/invite.html` |
 | Instagram bio (mark-as-page) | No studio shell. `body.get-page` + `.get` column; wordmark, one line, stacked store buttons. Inherits tokens; product pages may retint accent/ink. Stays unlinked from studio and product nav. | `expenses/get/`, `aura/get/` |
 
-Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. Instagram bios are the exception: Satoshi + `css/styles.css` + local `get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. AURA’s bio also loads **Cinzel** for the wordmark and retints tokens to AURA ink / temple gold / parchment (`#05060f` / `#d4af37` / `#f0cd6a`, text `#f2e8d4`). Compass lives at `aura/get/aura-mark.png` (transparent, from the AURA app) — not `assets/aura-icon.png`. Store stack on AURA: Play **blocked / Soon** (`.btn-secondary.btn-soon`, CSS `pointer-events: none`, swap the `<span>` for an `<a>` when Open testing has a URL) then App Store **gold / Beta** (live TestFlight). Expenses is the inverse: Play primary live, App Store secondary live. Do not add these URLs to studio or product navigation.
+Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. Instagram bios are the exception: Satoshi + `css/styles.css` + local `get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. AURA’s bio retints tokens to solar-embrace ivory bronze (`#ba7f46` / `#e7bb85`) and uses `assets/finalized-icons/aura-solar-embrace-ivory.png` as the mark. Store stack on AURA: Play **blocked / Soon** (`.btn-secondary.btn-soon`, CSS `pointer-events: none`, swap the `<span>` for an `<a>` when Open testing has a URL) then App Store **bronze / Beta** (live TestFlight). Expenses is the inverse: Play primary live, App Store secondary live. Do not add these URLs to studio or product navigation.
 
 ### Stable store URLs (do not rename)
 
@@ -179,10 +178,10 @@ Store CTAs open in a new tab (`target="_blank"` + `rel="noopener noreferrer"`). 
 
 ### Instagram bio column (`.get`)
 
-Phone-width stack (`min(400px, calc(100% - 40px))`) in `100dvh` / `100svh`. Compass or lockup, one muted sentence (`max-width: 34ch`), two full-width store plates (`gap: 12px`), gLitCh Labs credit. No nav, no footer, no theme picker.
+Phone-width stack (`min(400px, calc(100% - 40px))`) in `100dvh` / `100svh`. Finalized squircle + Satoshi brand name, one muted sentence (`max-width: 34ch`), two full-width store plates (`gap: 12px`), gLitCh Labs credit. No nav, no footer, no theme picker.
 
-- **Expenses:** lockup PNG fills the mark wrap; Play `.btn-primary` live; App Store `.btn-secondary` live.
-- **AURA:** compass `min(220px, 58vw)` + Cinzel wordmark; Play `.btn-secondary.btn-soon`; App Store `.btn-primary` TestFlight.
+- **Expenses:** champagne-on-obsidian squircle fills the mark wrap (`min(240px, 62vw)`); Play `.btn-primary` live; App Store `.btn-secondary` live.
+- **AURA:** solar-embrace-ivory squircle same wrap; Play `.btn-secondary.btn-soon`; App Store `.btn-primary` TestFlight.
 
 ### Sections
 
@@ -218,7 +217,7 @@ Studio mark + © year (`#year` filled by `main.js`) + sparse product/privacy/Git
 - Ease: `--ease: cubic-bezier(0.22, 1, 0.36, 1)`
 - Entrance: `rise` / `rise-logo` opacity + translateY
 - Nav appears slightly first; hero mark, then copy, then CTAs
-- Bios: mark `rise-logo` at 0.08s; AURA wordmark `rise` at 0.2s; lead then CTAs then credit (credit at 0.58s)
+- Bios: mark `rise-logo` at 0.08s; lead then CTAs then credit (credit at 0.58s)
 - Respect `prefers-reduced-motion: reduce` (CSS + JS skip reveals)
 - Prefer 2–3 intentional motions per page over constant animation
 
@@ -230,10 +229,13 @@ Studio mark + © year (`#year` filled by `main.js`) + sparse product/privacy/Git
 |-------|-------------|
 | `assets/glitchlabs-icon.png` | Favicon, nav, footer |
 | `assets/glitchlabs-wordmark.png` | Home hero |
-| `assets/expenses-icon.png` | Nav product crumb, product grid |
-| `assets/aura-icon.png` | AURA favicon, nav crumb, product grid, AURA hero mark |
-| `assets/lumen-icon.png` | Lumen favicon, nav crumb, product grid, Lumen hero mark |
-| `aura/get/aura-mark.png` | AURA Instagram bio compass (transparent, from the AURA app) |
+| `assets/expenses-icon.png` | Legacy Expenses mark (prefer finalized) |
+| `assets/aura-icon.png` | Legacy AURA compass JPEG (prefer finalized) |
+| `assets/lumen-icon.png` | Legacy Lumen mark (prefer finalized) |
+| `assets/finalized-icons/expenses-champagne-on-obsidian.png` | Expenses bio + site icon |
+| `assets/finalized-icons/aura-solar-embrace-ivory.png` | AURA bio + site icon (active) |
+| `assets/finalized-icons/aura-solar-embrace-obsidian.png` | AURA dark alternate |
+| `assets/finalized-icons/lumen-metallic-enamel.png` | Lumen site icon |
 | `assets/expenses-wordmark.png` | Expenses hero |
 | `assets/expenses-logo.png` | Legacy / invite mark under `expenses/assets/` also kept for store pages |
 
@@ -252,7 +254,7 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 ## Implementation checklist (new page)
 
 1. Copy shell from an existing page at the same path depth (`contact.html` or `expenses/index.html`). Instagram bio copies `expenses/get/` or `aura/get/`, not a studio-shell page.
-2. Include fonts + `styles.css` + `theme.js` + `main.js`. Instagram bio: Satoshi + `styles.css` + `get.css` only (AURA also loads Cinzel).
+2. Include fonts + `styles.css` + `theme.js` + `main.js`. Instagram bio: Satoshi + `styles.css` + `get.css` only.
 3. Use CSS variables — no one-off hex for accent/text/bg on studio-shell pages. Bios retint those variables on `body.get-page`, then keep using the vars.
 4. Pick the right page type (hero / product / doc / invite / Instagram bio).
 5. If under `expenses/` or `aura/` and using the studio shell, use brand lockup + product crumb. Skip the shell entirely for `expenses/get/` and `aura/get/`.
@@ -272,6 +274,6 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 | `assets/` | Studio + product imagery |
 | `expenses/*`, `aura/*`, `lumen/*` | Product + store-facing pages |
 | `expenses/get/` | Instagram bio landing — inherits `css/styles.css` tokens; layout in `get.css`; unlinked from nav |
-| `aura/get/` | AURA Instagram bio — sibling of `expenses/get/`; ink `#05060f` / gold `#d4af37` / hover `#f0cd6a`; Cinzel wordmark; compass `aura/get/aura-mark.png`; Play blocked until Open testing; TestFlight live; unlinked from nav |
+| `aura/get/` | AURA Instagram bio — sibling of `expenses/get/`; ivory bronze `#ba7f46` / `#e7bb85`; Satoshi brand name; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`; Play blocked until Open testing; TestFlight live; unlinked from nav |
 
 When the visual system changes, update **this file** and the CSS tokens together.

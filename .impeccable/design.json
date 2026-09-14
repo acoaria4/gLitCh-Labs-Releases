@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-09-11T07:00:00Z",
+  "generatedAt": "2026-09-14T04:00:00Z",
   "title": "gLitCh Labs — Design Language",
   "extensions": {
     "colorMeta": {
@@ -64,41 +64,29 @@
         "canonical": "rgba(255,255,255,0.14)",
         "tonalRamp": ["#0b0b12", "#16161e", "#22222c", "#333340", "#4a4a58", "#6e6d7a", "#a8a6b3", "#f5f3ee"]
       },
-      "aura-ink": {
-        "role": "neutral",
-        "displayName": "AURA Ink",
-        "canonical": "#05060f",
-        "tonalRamp": ["#03040a", "#05060f", "#0c0e1c", "#16182c", "#2a2d48", "#5a5e78", "#a8aac0", "#e8eaf4"]
-      },
-      "aura-ink-deep": {
-        "role": "neutral",
-        "displayName": "AURA Ink Deep",
-        "canonical": "#03040a",
-        "tonalRamp": ["#020308", "#03040a", "#05060f", "#0c0e1c", "#1a1d30", "#4a4e66", "#989cb4", "#e4e6f0"]
-      },
-      "aura-gold": {
+      "aura-bronze": {
         "role": "primary",
-        "displayName": "Temple Gold",
-        "canonical": "#d4af37",
-        "tonalRamp": ["#3d320c", "#5c4a12", "#8a6e1c", "#b89428", "#d4af37", "#f0cd6a", "#f6e0a0", "#fbf3d8"]
+        "displayName": "Ivory Bronze",
+        "canonical": "#ba7f46",
+        "tonalRamp": ["#844b1c", "#9a6230", "#ba7f46", "#c99d71", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6"]
       },
-      "aura-gold-hover": {
+      "aura-bronze-hover": {
         "role": "primary",
-        "displayName": "Temple Gold Hover",
-        "canonical": "#f0cd6a",
-        "tonalRamp": ["#3d320c", "#5c4a12", "#8a6e1c", "#d4af37", "#e4c050", "#f0cd6a", "#f6e0a0", "#fbf3d8"]
+        "displayName": "Ivory Bronze Hover",
+        "canonical": "#e7bb85",
+        "tonalRamp": ["#844b1c", "#ba7f46", "#c99d71", "#d9b793", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6"]
       },
-      "aura-parchment": {
+      "aura-plate": {
         "role": "neutral",
-        "displayName": "Warm Parchment",
-        "canonical": "#f2e8d4",
-        "tonalRamp": ["#2a2418", "#4a4030", "#7a6e58", "#a89880", "#c4b49a", "#d4c8b4", "#e8dcc8", "#f2e8d4"]
+        "displayName": "Ivory Plate",
+        "canonical": "#f2ede5",
+        "tonalRamp": ["#844b1c", "#ba7f46", "#c9b8a4", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6", "#ffffff"]
       },
       "aura-muted": {
         "role": "neutral",
-        "displayName": "Parchment Muted",
-        "canonical": "#d4c8b4",
-        "tonalRamp": ["#2a2418", "#4a4030", "#7a6e58", "#a89880", "#c4b49a", "#d4c8b4", "#e8dcc8", "#f2e8d4"]
+        "displayName": "Warm Cream Muted",
+        "canonical": "#c9b8a4",
+        "tonalRamp": ["#844b1c", "#8c6443", "#a89880", "#c9b8a4", "#e7bb85", "#f2ede5", "#f7f1e8", "#fcfaf6"]
       }
     },
     "typographyMeta": {
@@ -109,10 +97,6 @@
       "display": {
         "displayName": "Instrument Serif",
         "purpose": "Studio heroes, page titles, product headlines. Not loaded on expenses/get/ or aura/get/."
-      },
-      "display-aura": {
-        "displayName": "Cinzel",
-        "purpose": "AURA Instagram bio wordmark only. Weight 700, letter-spacing 0.28em, clamp(2rem, 9vw, 2.75rem). Scoped via --font-display on body.get-page in aura/get/get.css."
       }
     },
     "shadows": [
@@ -132,9 +116,9 @@
         "purpose": "Soft gold halo under the Expenses wordmark on the bio landing. Nav product icons use a lighter version of the same idea."
       },
       {
-        "name": "aura-compass",
-        "value": "drop-shadow(0 14px 28px color-mix(in srgb, #05060f 70%, transparent)) drop-shadow(0 0 22px color-mix(in srgb, #d4af37 28%, transparent))",
-        "purpose": "Ink drop plus temple-gold halo under the AURA compass on aura/get/."
+        "name": "aura-ivory-mark",
+        "value": "drop-shadow(0 14px 28px color-mix(in srgb, #844b1c 55%, transparent)) drop-shadow(0 0 18px color-mix(in srgb, #ba7f46 22%, transparent))",
+        "purpose": "Bronze shadow plus ivory-bronze halo under the AURA solar-embrace squircle on aura/get/."
       }
     ],
     "motion": [
@@ -146,12 +130,12 @@
       {
         "name": "rise",
         "value": "opacity 0→1, translateY(22px)→0",
-        "purpose": "Entrance for copy and CTAs. expenses/get lead 0.28s; aura/get wordmark 0.2s then lead 0.32s; both CTAs 0.44s, credit 0.58s."
+        "purpose": "Entrance for copy and CTAs. Bio landings: lead 0.28s, CTAs 0.44s, credit 0.58s."
       },
       {
         "name": "rise-logo",
         "value": "0.95s var(--ease) 0.08s forwards",
-        "purpose": "Entrance for the bio mark (Expenses lockup, AURA compass); slightly longer than copy rise."
+        "purpose": "Entrance for the bio mark (Expenses champagne squircle, AURA ivory squircle); slightly longer than copy rise."
       },
       {
         "name": "button-hover",
@@ -211,14 +195,14 @@
       "name": "AURA Instagram Bio",
       "kind": "custom",
       "refersTo": "get-page-aura",
-      "description": "aura/get/ only: AURA ink field, Cinzel tracked wordmark, Play blocked/Soon then App Store gold/Beta (TestFlight). Compass is aura/get/aura-mark.png, not assets/aura-icon.png.",
-      "html": "<div class=\"ds-get-aura\"><span class=\"ds-get-wordmark\">AURA</span><p class=\"ds-get-lead\">Vedic astrology — charts, predictions, Porutham, and Tamil calendar.</p><div class=\"ds-get-cta\"><span class=\"ds-btn-secondary ds-get-store ds-btn-soon\">Get on Google Play <span class=\"ds-soon-label\">Soon</span></span><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
-      "css": ".ds-get-aura { --bg: #05060f; --bg-deep: #03040a; --accent: #d4af37; --accent-hover: #f0cd6a; --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent); --text: #f2e8d4; --muted: #d4c8b4; --font-display: Cinzel, Georgia, serif; display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-sans, Satoshi, sans-serif); width: min(400px, 100%); margin: 0 auto; background: var(--bg); color: var(--text); padding: 28px 20px; } .ds-get-wordmark { display: block; font-family: var(--font-display); font-size: clamp(2rem, 9vw, 2.75rem); font-weight: 700; letter-spacing: 0.28em; line-height: 1.1; color: color-mix(in srgb, var(--accent) 92%, #fff9ec); } .ds-get-lead { margin: 12px 0 0; max-width: 34ch; color: var(--muted); font-size: 1.05rem; font-weight: 400; line-height: 1.5; } .ds-get-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 28px; } .ds-get-store { width: 100%; min-height: 58px; padding: 0 20px; font-size: 0.98rem; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-family: var(--font-sans, Satoshi, sans-serif); font-weight: 600; text-decoration: none; } .ds-btn-primary { background: var(--accent); color: var(--bg); border: 1px solid transparent; cursor: pointer; } .ds-btn-primary:hover { background: var(--accent-hover); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); transform: translateY(-2px); } .ds-btn-secondary { background: rgba(255,255,255,0.045); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); } .ds-btn-soon { pointer-events: none; user-select: none; cursor: default; opacity: 0.62; } .ds-get-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; } .ds-get-credit { margin: 36px 0 0; color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; }"
+      "description": "aura/get/ only: studio near-black field retinted to ivory bronze, Satoshi brand name, Play blocked/Soon then App Store bronze/Beta (TestFlight). Mark is assets/finalized-icons/aura-solar-embrace-ivory.png.",
+      "html": "<div class=\"ds-get-aura\"><span class=\"ds-get-brand-name\">AURA</span><p class=\"ds-get-lead\">Vedic astrology — charts, predictions, Porutham, and Tamil calendar.</p><div class=\"ds-get-cta\"><span class=\"ds-btn-secondary ds-get-store ds-btn-soon\">Get on Google Play <span class=\"ds-soon-label\">Soon</span></span><a class=\"ds-btn-primary ds-get-store\" href=\"#\">Download on the App Store <span class=\"ds-soon-label\">Beta</span></a></div><p class=\"ds-get-credit\">gLitCh Labs</p></div>",
+      "css": ".ds-get-aura { --accent: #ba7f46; --accent-hover: #e7bb85; --accent-soft: color-mix(in srgb, var(--accent) 18%, transparent); --text: #f7f1e8; --muted: #c9b8a4; display: flex; flex-direction: column; align-items: center; text-align: center; font-family: var(--font-sans, Satoshi, sans-serif); width: min(400px, 100%); margin: 0 auto; color: var(--text); padding: 28px 20px; } .ds-get-brand-name { display: block; margin: 0 0 16px; font-size: 1.8rem; font-weight: 500; letter-spacing: 0.08em; } .ds-get-lead { margin: 4px 0 0; max-width: 34ch; color: var(--muted); font-size: 1.05rem; font-weight: 400; line-height: 1.5; } .ds-get-cta { display: flex; flex-direction: column; gap: 12px; width: 100%; margin-top: 28px; } .ds-get-store { width: 100%; min-height: 58px; padding: 0 20px; font-size: 0.98rem; box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; font-family: var(--font-sans, Satoshi, sans-serif); font-weight: 600; text-decoration: none; } .ds-btn-primary { background: var(--accent); color: var(--bg, #0b0b12); border: 1px solid transparent; cursor: pointer; } .ds-btn-primary:hover { background: var(--accent-hover); box-shadow: 0 10px 30px color-mix(in srgb, var(--accent) 22%, transparent); transform: translateY(-2px); } .ds-btn-secondary { background: rgba(255,255,255,0.045); color: var(--text); border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent); } .ds-btn-soon { pointer-events: none; user-select: none; cursor: default; opacity: 0.62; } .ds-get-store:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; } .ds-soon-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; opacity: 0.85; margin-left: 6px; } .ds-get-credit { margin: 36px 0 0; color: var(--muted); font-size: 0.95rem; font-weight: 600; letter-spacing: 0.04em; }"
     }
   ],
   "narrative": {
     "northStar": "Marks lead; headlines support",
-    "overview": "Atmosphere over flat fill: soft accent glows and grain over solid black. Glass, not cards-for-cards’ sake. Dark by default — cream Satoshi UI on near-black, with Instrument Serif reserved for studio heroes. Brand and product marks lead; headlines support, never overpower. Instagram bios are a shell-off exception of the same world: token inheritance, no studio nav, unlinked from product chrome. aura/get/ retints those tokens to AURA ink and temple gold and sets Cinzel on the wordmark; it is a sibling of expenses/get/, not a second studio.",
+    "overview": "Atmosphere over flat fill: soft accent glows and grain over solid black. Glass, not cards-for-cards’ sake. Dark by default — cream Satoshi UI on near-black, with Instrument Serif reserved for studio heroes. Brand and product marks lead; headlines support, never overpower. Instagram bios are a shell-off exception of the same world: token inheritance, no studio nav, unlinked from product chrome. aura/get/ retints those tokens to solar-embrace ivory bronze and uses a Satoshi brand name under the finalized squircle; it is a sibling of expenses/get/, not a second studio.",
     "keyCharacteristics": [
       "Atmosphere over flat fill",
       "Glass, not cards-for-cards’ sake",
@@ -246,23 +230,23 @@
       },
       {
         "name": "The Unlinked Bio Rule",
-        "body": "expenses/get/ and aura/get/ inherit tokens from css/styles.css (AURA retints ink/gold on body.get-page) and must not appear in studio or product navigation.",
+        "body": "expenses/get/ and aura/get/ inherit tokens from css/styles.css (AURA retints ivory bronze on body.get-page) and must not appear in studio or product navigation.",
         "section": "layout"
       }
     ],
     "dos": [
       "Do use CSS variables from css/styles.css — no one-off hex for accent, text, or background on studio-shell pages.",
-      "Do retint body.get-page on product bios (AURA: #05060f / #d4af37 / #f0cd6a), then keep using the variables.",
+      "Do retint body.get-page on product bios (AURA: #ba7f46 / #e7bb85), then keep using the variables.",
       "Do keep store CTAs as stacked full-width .get-store plates; AURA Play stays .btn-secondary.btn-soon until Open testing.",
-      "Do treat expenses/get/ and aura/get/ as studio-shell exceptions: Satoshi + styles.css + get.css only (AURA also loads Cinzel).",
+      "Do treat expenses/get/ and aura/get/ as studio-shell exceptions: Satoshi + styles.css + get.css only.",
       "Do keep store-linked paths intact (privacy, support, delete-account, invite).",
-      "Do source the AURA bio compass from aura/get/aura-mark.png, not assets/aura-icon.png."
+      "Do source the AURA bio mark from assets/finalized-icons/aura-solar-embrace-ivory.png."
     ],
     "donts": [
       "Don’t add expenses/get/ or aura/get/ to studio or product nav.",
       "Don’t drop the bio landing into the nav-hero-resources template.",
       "Don’t invent a parallel palette on a studio-shell or policy page.",
-      "Don’t paint AURA’s bio with studio champagne, or studio chrome with temple gold.",
+      "Don’t paint AURA’s bio with studio champagne, or studio chrome with ivory bronze.",
       "Don’t load a theme picker on a bio page.",
       "Don’t treat AURA Play as a live link until Open testing has a listing URL.",
       "Don’t stuff stats, schedules, promo chips, or secondary marketing into a first viewport."
