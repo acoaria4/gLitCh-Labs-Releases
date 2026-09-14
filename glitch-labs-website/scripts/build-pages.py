@@ -1,4 +1,4 @@
-"""Build shared page shells from local content; never writes outside New Website 8."""
+"""Build shared page shells from local content; never writes outside glitch-labs-website."""
 from pathlib import Path
 import re, html
 ROOT=Path(__file__).resolve().parents[1]

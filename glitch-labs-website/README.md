@@ -1,4 +1,4 @@
-# gLitCh Labs — New Website 8
+# gLitCh Labs — glitch-labs-website
 
 A standalone static website. All implementation and assets are contained in this folder. No build or install required. Product links open the individual pages in `expenses/`, `aura/`, and `lumen/`. About, support, and privacy links point to the existing public site. Store links and availability follow the root `/get` reference pages. Product colors live in `product-themes.css`.
 
