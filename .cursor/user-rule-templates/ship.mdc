@@ -1,0 +1,36 @@
+---
+description: When the user says ship — new branch, commit, push
+alwaysApply: true
+---
+
+<!--
+Portable source of truth for other machines. This path is not auto-applied.
+
+Install: cp .cursor/user-rule-templates/ship.mdc ~/.cursor/rules/
+
+Do not copy into .cursor/rules/ if you already use the ~/.cursor/rules copy
+(avoids applying the rule twice).
+-->
+
+# Ship
+
+When the user says **ship** (exact word as a standing abbreviation; also clear equivalents such as “ship this” / “ship it” when they clearly mean this ritual):
+
+Run these steps in order. Stop on failure.
+
+| Step | Action |
+| ---- | --- |
+| 1 | **Move to a new branch** — follow `move-to-new-branch.mdc` fully (patch bump + slug, create/check out, `SetActiveBranch`). Slug from the work being shipped. |
+| 2 | **Commit** — follow the committing-changes-with-git protocol (status/diff/log, stage relevant files, HEREDOC message, never skip hooks). If there is nothing to commit, stop after step 1 and say so; do not empty-commit. |
+| 3 | **Push** — `git push -u origin HEAD` with host permissions so the new branch tracks remote. Do not force-push. |
+
+## Not this ritual
+
+- **Going for Release** / prep for release — versionCode bump, AAB, store notes. Do not run that when they only said **ship**.
+- Ordinary “commit” or “push” alone — do only what they asked; do not invent a new branch.
+- **Move to a new branch** alone — branch only; no commit/push unless they also asked.
+
+## Notes
+
+- Prefer a short camelCase slug that names the change (example: `1.4.13-lumenGet`).
+- Return the new branch name and remote tracking confirmation when done.

@@ -25,3 +25,5 @@ When the user says **Move to a new branch** (or a clear equivalent such as “do
 Do **not** bump `package.json` / native version codes just because of the branch rename — version bumps stay with **Going for Release** / `npm run bump`.
 
 Do **not** use this rule for ordinary feature work when the user did not ask for a new branch.
+
+When the user says **ship**, that is a larger ritual (new branch + commit + push) — follow `ship.mdc`, which includes this rule as step 1.
