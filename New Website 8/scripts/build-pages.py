@@ -2,10 +2,10 @@
 from pathlib import Path
 import re, html
 ROOT=Path(__file__).resolve().parents[1]
-PRODUCTS={'expenses':('Expenses','#0b0b12'),'aura':('AURA','#f2ede5'),'lumen':('Lumen','#fc4177'),'studio':('gLitCh Labs','#0b0d10')}
+PRODUCTS={'expenses':('Expenses','#0b0b12'),'aura':('AURA','#f2ede5'),'lumen':('Lumen','#f8e7ed'),'studio':('gLitCh Labs','#0b0d10')}
 LABELS={'privacy':'Privacy','support':'Support','delete-account':'Delete account','data-controls':'Data controls','invite':'Group invite','about':'About','contact':'Contact'}
 def styles(prefix):
- return ''.join(f'<link rel="stylesheet" href="{prefix}{name}.css">' for name in ['fonts','styles','product-themes','typography','documents'])
+ return ''.join(f'<link rel="stylesheet" href="{prefix}{name}.css?v=unified-1">' for name in ['fonts','styles','product-themes','typography','documents','navigation'])
 def resources(slug,prefix=''):
  return ''.join(f'<a href="{prefix}{key}.html">{LABELS[key]}</a>' for key in ('privacy','support','delete-account','data-controls') if (ROOT/'content'/slug/(key+'.html')).exists())
 for slug,(name,color) in PRODUCTS.items():
@@ -38,7 +38,7 @@ for slug,(name,color) in PRODUCTS.items():
 for slug,(name,color) in PRODUCTS.items():
  if slug=='studio':continue
  p=ROOT/slug/'index.html';s=p.read_text()
- for sheet in ('fonts','typography'):
+ for sheet in ('fonts','typography','navigation'):
   if f'../{sheet}.css' not in s:s=s.replace('</head>',f'<link rel="stylesheet" href="../{sheet}.css"></head>')
  s=re.sub(r'<h1 id="product-title">.*?</h1>',f'<h1 id="product-title">{name}<span class="name-dot" aria-hidden="true">.</span></h1>',s)
  s=re.sub(r'<a class="brand" href="../index.html">[\s\S]*?</a>',f'<a class="brand" href="../index.html#{slug}"><img src="../assets/{slug}.png" alt="" width="32" height="32"><span class="product-name">{name}<span class="name-dot" aria-hidden="true">.</span></span></a>',s,count=1)
@@ -50,9 +50,9 @@ for slug,(name,color) in PRODUCTS.items():
  stores=re.search(r'<div class="store-links"[\s\S]*?</div>',s).group(0)
  note=re.search(r'<p class="release-note">.*?</p>',s).group(0)
  getdir=ROOT/slug/'get';getdir.mkdir(exist_ok=True)
- getdir.joinpath('index.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="{color}"><meta name="description" content="Get {name} by gLitCh Labs. Download availability and beta links."><title>Get {name} — gLitCh Labs</title><link rel="icon" href="../../assets/{slug}.png">{styles('../../')}</head><body class="product-site get-site {slug}"><header class="navigation"><a class="brand" href="../index.html">← {name}</a><nav aria-label="Main navigation"><a href="../support.html">Support</a><a href="../../index.html#{slug}">All apps ↗</a></nav></header><main class="product-landing"><div class="landing-visual"><img class="landing-icon" src="../../assets/{slug}.png" alt="" width="1280" height="1280"></div><div class="landing-copy">{title}{desc}{stores}{note}</div></main><footer class="product-footer"><a href="../../index.html">gLitCh Labs</a><nav aria-label="Product resources">{resources(slug,'../')}</nav></footer></body></html>''')
+ getdir.joinpath('index.html').write_text(f'''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="{color}"><meta name="description" content="Get {name} by gLitCh Labs. Download availability and beta links."><title>Get {name} — gLitCh Labs</title><link rel="icon" href="../../assets/{slug}.png">{styles('../../')}</head><body class="product-site get-site {slug}"><header class="navigation"><a class="brand" href="../index.html"><img src="../../assets/{slug}.png" alt="" width="32" height="32"><span class="product-name">{name}<span class="name-dot" aria-hidden="true">.</span></span></a><nav aria-label="Main navigation"><a href="../support.html">Support</a><a href="../../index.html#{slug}">All apps ↗</a></nav></header><main class="product-landing"><div class="landing-visual"><img class="landing-icon" src="../../assets/{slug}.png" alt="" width="1280" height="1280"></div><div class="landing-copy">{title}{desc}{stores}{note}</div></main><footer class="product-footer"><a href="../../index.html">gLitCh Labs</a><nav aria-label="Product resources">{resources(slug,'../')}</nav></footer></body></html>''')
 p=ROOT/'index.html';s=p.read_text()
-for sheet in ('fonts','typography'):
+for sheet in ('fonts','typography','navigation'):
  if f'href="{sheet}.css"' not in s:s=s.replace('</head>',f'<link rel="stylesheet" href="{sheet}.css"></head>')
 for slug in ('expenses','aura','lumen'):
  s=s.replace(f'https://acoaria4.github.io/gLitCh-Labs-Releases/{slug}/privacy.html',f'{slug}/privacy.html')

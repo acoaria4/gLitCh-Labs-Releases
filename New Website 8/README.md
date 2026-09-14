@@ -21,7 +21,7 @@ See `RUNWAY-PROMPT.md` for the creative brief.
 
 - Expenses: Manrope, champagne on charcoal.
 - AURA: Cormorant Garamond headings, DM Sans body, bronze on ivory.
-- Lumen: Outfit, gold on pink.
+- Lumen: Outfit, dark plum text on pale blush (#F8E7ED), icon-pink (#FC4177) action buttons with white text, and gold product-name dots.
 
 Fonts are self-hosted in `assets/fonts/`, with open-source licenses included. No font-provider request is needed at runtime.
 
@@ -34,3 +34,7 @@ Edit supporting-page copy in `content/<product>/`, then run `python3 scripts/bui
 Run `python3 scripts/check-pages.py` to check local destinations, anchors, assets, page headings, and that generated policies preserve their content source.
 
 Invite links accept `?t=...` or `?token=...` and open the Expenses deep link only when the visitor selects Open in Expenses. Missing-token links show an explanation without an active app link.
+
+## Navigation and scrolling
+
+`navigation.css` shares readable header/footer typography and 44px touch targets across the site. Mobile navigation uses two rows so all main links remain visible. On the main site, Arrow Up/Down and Page Up/Down move one section per press; Home/End select the first/last section. Held-key repeats are ignored. Previous/Next buttons offer the same behavior on touchscreens. Native touch/wheel scrolling remains available within longer sections. Reduced-motion users receive immediate section jumps. Supporting pages retain normal document scrolling.

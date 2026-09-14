@@ -31,12 +31,12 @@
 .document-toc ol{margin-bottom:0}
 .document-toc li{margin-bottom:5px}
 .document-content .help-note{padding:20px;border:1px solid var(--rule);border-radius:12px;background:var(--halo)}
-.studio-site{--field:#0b0d10;--foreground:#f0eeea;--secondary:#b5bbc4;--rule:#ffffff25;--halo:#b9c5d515;--button-metal:#b9c5d5;--button-hover:#e0e6ee;--button-ink:#0b0d10;--name-dot:#b9c5d5}
+.studio-site{--field:#0b0d10;--field-deep:#080a0d;--foreground:#f0eeea;--secondary:#b5bbc4;--rule:#ffffff25;--halo:#b9c5d515;--button-metal:#b9c5d5;--button-hover:#e0e6ee;--button-ink:#0b0d10;--name-dot:#b9c5d5}
 .studio-site .document-content h2{font-size:27px}
 .get-site .product-landing{display:flex;flex-direction:column;gap:20px;text-align:center;padding:105px 24px 45px;min-height:100svh}
 .get-site .landing-visual{order:-1}
 .get-site .landing-icon{width:min(220px,55vw)}
-.get-site .product-landing h1{font-size:52px;margin-bottom:15px}
+/* Download product titles inherit the same responsive typography as sections. */
 .get-site .description{max-width:380px;margin:auto}
 .get-site .store-links{width:min(400px,calc(100vw - 48px));margin-inline:auto}
 .get-site .release-note{margin-inline:auto}
