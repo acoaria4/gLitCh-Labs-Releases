@@ -33,6 +33,7 @@ const observer = new IntersectionObserver(entries => {
     const visible = Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0));
     return visible > best.visible ? { scene, visible } : best;
   }, { scene: scenes[0], visible: 0 }).scene;
+  document.body.dataset.scene = active.id;
   sectionLinks.forEach(link => {
     if (link.hash === `#${active.id}`) link.setAttribute('aria-current', 'location');
     else link.removeAttribute('aria-current');

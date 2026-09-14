@@ -1,6 +1,6 @@
 # gLitCh Labs — New Website 8
 
-A standalone static website. All implementation and assets are contained in this folder. No build or install required. Product, about, and privacy links point to the existing public site.
+A standalone static website. All implementation and assets are contained in this folder. No build or install required. Product links open the individual pages in `expenses/`, `aura/`, and `lumen/`. About, support, and privacy links point to the existing public site. Store links and availability follow the root `/get` reference pages. Product colors live in `product-themes.css`.
 
 Preview: open `index.html` directly, or run `python3 -m http.server 8088` from this folder and visit http://localhost:8088.
 
