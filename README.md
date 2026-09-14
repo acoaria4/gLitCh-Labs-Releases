@@ -47,3 +47,7 @@ The repository root is the live website source. GitHub Pages is configured to de
 - `glitch-labs-website/` preserves the pre-promotion copy of the new site.
 
 Both directories are local, ignored backups and must remain untracked. Make ongoing changes at root; the backups are snapshots, not synchronized copies. Repository metadata and editor configuration remain at root. The Google verification file retains its original root URL.
+
+## Social Composer
+
+Social Composer is restored at `social-composer/` from the latest `main` snapshot used during promotion. It is part of the published root site and links back to the studio homepage. Its files and assets are tracked normally.

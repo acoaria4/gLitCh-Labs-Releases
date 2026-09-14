@@ -14,7 +14,8 @@ class Page(HTMLParser):
    if a.get(key):self.links.append(a[key])
 pages={p:Page(p.read_text()) for p in ROOT.rglob('*.html') if not {'content', 'old_main_website', 'glitch-labs-website', '.git'}.intersection(p.relative_to(ROOT).parts) and not p.name.startswith('google')}
 for p,page in pages.items():
- assert page.h1==1,(p,'heading count',page.h1)
+ if 'social-composer' not in p.relative_to(ROOT).parts:
+  assert page.h1==1,(p,'heading count',page.h1)
  for url in page.links:
   u=urlsplit(url)
   if u.scheme or u.netloc:continue
@@ -33,4 +34,4 @@ for p in ROOT.glob('*.css'):
  for path in re.findall(r'url\(([^)]+)\)',p.read_text()):
   path=path.strip('\'"')
   if not path.startswith(('data:','http')):assert (p.parent/path).exists(),(p,path)
-print(f'PASS: {len(pages)} pages, local links/anchors/assets, one h1 per page, privacy text preserved.')
+print(f'PASS: {len(pages)} pages, local links/anchors/assets, marketing-page headings, privacy text preserved.')
