@@ -77,9 +77,9 @@ Same token names as the studio sheet; values are product-scoped so champagne Mor
 | Surface | `--bg` / `--bg-deep` | `--accent` / `--accent-hover` | `--text` / `--muted` | Display face |
 |---------|----------------------|-------------------------------|----------------------|--------------|
 | `expenses/get/` | studio `#0b0b12` / `#07070c` | `#d9b793` / `#f7e0bd` (champagne-on-obsidian) | `#f7f1e8` / `#c9b8a4` | none — finalized squircle is the mark |
-| `aura/get/` | studio `#0b0b12` / `#07070c` | `#ba7f46` / `#e7bb85` (solar-embrace ivory bronze) | `#f7f1e8` / `#c9b8a4` | none — Satoshi `.get-brand-name` under the squircle |
+| `aura/get/` | `#f2ede5` / `#eae3d6` (ivory plate trial) | `#ba7f46` / `#e7bb85` (solar-embrace bronze) | `#3d2a18` / `#7a5a38` (bronze ink) | none — Satoshi `.get-brand-name` under the squircle |
 
-AURA’s atmospheric glow is ivory bronze from the finalized mark (`#f2ede5` → `#ba7f46` → `#844b1c`), not studio champagne. `theme-color` on `aura/get/` is `#0b0b12`.
+AURA’s bio is currently an **ivory-field trial**: plate cream field with bronze metal accents matching `aura-solar-embrace-ivory.png`. `theme-color` is `#f2ede5`. Revert to dark bronze-on-black at commit `8592488` if the trial fails.
 
 ---
 
@@ -135,7 +135,7 @@ Path depth:
 | Invite landing | `.invite-panel.glass` + deep-link JS | `expenses/invite.html` |
 | Instagram bio (mark-as-page) | No studio shell. `body.get-page` + `.get` column; wordmark, one line, stacked store buttons. Inherits tokens; product pages may retint accent/ink. Stays unlinked from studio and product nav. | `expenses/get/`, `aura/get/` |
 
-Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. Instagram bios are the exception: Satoshi + `css/styles.css` + local `get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. AURA’s bio retints tokens to solar-embrace ivory bronze (`#ba7f46` / `#e7bb85`) and uses `assets/finalized-icons/aura-solar-embrace-ivory.png` as the mark. Store stack on AURA: Play **blocked / Soon** (`.btn-secondary.btn-soon`, CSS `pointer-events: none`, swap the `<span>` for an `<a>` when Open testing has a URL) then App Store **bronze / Beta** (live TestFlight). Expenses is the inverse: Play primary live, App Store secondary live. Do not add these URLs to studio or product navigation.
+Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. Instagram bios are the exception: Satoshi + `css/styles.css` + local `get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. AURA’s bio is an **ivory-field trial**: plate cream `#f2ede5`, bronze `#ba7f46` / `#e7bb85`, bronze ink text; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`. Store stack on AURA: Play **blocked / Soon** (`.btn-secondary.btn-soon`, CSS `pointer-events: none`, swap the `<span>` for an `<a>` when Open testing has a URL) then App Store **bronze / Beta** (live TestFlight). Expenses stays dark champagne-on-obsidian. Do not add these URLs to studio or product navigation.
 
 ### Stable store URLs (do not rename)
 
@@ -274,6 +274,6 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 | `assets/` | Studio + product imagery |
 | `expenses/*`, `aura/*`, `lumen/*` | Product + store-facing pages |
 | `expenses/get/` | Instagram bio landing — inherits `css/styles.css` tokens; layout in `get.css`; unlinked from nav |
-| `aura/get/` | AURA Instagram bio — sibling of `expenses/get/`; ivory bronze `#ba7f46` / `#e7bb85`; Satoshi brand name; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`; Play blocked until Open testing; TestFlight live; unlinked from nav |
+| `aura/get/` | AURA Instagram bio — ivory-field trial (plate `#f2ede5`, bronze `#ba7f46`); Satoshi brand name; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`; Play blocked until Open testing; TestFlight live; unlinked from nav |
 
 When the visual system changes, update **this file** and the CSS tokens together.

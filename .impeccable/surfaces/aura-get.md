@@ -12,9 +12,9 @@ related_targets: []
 **Job:** Get into the app — iOS on TestFlight now; Android when Open testing unlocks.
 **Action:** App Store tap. Google Play stays visible but blocked until a Play URL exists.
 **Proof:** Real AURA solar-embrace-ivory mark + live TestFlight URL. No ratings or invented claims.
-**Constraints:** GitHub Pages static HTML; Instagram WebView; unlinked from studio/product pages; inherit studio shell tokens, retint accent to ivory bronze; no theme picker.
+**Constraints:** GitHub Pages static HTML; Instagram WebView; unlinked from studio/product pages; inherit studio tokens then retint to ivory plate + bronze; no theme picker.
 
-**Direction:** The mark is the page. Phone-width column in 100dvh. AURA ivory squircle + Satoshi brand name at scale, one sentence, Play (blocked / Soon) then App Store (TestFlight / Beta). Tiny gLitCh Labs credit.
-**Memorable moment:** The bronze-on-ivory solar embrace filling the first look, not a Linktree list.
+**Direction:** Ivory-field trial. Phone-width column in 100dvh on plate cream `#f2ede5`. AURA ivory squircle + Satoshi brand name, one sentence, Play (blocked / Soon) then App Store bronze (TestFlight / Beta). Tiny gLitCh Labs credit. Revert to dark bio at `8592488` if the trial fails.
+**Memorable moment:** Champagne-gold metal on ivory — page field matches the icon plate.
 
-**Unresolved:** Android Open testing URL — replace the blocked Play control when it exists.
+**Unresolved:** Android Open testing URL — replace the blocked Play control when it exists. Keep or revert the ivory field after review.
