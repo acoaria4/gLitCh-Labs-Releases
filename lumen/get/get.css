@@ -4,14 +4,14 @@ body.get-page {
   color-scheme: light;
   --bg: #fc4177;
   --bg-deep: #e22a5f;
-  --accent: #d3a348;
-  --accent-hover: #e8c56a;
+  --accent: #edbb55;
+  --accent-hover: #f7e08a;
   --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
   --text: #f7f1e8;
   --muted: #f5c9d6;
-  --glass: color-mix(in srgb, #d3a348 10%, #ffffff);
-  --glass-strong: color-mix(in srgb, #d3a348 16%, #ffffff);
-  --glass-border: color-mix(in srgb, #d3a348 36%, transparent);
+  --glass: color-mix(in srgb, #edbb55 12%, #f1eadc);
+  --glass-strong: color-mix(in srgb, #edbb55 20%, #f1eadc);
+  --glass-border: color-mix(in srgb, #edbb55 42%, transparent);
   min-height: 100dvh;
   min-height: 100svh;
   overflow-x: hidden;
@@ -24,12 +24,12 @@ body.get-page::before {
   background:
     radial-gradient(
       ellipse 70% 48% at 50% 26%,
-      color-mix(in srgb, #e8c56a 28%, transparent),
-      color-mix(in srgb, #d3a348 12%, transparent) 38%,
-      color-mix(in srgb, #8c5a20 6%, transparent) 58%,
+      color-mix(in srgb, #f7e08a 28%, transparent),
+      color-mix(in srgb, #edbb55 14%, transparent) 38%,
+      color-mix(in srgb, #764404 6%, transparent) 58%,
       transparent 72%
     ),
-    radial-gradient(ellipse 40% 28% at 100% 88%, color-mix(in srgb, #d3a348 8%, transparent), transparent 52%),
+    radial-gradient(ellipse 40% 28% at 100% 88%, color-mix(in srgb, #edbb55 8%, transparent), transparent 52%),
     linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
 }
 
@@ -80,8 +80,8 @@ body.get-page ::selection {
   opacity: 0;
   animation: rise-logo 0.95s var(--ease) 0.08s forwards;
   filter:
-    drop-shadow(0 12px 24px color-mix(in srgb, #8c5a20 22%, transparent))
-    drop-shadow(0 0 14px color-mix(in srgb, #d3a348 18%, transparent));
+    drop-shadow(0 12px 24px color-mix(in srgb, #764404 22%, transparent))
+    drop-shadow(0 0 14px color-mix(in srgb, #edbb55 22%, transparent));
 }
 
 .get-lead {
@@ -114,20 +114,36 @@ body.get-page ::selection {
 }
 
 body.get-page .btn-primary {
-  color: #3d1224;
+  color: #f1eadc;
+}
+
+body.get-page .btn-primary .soon-label {
+  color: #f1eadc;
+  opacity: 0.92;
 }
 
 body.get-page .btn-secondary {
-  background: color-mix(in srgb, #d3a348 12%, #ffffff);
-  color: #3d1224;
-  border-color: color-mix(in srgb, #d3a348 48%, transparent);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  background: color-mix(in srgb, #f1eadc 16%, transparent);
+  color: #f1eadc;
+  border-color: color-mix(in srgb, #edbb55 48%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+body.get-page .btn-secondary .soon-label {
+  color: #f1eadc;
+  opacity: 0.85;
 }
 
 body.get-page .btn-secondary:hover:not(.btn-soon) {
-  background: color-mix(in srgb, #d3a348 22%, #ffffff);
-  border-color: var(--accent);
+  background: color-mix(in srgb, #f1eadc 26%, transparent);
+  border-color: var(--accent-hover);
+}
+
+body.get-page .btn-soon {
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.88;
 }
 
 .get-store:focus-visible {
@@ -139,11 +155,6 @@ body.get-page .btn-secondary:hover:not(.btn-soon) {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
-}
-
-body.get-page .btn-soon {
-  pointer-events: none;
-  user-select: none;
 }
 
 .get-credit {
@@ -163,7 +174,7 @@ body.get-page .btn-soon {
   width: 35px;
   height: 35px;
   border-radius: 8px;
-  filter: drop-shadow(0 2px 6px color-mix(in srgb, #8c5a20 18%, transparent));
+  filter: drop-shadow(0 2px 6px color-mix(in srgb, #764404 18%, transparent));
 }
 
 @media (max-height: 720px) {

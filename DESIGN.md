@@ -78,7 +78,7 @@ Same token names as the studio sheet; values are product-scoped so champagne Mor
 |---------|----------------------|-------------------------------|----------------------|--------------|
 | `expenses/get/` | studio `#0b0b12` / `#07070c` | `#d9b793` / `#f7e0bd` (champagne-on-obsidian) | `#f7f1e8` / `#c9b8a4` | none — finalized squircle is the mark |
 | `aura/get/` | `#f2ede5` / `#eae3d6` (ivory plate trial) | `#ba7f46` / `#e7bb85` (solar-embrace bronze) | `#3d2a18` / `#7a5a38` (bronze ink) | none — Satoshi `.get-brand-name` under the squircle |
-| `lumen/get/` | `#fc4177` / `#e22a5f` (magenta plate) | `#d3a348` / `#e8c56a` (metallic-enamel gold) | `#f7f1e8` / `#f5c9d6` (cream on magenta) | none — Satoshi `.get-brand-name` under the squircle |
+| `lumen/get/` | `#fc4177` / `#e22a5f` (magenta plate) | `#edbb55` / `#f7e08a` (star/border enamel gold) | `#f7f1e8` / `#f5c9d6` (cream on magenta); store label ink `#f1eadc` | none — Satoshi `.get-brand-name` under the squircle |
 
 AURA’s bio is currently an **ivory-field trial**: plate cream field with bronze metal accents matching `aura-solar-embrace-ivory.png`. `theme-color` is `#f2ede5`. Revert to dark bronze-on-black at commit `8592488` if the trial fails.
 
@@ -138,7 +138,7 @@ Path depth:
 | Invite landing | `.invite-panel.glass` + deep-link JS | `expenses/invite.html` |
 | Instagram bio (mark-as-page) | No studio shell. `body.get-page` + `.get` column; wordmark, one line, stacked store buttons. Inherits tokens; product pages may retint accent/ink. Stays unlinked from studio and product nav. | `expenses/get/`, `aura/get/`, `lumen/get/` |
 
-Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. Instagram bios are the exception: Satoshi + `css/styles.css` + local `get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. AURA’s bio is an **ivory-field trial**: plate cream `#f2ede5`, bronze `#ba7f46` / `#e7bb85`, bronze ink text; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`. Store stack on AURA: Play **blocked / Soon** (`.btn-secondary.btn-soon`, CSS `pointer-events: none`, swap the `<span>` for an `<a>` when Open testing has a URL) then App Store **bronze / Beta** (live TestFlight). Expenses stays dark champagne-on-obsidian. Lumen uses the same plate-field pattern as AURA: magenta plate `#fc4177` / `#e22a5f`, enamel gold `#d3a348` / `#e8c56a`, cream ink; mark `assets/finalized-icons/lumen-metallic-enamel.png`; both Play and App Store **blocked / Soon**. Do not add these URLs to studio or product navigation.
+Studio-shell pages (home, subpage, product, policy, invite) use the wrap / nav / footer pattern above. Instagram bios are the exception: Satoshi + `css/styles.css` + local `get.css` only — no Instrument Serif, no `theme.js`, no `main.js`. AURA’s bio is an **ivory-field trial**: plate cream `#f2ede5`, bronze `#ba7f46` / `#e7bb85`, bronze ink text; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`. Store stack on AURA: Play **blocked / Soon** (`.btn-secondary.btn-soon`, CSS `pointer-events: none`, swap the `<span>` for an `<a>` when Open testing has a URL) then App Store **bronze / Beta** (live TestFlight). Expenses stays dark champagne-on-obsidian. Lumen uses the same plate-field pattern as AURA: magenta plate `#fc4177` / `#e22a5f`, richer enamel gold `#edbb55` / `#f7e08a` (star/border) with cream store label ink `#f1eadc`; mark `assets/finalized-icons/lumen-metallic-enamel.png`; both Play and App Store **blocked / Soon**. Do not add these URLs to studio or product navigation.
 
 ### Stable store URLs (do not rename)
 
@@ -185,7 +185,7 @@ Phone-width stack (`min(400px, calc(100% - 40px))`) in `100dvh` / `100svh`. Fina
 
 - **Expenses:** champagne-on-obsidian squircle fills the mark wrap (`min(240px, 62vw)`); Play `.btn-primary` live; App Store `.btn-secondary` live.
 - **AURA:** solar-embrace-ivory squircle same wrap; Play `.btn-secondary.btn-soon`; App Store `.btn-primary` TestFlight.
-- **Lumen:** metallic-enamel squircle same wrap on magenta plate field; Play `.btn-primary.btn-soon`; App Store `.btn-secondary.btn-soon`.
+- **Lumen:** metallic-enamel squircle same wrap on magenta plate field; Play `.btn-primary.btn-soon` (enamel gold + cream ink); App Store `.btn-secondary.btn-soon` (cream glass + gold border), complementary like Expenses.
 
 ### Sections
 
@@ -279,6 +279,6 @@ Icons in nav get a soft accent drop-shadow. Prefer transparent wordmarks on dark
 | `expenses/*`, `aura/*`, `lumen/*` | Product + store-facing pages |
 | `expenses/get/` | Instagram bio landing — inherits `css/styles.css` tokens; layout in `get.css`; unlinked from nav |
 | `aura/get/` | AURA Instagram bio — ivory-field trial (plate `#f2ede5`, bronze `#ba7f46`); Satoshi brand name; mark `assets/finalized-icons/aura-solar-embrace-ivory.png`; Play blocked until Open testing; TestFlight live; unlinked from nav |
-| `lumen/get/` | Lumen Instagram bio — magenta plate field `#fc4177` / `#e22a5f`, enamel gold `#d3a348` / `#e8c56a` (AURA plate-field pattern); Satoshi brand name; mark `assets/finalized-icons/lumen-metallic-enamel.png`; Play and App Store both blocked until listing URLs exist; unlinked from nav |
+| `lumen/get/` | Lumen Instagram bio — magenta plate field `#fc4177` / `#e22a5f`, enamel gold `#edbb55` / `#f7e08a` with cream store ink `#f1eadc` (AURA plate-field pattern); Satoshi brand name; mark `assets/finalized-icons/lumen-metallic-enamel.png`; Play and App Store both blocked until listing URLs exist; unlinked from nav |
 
 When the visual system changes, update **this file** and the CSS tokens together.

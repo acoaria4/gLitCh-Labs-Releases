@@ -42,7 +42,7 @@ Studio and product pages ship as static HTML on GitHub Pages (`acoaria4.github.i
 - Product names: Expenses, AURA, Lumen.
 - Voice: calm, precise, unhurried — product-first, not hype. Prefer “local-first”, “optional”, “calm”.
 - Assets: `assets/glitchlabs-icon.png`, `assets/finalized-icons/expenses-champagne-on-obsidian.png`, `assets/finalized-icons/aura-solar-embrace-ivory.png`, `assets/finalized-icons/lumen-metallic-enamel.png`.
-- Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ivory plate + bronze `#ba7f46` / `#e7bb85`; Lumen: magenta plate `#fc4177` + enamel gold `#d3a348` / `#e8c56a`).
+- Visual system already lives in `DESIGN.md` / `css/styles.css`; product bios may retint tokens from the product (AURA: ivory plate + bronze `#ba7f46` / `#e7bb85`; Lumen: magenta plate `#fc4177` + enamel gold `#edbb55` / `#f7e08a` with cream store ink `#f1eadc`).
 
 ## Evidence on Hand
 
