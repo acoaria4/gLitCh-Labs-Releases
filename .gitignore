@@ -38,3 +38,6 @@ assets/generations/
 
 # Local Play Store listing copy and artwork
 /play-store-listings/
+
+# Local iOS App Store listing copy
+/ios-store-listings/
