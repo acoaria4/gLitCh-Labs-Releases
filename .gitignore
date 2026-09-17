@@ -41,3 +41,6 @@ assets/generations/
 
 # Local iOS App Store listing copy
 /ios-store-listings/
+
+# Local Social Composer export drafts
+/social-composer/exports/
