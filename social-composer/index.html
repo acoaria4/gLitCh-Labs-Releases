@@ -4,38 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Social Composer — gLitCh Labs</title>
-    <link rel="icon" href="assets/glitchlabs-icon.png" type="image/png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="css/composer.css" />
+    <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/composer.css?v=horoscope-status-2" />
   </head>
   <body>
     <div class="app">
       <header class="toolbar">
         <a class="toolbar-home" href="../index.html" aria-label="gLitCh Labs home">
           <img
-            src="assets/glitchlabs-icon.png"
+            src="brands/current/glitchlabs-icon.png"
             alt=""
             width="40"
             height="40"
           />
           <span class="toolbar-brand-text">
             <span class="toolbar-title">gLitCh Labs</span>
-            <span class="toolbar-sub">Social Composer</span>
+            <h1 class="toolbar-sub">Social Composer<span class="name-dot">.</span></h1>
           </span>
         </a>
 
         <div class="toolbar-actions">
+          <button id="btn-blank" type="button" class="btn btn-ghost">Blank</button>
           <label class="btn btn-ghost">
-            Upload background
+            Upload
             <input id="bg-input" type="file" accept="image/*" hidden />
           </label>
 
@@ -43,6 +35,7 @@
             <span class="field-label">Size</span>
             <select id="preset-select" aria-label="Export size">
               <option value="native">Native (background)</option>
+              <option value="1080x1350">Instagram Portrait · 1080×1350</option>
               <option value="1080x1080">Instagram Square · 1080×1080</option>
               <option value="1080x1920">Story · 1080×1920</option>
               <option value="1200x630">Landscape · 1200×630</option>
@@ -85,8 +78,14 @@
 
       <div class="workspace">
         <aside class="pane" aria-label="Brand assets">
-          <details class="brand-group" open>
-            <summary class="brand-heading">Expenses</summary>
+          <nav class="brand-picker" aria-label="Choose a brand">
+            <button type="button" class="btn" data-brand="expenses" aria-pressed="true">Expenses</button>
+            <button type="button" class="btn" data-brand="aura" aria-pressed="false">AURA</button>
+            <button type="button" class="btn" data-brand="lumen" aria-pressed="false">Lumen</button>
+            <button type="button" class="btn" data-brand="glitch" aria-pressed="false">gLitCh Labs</button>
+          </nav>
+          <details class="brand-group" data-brand-panel="expenses" open>
+            <summary class="brand-heading brand-expenses">Expenses<span>.</span></summary>
             <div class="asset-grid" id="assets-expenses"></div>
             <div class="tint-panel" id="tint-panel" hidden>
               <p class="tint-panel-label">Custom Color</p>
@@ -129,8 +128,27 @@
               </div>
             </div>
           </details>
-          <details class="brand-group" open>
-            <summary class="brand-heading">gLitCh Labs</summary>
+          <details class="brand-group" data-brand-panel="aura" open hidden>
+            <summary class="brand-heading brand-aura">AURA<span>.</span></summary>
+          <details class="horoscope-panel" open>
+            <summary class="brand-heading brand-aura">Daily horoscope<span>.</span></summary>
+            <p class="pane-hint">All 12 Moon signs, straight from AURA.</p>
+            <p id="horoscope-api-status" class="api-status" data-state="checking" role="status" aria-live="polite">Checking API…</p>
+            <label class="horoscope-field">Reading date <input id="horoscope-date" type="date" min="1900-01-01" max="2100-12-31" required></label>
+            <label class="horoscope-field">Post color <select id="horoscope-theme"><option value="daily">Day-specific</option><option value="general">General · AURA ivory</option></select></label>
+            <p id="horoscope-palette" class="pane-hint"></p>
+            <button id="horoscope-create" type="button" class="btn btn-primary">Create horoscope</button>
+            <p id="horoscope-status" class="pane-hint" role="status" aria-live="polite">Choose a date to create a 1080 × 1350 post.</p>
+          </details>
+
+            <div class="asset-grid" id="assets-aura"></div>
+          </details>
+          <details class="brand-group" data-brand-panel="lumen" open hidden>
+            <summary class="brand-heading brand-lumen">Lumen<span>.</span></summary>
+            <div class="asset-grid" id="assets-lumen"></div>
+          </details>
+          <details class="brand-group" data-brand-panel="glitch" open hidden>
+            <summary class="brand-heading brand-glitch">gLitCh Labs<span>.</span></summary>
             <div class="asset-grid" id="assets-glitch"></div>
           </details>
           <details class="brand-group" open>
@@ -167,7 +185,7 @@
             <canvas id="stage-canvas"></canvas>
             <div id="empty-state" class="empty-state">
               <p>Drop a background image here</p>
-              <p class="empty-sub">or use Upload background</p>
+              <p class="empty-sub">or choose Upload or Blank</p>
             </div>
             <div id="selection-box" class="selection-box" hidden>
               <span class="handle nw" data-handle="nw"></span>
@@ -176,7 +194,7 @@
               <span class="handle se" data-handle="se"></span>
             </div>
           </div>
-          <p id="meta" class="meta"></p>
+          <p id="meta" class="meta" role="status" aria-live="polite"></p>
         </main>
 
         <aside
@@ -205,6 +223,7 @@
       </div>
     </div>
 
-    <script src="js/composer.js"></script>
+    <script src="js/composer.js?v=horoscope-status-2"></script>
+    <script src="js/horoscope.js?v=horoscope-status-2"></script>
   </body>
 </html>

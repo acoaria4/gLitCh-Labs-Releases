@@ -35,3 +35,12 @@ assets/generations/
 # Local website backups — root is the published site
 /old_main_website/
 /glitch-labs-website/
+
+# Local Play Store listing copy and artwork
+/play-store-listings/
+
+# Local iOS App Store listing copy
+/ios-store-listings/
+
+# Local Social Composer export drafts
+/social-composer/exports/

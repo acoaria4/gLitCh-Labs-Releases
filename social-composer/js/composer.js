@@ -1,63 +1,32 @@
 (() => {
   "use strict";
 
+  // All built-in artwork is owned by this folder and comes from the current site identity.
   const BRANDS = [
-    {
-      group: "expenses",
-      container: "assets-expenses",
-      assets: [
-        {
-          id: "expenses-champagne-on-obsidian",
-          label: "Champagne on Obsidian",
-          src: "../assets/finalized-icons/expenses-champagne-on-obsidian.png",
-        },
-        {
-          id: "expenses-icon-wordmark",
-          label: "Icon + Wordmark",
-          src: "brands/expenses-icon-wordmark.png",
-        },
-        {
-          id: "expenses-squircle",
-          label: "Squircle",
-          src: "brands/expenses-squircle.png",
-        },
-        {
-          id: "expenses-icon",
-          label: "Icon",
-          src: "brands/expenses-icon.png",
-        },
-        {
-          id: "expenses-icon-darker",
-          label: "Icon Darker",
-          src: "brands/expenses-icon-darker.png",
-        },
-        {
-          id: "expenses-wordmark",
-          label: "Wordmark",
-          src: "brands/expenses-wordmark.png",
-        },
-      ],
-    },
-    {
-      group: "glitch",
-      container: "assets-glitch",
-      assets: [
-        {
-          id: "glitchlabs-logo",
-          label: "Logo",
-          src: "brands/glitchlabs-logo.png",
-        },
-        {
-          id: "glitchlabs-logo-wordmark",
-          label: "Logo + Wordmark",
-          src: "brands/glitchlabs-logo-wordmark.png",
-        },
-      ],
-    },
-  ];
+    ["expenses", "expenses"], ["aura", "aura"],
+    ["lumen", "lumen"], ["glitchlabs", "glitch"],
+  ].map(([id, group]) => ({
+    group, container: `assets-${group}`,
+    assets: [
+      ["icon", "App icon"], ["mark", id === "lumen" ? "Gold spark" : "Transparent mark"],
+      ["wordmark-light", "Wordmark · light"], ["wordmark-dark", "Wordmark · dark"],
+      ["lockup-light", "Icon + name · light"], ["lockup-dark", "Icon + name · dark"],
+    ].map(([variant, label]) => ({id: `${id}-${variant}`, label, src: `brands/current/${id}-${variant}.png`})),
+  }));
+  // Keep saved layouts usable, but resolve their old identifiers to current artwork.
+  const LEGACY_ASSETS = {
+    "expenses-champagne-on-obsidian": "expenses-icon",
+    "expenses-squircle": "expenses-icon",
+    "expenses-icon-darker": "expenses-mark",
+    "expenses-wordmark": "expenses-wordmark-light",
+    "expenses-icon-wordmark": "expenses-lockup-light",
+    "glitchlabs-logo": "glitchlabs-icon",
+    "glitchlabs-logo-wordmark": "glitchlabs-lockup-light",
+  };
 
   const PRESETS = {
     native: null,
+    "1080x1350": { w: 1080, h: 1350, slug: "1080x1350" },
     "1080x1080": { w: 1080, h: 1080, slug: "1080x1080" },
     "1080x1920": { w: 1080, h: 1920, slug: "1080x1920" },
     "1200x630": { w: 1200, h: 630, slug: "1200x630" },
@@ -78,8 +47,8 @@
   const CREATED_PANE_STORAGE_KEY = "glitch-social-composer-created-pane-open";
   const TINT_STORAGE_KEY = "glitch-social-composer-tint-hex";
   const CUSTOM_COLOR_ID = "expenses-custom-color";
-  const TINT_SOURCE_ID = "expenses-icon-darker";
-  const DEFAULT_TINT_HEX = "#d8c4a0";
+  const TINT_SOURCE_ID = "expenses-mark";
+  const DEFAULT_TINT_HEX = "#d9b793";
 
   const els = {
     canvas: document.getElementById("stage-canvas"),
@@ -127,6 +96,7 @@
   const state = {
     /** @type {HTMLImageElement | null} */
     bgImage: null,
+    postDate: null,
     /** canvas pixel size (export space) */
     width: 0,
     height: 0,
@@ -414,6 +384,7 @@
 
   function resetSession() {
     state.bgImage = null;
+    state.postDate = null;
     state.overlays = [];
     state.selectedId = null;
     state.width = 0;
@@ -451,6 +422,7 @@
   async function setBackground(file) {
     const img = await loadImageFromFile(file);
     state.bgImage = img;
+    state.postDate = null;
     state.overlays = [];
     state.selectedId = null;
     recomputeCanvasSize();
@@ -664,7 +636,9 @@
     const out = renderExportCanvas();
     const preset = currentPreset();
     const slug = preset ? preset.slug : "native";
-    const filename = `glitch-compose-${slug}-${state.width}x${state.height}.png`;
+    const filename = state.postDate
+      ? `aura-daily-horoscope-${state.postDate}-${state.width}x${state.height}.png`
+      : `glitch-compose-${slug}-${state.width}x${state.height}.png`;
     out.toBlob((blob) => {
       if (!blob) return;
       const a = document.createElement("a");
@@ -792,6 +766,7 @@
           createdAt: Number(a.createdAt) || Date.now(),
           composition: {
             bgDataUrl: a.composition.bgDataUrl,
+            postDate: /^\d{4}-\d{2}-\d{2}$/.test(a.composition.postDate || "") ? a.composition.postDate : null,
             presetKey:
               typeof a.composition.presetKey === "string"
                 ? a.composition.presetKey
@@ -849,6 +824,7 @@
       createdAt: Date.now(),
       composition: {
         bgDataUrl,
+        postDate: state.postDate,
         presetKey: state.presetKey || "native",
         tintHex: state.tintHex || DEFAULT_TINT_HEX,
         overlays: state.overlays.map((o) => ({
@@ -939,6 +915,7 @@
       }
 
       state.bgImage = bg;
+      state.postDate = comp.postDate || null;
       state.presetKey =
         Object.prototype.hasOwnProperty.call(PRESETS, comp.presetKey)
           ? comp.presetKey
@@ -1114,7 +1091,10 @@
       if (!root) continue;
       root.replaceChildren();
       for (const asset of group.assets) {
-        root.appendChild(buildAssetChip(asset));
+        const chip = buildAssetChip(asset);
+        chip.disabled = !assetImages.has(asset.id);
+        if (chip.disabled) chip.title = `${asset.label} could not load. Reload to retry.`;
+        root.appendChild(chip);
       }
       if (group.group === "expenses") {
         const chip = buildAssetChip({
@@ -1476,15 +1456,61 @@
 
   async function preloadAssets() {
     const all = BRANDS.flatMap((g) => g.assets);
-    await Promise.all(
+    const results = await Promise.allSettled(
       all.map(async (asset) => {
         const img = await loadImageUrl(asset.src);
         assetImages.set(asset.id, img);
       })
     );
+    for (const [oldId, currentId] of Object.entries(LEGACY_ASSETS)) {
+      if (assetImages.has(currentId)) assetImages.set(oldId, assetImages.get(currentId));
+    }
+    return results.filter(result => result.status === "rejected").length;
   }
 
+  async function setBlankBackground() {
+    const preset = currentPreset() || PRESETS["1080x1080"];
+    const canvas = document.createElement("canvas");
+    canvas.width = preset.w;
+    canvas.height = preset.h;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "#000000";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    // Use the same image pipeline as uploads so save, restore and export work normally.
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+    if (!blob) throw new Error("Could not create a blank background");
+    await setBackground(blob);
+  }
+
+  // Shared canvas pipeline: template posts retain normal placement, saving and export.
+  window.auraComposer = {
+    async setHoroscope(blob, date) {
+      state.presetKey = "1080x1350";
+      els.preset.value = state.presetKey;
+      state.showGrid = false;
+      syncGridToggle();
+      await setBackground(blob);
+      state.postDate = date;
+    }
+  };
+
   // —— Events ——
+  document.getElementById("btn-blank").addEventListener("click", async () => {
+    try { await setBlankBackground(); }
+    catch (error) { els.meta.textContent = error.message; }
+  });
+  document.querySelectorAll("[data-brand]").forEach(button => {
+    button.addEventListener("click", () => {
+      closeTintPanel();
+      document.querySelectorAll("[data-brand]").forEach(other => {
+        other.setAttribute("aria-pressed", String(other === button));
+      });
+      document.querySelectorAll("[data-brand-panel]").forEach(panel => {
+        panel.hidden = panel.dataset.brandPanel !== button.dataset.brand;
+        if (!panel.hidden) panel.open = true;
+      });
+    });
+  });
 
   els.bgInput.addEventListener("change", async (e) => {
     const file = e.target.files && e.target.files[0];
@@ -1697,6 +1723,8 @@
     renderCustomPane();
   }
 
+  new ResizeObserver(() => { fitCanvasElement(); draw(); }).observe(els.stage);
+
   // —— Boot ——
   state.showGrid = loadShowGrid();
   state.gridInvert = loadGridInvert();
@@ -1707,11 +1735,12 @@
   bootCreatedPics();
   wireTintControls();
   Promise.all([preloadAssets(), bootCustomAssets()])
-    .then(() => {
+    .then(([failedAssets]) => {
       state.tintHex = loadStoredTintHex();
       buildAssetPane();
       applyTintColor(state.tintHex, { persist: false });
       updateChrome();
+      if (failedAssets) els.meta.textContent = `${failedAssets} brand assets could not load. Available assets are ready; reload to retry.`;
     })
     .catch((err) => {
       els.meta.textContent = err.message || "Failed to load brand assets";
