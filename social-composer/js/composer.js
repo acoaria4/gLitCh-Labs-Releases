@@ -26,6 +26,7 @@
 
   const PRESETS = {
     native: null,
+    "1080x1350": { w: 1080, h: 1350, slug: "1080x1350" },
     "1080x1080": { w: 1080, h: 1080, slug: "1080x1080" },
     "1080x1920": { w: 1080, h: 1920, slug: "1080x1920" },
     "1200x630": { w: 1200, h: 630, slug: "1200x630" },
@@ -95,6 +96,7 @@
   const state = {
     /** @type {HTMLImageElement | null} */
     bgImage: null,
+    postDate: null,
     /** canvas pixel size (export space) */
     width: 0,
     height: 0,
@@ -382,6 +384,7 @@
 
   function resetSession() {
     state.bgImage = null;
+    state.postDate = null;
     state.overlays = [];
     state.selectedId = null;
     state.width = 0;
@@ -419,6 +422,7 @@
   async function setBackground(file) {
     const img = await loadImageFromFile(file);
     state.bgImage = img;
+    state.postDate = null;
     state.overlays = [];
     state.selectedId = null;
     recomputeCanvasSize();
@@ -632,7 +636,9 @@
     const out = renderExportCanvas();
     const preset = currentPreset();
     const slug = preset ? preset.slug : "native";
-    const filename = `glitch-compose-${slug}-${state.width}x${state.height}.png`;
+    const filename = state.postDate
+      ? `aura-daily-horoscope-${state.postDate}-${state.width}x${state.height}.png`
+      : `glitch-compose-${slug}-${state.width}x${state.height}.png`;
     out.toBlob((blob) => {
       if (!blob) return;
       const a = document.createElement("a");
@@ -760,6 +766,7 @@
           createdAt: Number(a.createdAt) || Date.now(),
           composition: {
             bgDataUrl: a.composition.bgDataUrl,
+            postDate: /^\d{4}-\d{2}-\d{2}$/.test(a.composition.postDate || "") ? a.composition.postDate : null,
             presetKey:
               typeof a.composition.presetKey === "string"
                 ? a.composition.presetKey
@@ -817,6 +824,7 @@
       createdAt: Date.now(),
       composition: {
         bgDataUrl,
+        postDate: state.postDate,
         presetKey: state.presetKey || "native",
         tintHex: state.tintHex || DEFAULT_TINT_HEX,
         overlays: state.overlays.map((o) => ({
@@ -907,6 +915,7 @@
       }
 
       state.bgImage = bg;
+      state.postDate = comp.postDate || null;
       state.presetKey =
         Object.prototype.hasOwnProperty.call(PRESETS, comp.presetKey)
           ? comp.presetKey
@@ -1472,6 +1481,18 @@
     if (!blob) throw new Error("Could not create a blank background");
     await setBackground(blob);
   }
+
+  // Shared canvas pipeline: template posts retain normal placement, saving and export.
+  window.auraComposer = {
+    async setHoroscope(blob, date) {
+      state.presetKey = "1080x1350";
+      els.preset.value = state.presetKey;
+      state.showGrid = false;
+      syncGridToggle();
+      await setBackground(blob);
+      state.postDate = date;
+    }
+  };
 
   // —— Events ——
   document.getElementById("btn-blank").addEventListener("click", async () => {

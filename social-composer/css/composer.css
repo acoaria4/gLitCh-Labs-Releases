@@ -823,3 +823,16 @@ body::before{background:radial-gradient(ellipse at 50% 0,#20273280,transparent 6
 .brand-picker{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:sticky;top:-14px;z-index:3;background:#10151e;padding:8px 0}
 .brand-picker .btn{font-size:13px;padding:8px;white-space:nowrap}
 .brand-group[hidden]{display:none}
+
+.horoscope-panel{border-bottom:1px solid var(--line);padding-bottom:18px}
+.horoscope-panel .brand-heading{font-size:25px}
+.horoscope-field{display:flex;flex-direction:column;gap:6px;margin:14px 0;font-size:13px;font-weight:600}
+.horoscope-field input,.horoscope-field select{width:100%;min-width:0;min-height:44px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#141b26}
+#horoscope-create{width:100%;margin:12px 0}
+#horoscope-palette{border-left:4px solid var(--day-accent,#ba7f46);padding-left:9px}
+
+.api-status{display:flex;align-items:center;gap:7px;font-size:12px;line-height:1.5;color:#b8c2d0;margin:10px 0}
+.api-status::before{content:"";width:7px;height:7px;flex:0 0 7px;border-radius:50%;background:#9ba9ba}
+.api-status[data-state="working"]::before{background:#8acda6}
+.api-status[data-state="waiting"]::before{background:#e4ba72}
+.api-status[data-state="error"]::before{background:#ee9292}

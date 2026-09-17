@@ -6,7 +6,7 @@
     <title>Social Composer — gLitCh Labs</title>
     <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/composer.css?v=brands-blank-2" />
+    <link rel="stylesheet" href="css/composer.css?v=horoscope-status-2" />
   </head>
   <body>
     <div class="app">
@@ -35,6 +35,7 @@
             <span class="field-label">Size</span>
             <select id="preset-select" aria-label="Export size">
               <option value="native">Native (background)</option>
+              <option value="1080x1350">Instagram Portrait · 1080×1350</option>
               <option value="1080x1080">Instagram Square · 1080×1080</option>
               <option value="1080x1920">Story · 1080×1920</option>
               <option value="1200x630">Landscape · 1200×630</option>
@@ -129,6 +130,17 @@
           </details>
           <details class="brand-group" data-brand-panel="aura" open hidden>
             <summary class="brand-heading brand-aura">AURA<span>.</span></summary>
+          <details class="horoscope-panel" open>
+            <summary class="brand-heading brand-aura">Daily horoscope<span>.</span></summary>
+            <p class="pane-hint">All 12 Moon signs, straight from AURA.</p>
+            <p id="horoscope-api-status" class="api-status" data-state="checking" role="status" aria-live="polite">Checking API…</p>
+            <label class="horoscope-field">Reading date <input id="horoscope-date" type="date" min="1900-01-01" max="2100-12-31" required></label>
+            <label class="horoscope-field">Post color <select id="horoscope-theme"><option value="daily">Day-specific</option><option value="general">General · AURA ivory</option></select></label>
+            <p id="horoscope-palette" class="pane-hint"></p>
+            <button id="horoscope-create" type="button" class="btn btn-primary">Create horoscope</button>
+            <p id="horoscope-status" class="pane-hint" role="status" aria-live="polite">Choose a date to create a 1080 × 1350 post.</p>
+          </details>
+
             <div class="asset-grid" id="assets-aura"></div>
           </details>
           <details class="brand-group" data-brand-panel="lumen" open hidden>
@@ -211,6 +223,7 @@
       </div>
     </div>
 
-    <script src="js/composer.js?v=brands-blank-2"></script>
+    <script src="js/composer.js?v=horoscope-status-2"></script>
+    <script src="js/horoscope.js?v=horoscope-status-2"></script>
   </body>
 </html>
