@@ -6,7 +6,7 @@
     <title>Social Composer — gLitCh Labs</title>
     <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/composer.css" />
+    <link rel="stylesheet" href="css/composer.css?v=brands-blank-2" />
   </head>
   <body>
     <div class="app">
@@ -25,8 +25,9 @@
         </a>
 
         <div class="toolbar-actions">
+          <button id="btn-blank" type="button" class="btn btn-ghost">Blank</button>
           <label class="btn btn-ghost">
-            Upload background
+            Upload
             <input id="bg-input" type="file" accept="image/*" hidden />
           </label>
 
@@ -76,7 +77,13 @@
 
       <div class="workspace">
         <aside class="pane" aria-label="Brand assets">
-          <details class="brand-group" open>
+          <nav class="brand-picker" aria-label="Choose a brand">
+            <button type="button" class="btn" data-brand="expenses" aria-pressed="true">Expenses</button>
+            <button type="button" class="btn" data-brand="aura" aria-pressed="false">AURA</button>
+            <button type="button" class="btn" data-brand="lumen" aria-pressed="false">Lumen</button>
+            <button type="button" class="btn" data-brand="glitch" aria-pressed="false">gLitCh Labs</button>
+          </nav>
+          <details class="brand-group" data-brand-panel="expenses" open>
             <summary class="brand-heading brand-expenses">Expenses<span>.</span></summary>
             <div class="asset-grid" id="assets-expenses"></div>
             <div class="tint-panel" id="tint-panel" hidden>
@@ -120,15 +127,15 @@
               </div>
             </div>
           </details>
-          <details class="brand-group" open>
+          <details class="brand-group" data-brand-panel="aura" open hidden>
             <summary class="brand-heading brand-aura">AURA<span>.</span></summary>
             <div class="asset-grid" id="assets-aura"></div>
           </details>
-          <details class="brand-group" open>
+          <details class="brand-group" data-brand-panel="lumen" open hidden>
             <summary class="brand-heading brand-lumen">Lumen<span>.</span></summary>
             <div class="asset-grid" id="assets-lumen"></div>
           </details>
-          <details class="brand-group" open>
+          <details class="brand-group" data-brand-panel="glitch" open hidden>
             <summary class="brand-heading brand-glitch">gLitCh Labs<span>.</span></summary>
             <div class="asset-grid" id="assets-glitch"></div>
           </details>
@@ -166,7 +173,7 @@
             <canvas id="stage-canvas"></canvas>
             <div id="empty-state" class="empty-state">
               <p>Drop a background image here</p>
-              <p class="empty-sub">or use Upload background</p>
+              <p class="empty-sub">or choose Upload or Blank</p>
             </div>
             <div id="selection-box" class="selection-box" hidden>
               <span class="handle nw" data-handle="nw"></span>
@@ -204,6 +211,6 @@
       </div>
     </div>
 
-    <script src="js/composer.js"></script>
+    <script src="js/composer.js?v=brands-blank-2"></script>
   </body>
 </html>

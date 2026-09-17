@@ -819,3 +819,7 @@ body::before{background:radial-gradient(ellipse at 50% 0,#20273280,transparent 6
  .stage-drop{min-height:300px}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}}
+
+.brand-picker{display:grid;grid-template-columns:1fr 1fr;gap:6px;position:sticky;top:-14px;z-index:3;background:#10151e;padding:8px 0}
+.brand-picker .btn{font-size:13px;padding:8px;white-space:nowrap}
+.brand-group[hidden]{display:none}

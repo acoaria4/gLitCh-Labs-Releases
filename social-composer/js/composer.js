@@ -1459,7 +1459,37 @@
     return results.filter(result => result.status === "rejected").length;
   }
 
+  async function setBlankBackground() {
+    const preset = currentPreset() || PRESETS["1080x1080"];
+    const canvas = document.createElement("canvas");
+    canvas.width = preset.w;
+    canvas.height = preset.h;
+    const context = canvas.getContext("2d");
+    context.fillStyle = "#000000";
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    // Use the same image pipeline as uploads so save, restore and export work normally.
+    const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+    if (!blob) throw new Error("Could not create a blank background");
+    await setBackground(blob);
+  }
+
   // —— Events ——
+  document.getElementById("btn-blank").addEventListener("click", async () => {
+    try { await setBlankBackground(); }
+    catch (error) { els.meta.textContent = error.message; }
+  });
+  document.querySelectorAll("[data-brand]").forEach(button => {
+    button.addEventListener("click", () => {
+      closeTintPanel();
+      document.querySelectorAll("[data-brand]").forEach(other => {
+        other.setAttribute("aria-pressed", String(other === button));
+      });
+      document.querySelectorAll("[data-brand-panel]").forEach(panel => {
+        panel.hidden = panel.dataset.brandPanel !== button.dataset.brand;
+        if (!panel.hidden) panel.open = true;
+      });
+    });
+  });
 
   els.bgInput.addEventListener("change", async (e) => {
     const file = e.target.files && e.target.files[0];
