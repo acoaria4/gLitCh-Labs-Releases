@@ -4,17 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Social Composer — gLitCh Labs</title>
-    <link rel="icon" href="assets/glitchlabs-icon.png" type="image/png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
+    <link rel="stylesheet" href="css/fonts.css" />
     <link rel="stylesheet" href="css/composer.css" />
   </head>
   <body>
@@ -22,14 +13,14 @@
       <header class="toolbar">
         <a class="toolbar-home" href="../index.html" aria-label="gLitCh Labs home">
           <img
-            src="assets/glitchlabs-icon.png"
+            src="brands/current/glitchlabs-icon.png"
             alt=""
             width="40"
             height="40"
           />
           <span class="toolbar-brand-text">
             <span class="toolbar-title">gLitCh Labs</span>
-            <span class="toolbar-sub">Social Composer</span>
+            <h1 class="toolbar-sub">Social Composer<span class="name-dot">.</span></h1>
           </span>
         </a>
 
@@ -86,7 +77,7 @@
       <div class="workspace">
         <aside class="pane" aria-label="Brand assets">
           <details class="brand-group" open>
-            <summary class="brand-heading">Expenses</summary>
+            <summary class="brand-heading brand-expenses">Expenses<span>.</span></summary>
             <div class="asset-grid" id="assets-expenses"></div>
             <div class="tint-panel" id="tint-panel" hidden>
               <p class="tint-panel-label">Custom Color</p>
@@ -130,7 +121,15 @@
             </div>
           </details>
           <details class="brand-group" open>
-            <summary class="brand-heading">gLitCh Labs</summary>
+            <summary class="brand-heading brand-aura">AURA<span>.</span></summary>
+            <div class="asset-grid" id="assets-aura"></div>
+          </details>
+          <details class="brand-group" open>
+            <summary class="brand-heading brand-lumen">Lumen<span>.</span></summary>
+            <div class="asset-grid" id="assets-lumen"></div>
+          </details>
+          <details class="brand-group" open>
+            <summary class="brand-heading brand-glitch">gLitCh Labs<span>.</span></summary>
             <div class="asset-grid" id="assets-glitch"></div>
           </details>
           <details class="brand-group" open>
@@ -176,7 +175,7 @@
               <span class="handle se" data-handle="se"></span>
             </div>
           </div>
-          <p id="meta" class="meta"></p>
+          <p id="meta" class="meta" role="status" aria-live="polite"></p>
         </main>
 
         <aside

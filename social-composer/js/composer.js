@@ -1,60 +1,28 @@
 (() => {
   "use strict";
 
+  // All built-in artwork is owned by this folder and comes from the current site identity.
   const BRANDS = [
-    {
-      group: "expenses",
-      container: "assets-expenses",
-      assets: [
-        {
-          id: "expenses-champagne-on-obsidian",
-          label: "Champagne on Obsidian",
-          src: "../assets/finalized-icons/expenses-champagne-on-obsidian.png",
-        },
-        {
-          id: "expenses-icon-wordmark",
-          label: "Icon + Wordmark",
-          src: "brands/expenses-icon-wordmark.png",
-        },
-        {
-          id: "expenses-squircle",
-          label: "Squircle",
-          src: "brands/expenses-squircle.png",
-        },
-        {
-          id: "expenses-icon",
-          label: "Icon",
-          src: "brands/expenses-icon.png",
-        },
-        {
-          id: "expenses-icon-darker",
-          label: "Icon Darker",
-          src: "brands/expenses-icon-darker.png",
-        },
-        {
-          id: "expenses-wordmark",
-          label: "Wordmark",
-          src: "brands/expenses-wordmark.png",
-        },
-      ],
-    },
-    {
-      group: "glitch",
-      container: "assets-glitch",
-      assets: [
-        {
-          id: "glitchlabs-logo",
-          label: "Logo",
-          src: "brands/glitchlabs-logo.png",
-        },
-        {
-          id: "glitchlabs-logo-wordmark",
-          label: "Logo + Wordmark",
-          src: "brands/glitchlabs-logo-wordmark.png",
-        },
-      ],
-    },
-  ];
+    ["expenses", "expenses"], ["aura", "aura"],
+    ["lumen", "lumen"], ["glitchlabs", "glitch"],
+  ].map(([id, group]) => ({
+    group, container: `assets-${group}`,
+    assets: [
+      ["icon", "App icon"], ["mark", id === "lumen" ? "Gold spark" : "Transparent mark"],
+      ["wordmark-light", "Wordmark · light"], ["wordmark-dark", "Wordmark · dark"],
+      ["lockup-light", "Icon + name · light"], ["lockup-dark", "Icon + name · dark"],
+    ].map(([variant, label]) => ({id: `${id}-${variant}`, label, src: `brands/current/${id}-${variant}.png`})),
+  }));
+  // Keep saved layouts usable, but resolve their old identifiers to current artwork.
+  const LEGACY_ASSETS = {
+    "expenses-champagne-on-obsidian": "expenses-icon",
+    "expenses-squircle": "expenses-icon",
+    "expenses-icon-darker": "expenses-mark",
+    "expenses-wordmark": "expenses-wordmark-light",
+    "expenses-icon-wordmark": "expenses-lockup-light",
+    "glitchlabs-logo": "glitchlabs-icon",
+    "glitchlabs-logo-wordmark": "glitchlabs-lockup-light",
+  };
 
   const PRESETS = {
     native: null,
@@ -78,8 +46,8 @@
   const CREATED_PANE_STORAGE_KEY = "glitch-social-composer-created-pane-open";
   const TINT_STORAGE_KEY = "glitch-social-composer-tint-hex";
   const CUSTOM_COLOR_ID = "expenses-custom-color";
-  const TINT_SOURCE_ID = "expenses-icon-darker";
-  const DEFAULT_TINT_HEX = "#d8c4a0";
+  const TINT_SOURCE_ID = "expenses-mark";
+  const DEFAULT_TINT_HEX = "#d9b793";
 
   const els = {
     canvas: document.getElementById("stage-canvas"),
@@ -1114,7 +1082,10 @@
       if (!root) continue;
       root.replaceChildren();
       for (const asset of group.assets) {
-        root.appendChild(buildAssetChip(asset));
+        const chip = buildAssetChip(asset);
+        chip.disabled = !assetImages.has(asset.id);
+        if (chip.disabled) chip.title = `${asset.label} could not load. Reload to retry.`;
+        root.appendChild(chip);
       }
       if (group.group === "expenses") {
         const chip = buildAssetChip({
@@ -1476,12 +1447,16 @@
 
   async function preloadAssets() {
     const all = BRANDS.flatMap((g) => g.assets);
-    await Promise.all(
+    const results = await Promise.allSettled(
       all.map(async (asset) => {
         const img = await loadImageUrl(asset.src);
         assetImages.set(asset.id, img);
       })
     );
+    for (const [oldId, currentId] of Object.entries(LEGACY_ASSETS)) {
+      if (assetImages.has(currentId)) assetImages.set(oldId, assetImages.get(currentId));
+    }
+    return results.filter(result => result.status === "rejected").length;
   }
 
   // —— Events ——
@@ -1697,6 +1672,8 @@
     renderCustomPane();
   }
 
+  new ResizeObserver(() => { fitCanvasElement(); draw(); }).observe(els.stage);
+
   // —— Boot ——
   state.showGrid = loadShowGrid();
   state.gridInvert = loadGridInvert();
@@ -1707,11 +1684,12 @@
   bootCreatedPics();
   wireTintControls();
   Promise.all([preloadAssets(), bootCustomAssets()])
-    .then(() => {
+    .then(([failedAssets]) => {
       state.tintHex = loadStoredTintHex();
       buildAssetPane();
       applyTintColor(state.tintHex, { persist: false });
       updateChrome();
+      if (failedAssets) els.meta.textContent = `${failedAssets} brand assets could not load. Available assets are ready; reload to retry.`;
     })
     .catch((err) => {
       els.meta.textContent = err.message || "Failed to load brand assets";
