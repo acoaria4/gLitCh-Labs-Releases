@@ -76,18 +76,18 @@ The site is static HTML on GitHub Pages. Keep that. Add a couple of asset script
 
 ### 1. Images
 
-Export each mark at 256, 512, and optionally 768 px as WebP (keep a PNG fallback). Use a 32 px PNG or SVG for favicons — never the 1254 px art.
+Export each mark at 512 and **768–940 px** as high-quality WebP (keep a PNG fallback). Use a 32 px PNG or SVG for favicons — never the 1254 px art. 256 px is too small for 2× screens; see overshooting below.
 
 On the homepage:
 
 - Hero and in-view Expenses art get `srcset` / `sizes`.
 - `fetchpriority="high"` only on the hero.
 - AURA, Lumen, and Expenses below the fold get `loading="lazy"` and `decoding="async"`.
-- Product landings can use the 512 px WebP for the large icon and the 32 px file for the header and favicon.
+- Product landings can use the 768 px WebP for the large icon and the 32 px file for the header and favicon.
 
 ### 2. Fonts
 
-Change `scripts/fetch-fonts.py` to send a Chrome user-agent so Google Fonts returns WOFF2, keep the Latin `unicode-range` filter, and write `format("woff2")`. Drop 700 unless a page actually uses it.
+Change `scripts/fetch-fonts.py` to send a Chrome user-agent so Google Fonts returns WOFF2, keep the Latin `unicode-range` filter, and write `format("woff2")`. Drop unused faces only. Keep 700 where the UI uses it (the header brand is `font-weight: 700` in `navigation.css`).
 
 Split `fonts.css` into family sheets (`fonts-manrope.css`, and so on) so Expenses does not download Cormorant or Outfit. Preload only Manrope 500 on the homepage and the product display face on each landing.
 
@@ -95,10 +95,25 @@ Split `fonts.css` into family sheets (`fonts-manrope.css`, and so on) so Expense
 
 Two CSS animations were running on the hero (`float` on the emblem, `light` on a blurred beam). That is fine once the bitmap is small. Keep motion, but make it cheap:
 
-- Put the drop-shadow on a static wrapper and animate `transform` only.
-- Add `content-visibility: auto` plus `contain-intrinsic-size` on `.scene` so offscreen product sections skip layout and delay their typefaces.
-- Pause hero motion when `#home` is offscreen (the video already pauses).
-- Replace `background-attachment: fixed` on product pages, which composites the whole page on scroll.
+- Put the drop-shadow on a static wrapper and animate `transform` only — only if the wrapper matches the mark’s silhouette.
+- Add `content-visibility: auto` plus `contain-intrinsic-size` on `.scene` so offscreen product sections skip layout and delay their typefaces. Size the intrinsic box to the real scene height or scroll-snap will jump.
+- Pause hero motion when `#home` is offscreen (the video already pauses). This does not change what visitors see.
+- Leave `background-attachment: fixed` on product pages unless you explicitly want the wash to scroll with the copy. That is a look change, not a load-time must.
+
+## Where overshooting changes the look
+
+Done carefully, the work above should not change visual appeal. These are the places it can, if pushed too far.
+
+| Marker | Safe | Overshoot |
+| --- | --- | --- |
+| Image size | 768–940 px WebP at high quality for marks painted up to ~470 px CSS (2× screens need ~850 px) | 256 px, or a crushed WebP — hero and product marks go soft |
+| Font weight 700 | Drop unused faces (Cormorant 400, Outfit 700, unused 400s). Keep 700 for families the header brand uses | Removing all 700 files — the browser fakes bold from 600 and the wordmark looks muddy |
+| Product-page wash | Leave `background-attachment: fixed` | Removing it — the gradient scrolls with the page instead of staying pinned |
+| `content-visibility` on `.scene` | Set `contain-intrinsic-size` to the real section height | Wrong guess — scroll-snap jumps when a scene enters view |
+| Drop-shadow on a wrapper | Wrapper follows the icon silhouette, then animate `transform` only | A rectangular wrapper — the glow becomes a box instead of a mark-shaped shadow |
+| Motion | Pause hero `float` / `light` only while `#home` is offscreen | Stripping beams, float, or glows — that is atmosphere, not payload |
+
+Keep the beams, float, glows, and type. Compress and size assets; do not strip the atmosphere. The only recommendation that is optional for look is dropping `background-attachment: fixed`.
 
 ### 4. CSS delivery
 
@@ -114,4 +129,4 @@ Concatenate `styles.css`, `product-themes.css`, `typography.css`, `navigation.cs
 
 ---
 
-First-view current: 4,759 KB measured (`glitchlabs` + `expenses` PNGs, 12 TTF files, CSS/JS/HTML). Image source total 7,207 KB. Font source total 1,598 KB. Target ~370 KB is 256/512 WebP plus Latin WOFF2 plus lazy Expenses art. Social Composer was not profiled.
+First-view current: 4,759 KB measured (`glitchlabs` + `expenses` PNGs, 12 TTF files, CSS/JS/HTML). Image source total 7,207 KB. Font source total 1,598 KB. Target ~370 KB is 768–940 px WebP plus Latin WOFF2 plus lazy Expenses art. Social Composer was not profiled.
