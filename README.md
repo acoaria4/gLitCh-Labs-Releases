@@ -37,7 +37,7 @@ Invite links accept `?t=...` or `?token=...` and open the Expenses deep link onl
 
 ## Navigation and scrolling
 
-`navigation.css` shares readable header/footer typography and 44px touch targets across the site. Mobile navigation uses two rows so all main links remain visible. On the main site, Arrow Up/Down and Page Up/Down move one section per press; Home/End select the first/last section. Held-key repeats are ignored. Previous/Next buttons offer the same behavior on touchscreens. Native touch/wheel scrolling remains available within longer sections. Reduced-motion users receive immediate section jumps. Supporting pages retain normal document scrolling.
+`navigation.css` shares readable header/footer typography and 44px touch targets across the site. Mobile navigation uses two rows so all main links remain visible. On the main site, Arrow Up/Down and Page Up/Down move one section per press; Home/End select the first/last section. Held-key repeats are ignored. Previous/Next buttons offer the same behavior on touchscreens. Native touch and wheel scrolling are handled by the browser, including within taller sections. The scrolling runtime is restored exactly from a7bd58a (2.1.0-titaniumBookends). Reduced-motion users receive immediate section jumps. Supporting pages retain normal document scrolling.
 
 ## GitHub Pages and local archives
 
@@ -68,7 +68,7 @@ python3 scripts/check-pages.py
 
 Use the same Python environment for `scripts/build-pages.py`; it restores source references before regenerating pages, then automatically optimizes the results. Generated files are committed alongside the HTML, so GitHub Pages continues serving the repository root. Never edit generated minified files directly.
 
-The optimizer compares original/optimized PNG and lossless WebP sizes and verifies exact decoded RGBA pixels, dimensions, and ICC profiles. PNG favicon copies retain compatibility; page images use the smaller verified format. Fonts retain character coverage, outlines, and metrics in WOFF2. CSS and JavaScript are minified without bundling, selector restructuring, or variable renaming. The manifest records source/output hashes, sizes, savings, and PNG fallbacks. Stale hashed outputs owned by the optimizer are removed on rebuild.
+The optimizer compares original/optimized PNG and lossless WebP sizes and verifies exact decoded RGBA pixels, dimensions, and ICC profiles. PNG favicon copies retain compatibility; page images use the smaller verified format. Fonts retain character coverage, outlines, and metrics in WOFF2. CSS and ancillary JavaScript are conservatively minified. The homepage scrolling script is deliberately copied without minification or any other transformation; its hashed output must be byte-identical to the restored source. The manifest records source/output hashes, sizes, savings, and PNG fallbacks. Stale hashed outputs owned by the optimizer are removed on rebuild.
 
 For browser checks, install Playwright in a local tool environment and make it available through `NODE_PATH` (Chrome must be installed). Serve the site on port 8088:
 
@@ -80,3 +80,21 @@ node scripts/measure-performance.cjs http://127.0.0.1:8088 .cache/performance-re
 `SITE_URL` overrides the interaction-test address. The measurement script runs three fresh-cache Chrome loads at 390 × 844, 2× pixel density, 80 ms network latency, 8 Mbps download, and 4× CPU slowdown. It records resource transfer bytes, request counts, FCP, LCP, CLS, and load time. Resource Timing totals exclude HTML and browser-internal favicon requests; these are local comparisons, not production field measurements.
 
 For visual comparison, serve a baseline snapshot on port 8089 and the working site on 8088, then run `node scripts/capture-performance-visuals.cjs`. Captures go to `.cache/performance-visuals/` or `CAPTURE_DIR`. See `performance-report.md` for this optimization's measured results.
+
+### Scrolling restoration checks
+
+The homepage runtime and base CSS were restored from `a7bd58a`, before the performance upgrade. There are no application-level wheel/touch interceptors or new resize realignment handlers. The optimizer keeps an unminified, content-hashed runtime copy, and `check-optimized.py` verifies it matches the source exactly.
+
+To compare against the reference, serve a checkout or snapshot of that revision on port 8090 and this site on port 8088. Install Python Playwright and its test browsers, then run:
+
+```sh
+python -m pip install playwright==1.60.0
+python -m playwright install webkit firefox
+BROWSERS=chromium,webkit python scripts/test-snap-scroll.py
+python scripts/test-snap-touch.py
+BROWSERS=firefox python scripts/test-snap-scroll.py
+```
+
+`SITE_URL` and `REFERENCE_URL` override those addresses. These tests compare native scrolling outcomes with the reference; they do not impose a custom one-gesture-per-section rule. Browser simulations cannot establish that scrolling feels correct on every physical device. Firefox startup was previously blocked by this host's sandbox/graphics environment; a failed launch is not a passing browser check.
+
+Restoration verification: all six reference-comparison viewports passed in Chrome and WebKit, and all four native Chromium touch comparisons passed. The separately attempted Firefox launch failed with a local sandbox/graphics startup error; Firefox behavior remains unverified here. Source and served runtime bytes match `a7bd58a`, as do the source scrolling/layout stylesheets.

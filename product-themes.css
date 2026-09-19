@@ -1,8 +1,8 @@
 /* Product palettes drawn from the original /get pages. */
-.expenses{--field:#0b0b12;--field-deep:#07070c;--accent:#d9b793;--foreground:#f7f1e8;--secondary:#c9b8a4;--rule:#d9b79340;--halo:#d9b79320;color-scheme:dark}
-.aura{--field:#f2ede5;--field-deep:#eae3d6;--accent:#65401f;--foreground:#2b1c10;--secondary:#543c26;--rule:#ba7f4640;--halo:#e7bb8540;color-scheme:light}
-.lumen{--field:#f8e7ed;--field-deep:#efdae4;--accent:#71394f;--foreground:#291426;--secondary:#593448;--rule:#71394f35;--halo:#edbb5520;color-scheme:light}
-.product,.product-site{--product-background:radial-gradient(ellipse at 77% 40%,var(--halo),transparent 55%),linear-gradient(160deg,var(--field),var(--field-deep))}
+.expenses{--field:#0b0b12;--field-deep:#07070c;--accent:#d9b793;--foreground:#f7f1e8;--secondary:#c9b8a4;--rule:#d9b79340;--halo:#d9b79320;--ambient-halo:#d9b79338;--art-light:#d9b793;--orbit-light:#d9b79378;color-scheme:dark}
+.aura{--field:#f2ede5;--field-deep:#eae3d6;--accent:#65401f;--foreground:#2b1c10;--secondary:#543c26;--rule:#ba7f4640;--halo:#e7bb8540;--ambient-halo:#d9a56b68;--art-light:#d7a365;--orbit-light:#a3693270;color-scheme:light}
+.lumen{--field:#f8e7ed;--field-deep:#efdae4;--accent:#71394f;--foreground:#291426;--secondary:#593448;--rule:#71394f35;--halo:#edbb5520;--ambient-halo:#edbb5545;--art-light:#f4ba68;--orbit-light:#a95d8170;color-scheme:light}
+.product,.product-site{--product-background:radial-gradient(ellipse at 77% 40%,var(--ambient-halo,var(--halo)),transparent 62%),linear-gradient(160deg,var(--field),var(--field-deep))}
 .product{color:var(--foreground);background:var(--product-background)}
 .product .product-tagline{color:var(--foreground)}
 .product .description,.product .art-caption,.product .small-label,.product .next-link{color:var(--secondary)}
@@ -164,3 +164,24 @@ a.store-link:hover{box-shadow:0 5px 20px #0001;transform:translateY(-2px)}
 body[data-scene="lumen"] .scene-nav>a:after{background:#71394f}
 body[data-scene="lumen"] .scene-nav>a[aria-current]:after{background:#291426;box-shadow:0 0 0 5px #29142618}
 body[data-scene="lumen"] .motion-toggle{color:#291426}
+
+/* Stronger static light around artwork; independent of button/sidebar colors. */
+.product .art-glow{background:var(--art-light);opacity:.23}
+.product .orbital{border-color:var(--orbit-light)}
+.product .orbital-two{opacity:.85}
+.product-site .landing-visual{position:relative;isolation:isolate}
+.product-site .landing-visual::before{
+ content:'';position:absolute;inset:-24px 0;z-index:-1;pointer-events:none;
+ background:radial-gradient(ellipse at center,var(--ambient-halo) 0%,transparent 72%);
+}
+
+/* Icon-local halos keep the pale page backgrounds and UI colors intact. */
+.aura{--icon-halo:#b97832;--icon-halo-opacity:.4}
+.lumen{--icon-halo:#e65386;--icon-halo-opacity:.35}
+.product:is(.aura,.lumen) .art-glow{
+ inset:5%;background:var(--icon-halo);opacity:var(--icon-halo-opacity);filter:blur(30px);
+}
+.product-site:is(.aura,.lumen) .landing-visual::before{
+ inset:-24px 4%;background:var(--icon-halo);opacity:var(--icon-halo-opacity);
+ border-radius:50%;filter:blur(30px);
+}

@@ -225,28 +225,28 @@
       "saved_bytes": 349
     },
     "product-themes.css": {
-      "source_sha256": "b7bf8a12c5f35df8cc4721c8878c5544c09065f04f63544ead1805fde185bcd2",
-      "source_bytes": 9639,
-      "output": "assets/optimized/css/product-themes.6871386f04ecfddd.min.css",
-      "output_sha256": "6871386f04ecfddd3de3d272ae3b60a35c255bd5c3a08539c06463dbfa806240",
-      "output_bytes": 8976,
-      "saved_bytes": 663
+      "source_sha256": "755c017880c0f287cf781b1384a63e6d958a887cdb12f20ae5a381f574490169",
+      "source_bytes": 10848,
+      "output": "assets/optimized/css/product-themes.2fd1cf4d71595c02.min.css",
+      "output_sha256": "2fd1cf4d71595c0261cbda337029dadadcb5a07258ce7df56a0461cabf7cc1a3",
+      "output_bytes": 10000,
+      "saved_bytes": 848
     },
     "studio-theme.css": {
-      "source_sha256": "c49c2bca3a8baa79ff82d6cffa150ee0795f6859b4269c93416c79b46cec3340",
-      "source_bytes": 9723,
-      "output": "assets/optimized/css/studio-theme.61aa5771bf4bbe06.min.css",
-      "output_sha256": "61aa5771bf4bbe066aa34366a9c34c5a986846258daf147454af3affb7ff91f4",
-      "output_bytes": 9251,
+      "source_sha256": "7c33cd01ab56286d51fa0e67f892d47a4a9b7a5dc99ec62400f0859dafc194f7",
+      "source_bytes": 9722,
+      "output": "assets/optimized/css/studio-theme.30eebe2ff7f128fa.min.css",
+      "output_sha256": "30eebe2ff7f128fa920149b98981112483607347cbf802f33df83788025ef59e",
+      "output_bytes": 9250,
       "saved_bytes": 472
     },
     "styles.css": {
-      "source_sha256": "92f6d3a683adb66fdcd4b9022d49314063a668c663fbdf3ccc2933b1323e60b4",
-      "source_bytes": 10705,
-      "output": "assets/optimized/css/styles.239d46cd6da3905f.min.css",
-      "output_sha256": "239d46cd6da3905f08812b68438bf4f5eddc61d3e9ea986526d5161a4301a890",
-      "output_bytes": 10612,
-      "saved_bytes": 93
+      "source_sha256": "8dcc1e51cc3a51229cbe6e1cc5f4b0d8d8dd4915f0252a0a56b1d38d1e360680",
+      "source_bytes": 10417,
+      "output": "assets/optimized/css/styles.33936f59f160d2fd.min.css",
+      "output_sha256": "33936f59f160d2fd5ec1e30a2f9ca39c0d2451cad4ac6ded17feaba922bb4937",
+      "output_bytes": 10415,
+      "saved_bytes": 2
     },
     "typography.css": {
       "source_sha256": "13a74a3d4d88ecca3b3ab30cda6d57b5b6c8b378a859b1ecc890c910a15ec6a4",
@@ -265,12 +265,13 @@
       "saved_bytes": 35
     },
     "script.js": {
-      "source_sha256": "f0ea30fbff6bdc92871148f53d4c330a21cef34062de51a34fefd39eb9e2681b",
-      "source_bytes": 4774,
-      "output": "assets/optimized/js/script.cd867e43410e9190.min.js",
-      "output_sha256": "cd867e43410e919009a97e273ff813e0d949a287ff5086b9581f6b0bfb5ca91e",
-      "output_bytes": 4154,
-      "saved_bytes": 620
+      "source_sha256": "97ea315461fc350c809485a76262363c10effd977d5684c006e904212304f742",
+      "source_bytes": 4703,
+      "output": "assets/optimized/js/script.97ea315461fc350c.js",
+      "output_sha256": "97ea315461fc350c809485a76262363c10effd977d5684c006e904212304f742",
+      "output_bytes": 4703,
+      "saved_bytes": 0,
+      "delivery": "Unminified, byte-identical to source"
     }
   }
 }

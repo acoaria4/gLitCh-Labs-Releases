@@ -10,6 +10,8 @@ for source, item in manifest['assets'].items():
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
     assert sha(original) == item['source_sha256'], f'Stale source: {source}'
     assert sha(output) == item['output_sha256'], f'Changed output: {output}'
+    if source == 'script.js':
+        assert original.read_bytes() == output.read_bytes(), 'Scrolling runtime must not be transformed'
     if original.suffix == '.png':
         a, b = Image.open(original), Image.open(output)
         assert a.size == b.size and a.convert('RGBA').tobytes() == b.convert('RGBA').tobytes(), source
