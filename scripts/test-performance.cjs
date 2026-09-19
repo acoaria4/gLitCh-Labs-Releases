@@ -1,2 +1,27 @@
-const {chromium}=require('playwright');const assert=require('assert/strict');
-(async()=>{const b=await chromium.launch({channel:'chrome',headless:true});try{const p=await b.newPage({viewport:{width:390,height:844}});await p.goto((process.env.SITE_URL||'http://127.0.0.1:8088'));const beam=p.locator('.beam-one'),toggle=p.locator('.motion-toggle');assert.equal(await toggle.getAttribute('aria-pressed'),'false');await p.evaluate(()=>{Object.defineProperty(document,'hidden',{configurable:true,get:()=>true});document.dispatchEvent(new Event('visibilitychange'))});assert.equal(await beam.evaluate(e=>getComputedStyle(e).animationPlayState),'paused');assert.equal(await toggle.getAttribute('aria-pressed'),'false');await p.evaluate(()=>{delete document.hidden;document.dispatchEvent(new Event('visibilitychange'))});assert.equal(await beam.evaluate(e=>getComputedStyle(e).animationPlayState),'running');await p.keyboard.press('ArrowDown');await p.waitForFunction(()=>document.body.dataset.scene==='expenses');await p.waitForTimeout(800);assert.equal(await beam.evaluate(e=>getComputedStyle(e).animationPlayState),'paused');await toggle.click();await p.keyboard.press('Home');await p.waitForFunction(()=>document.body.dataset.scene==='home');assert.equal(await toggle.getAttribute('aria-pressed'),'true');assert.equal(await beam.evaluate(e=>getComputedStyle(e).animationPlayState),'paused');await toggle.click();assert.equal(await beam.evaluate(e=>getComputedStyle(e).animationPlayState),'running');await p.keyboard.press('End');await p.waitForFunction(()=>document.body.dataset.scene==='studio');await p.waitForTimeout(800);assert.equal(await p.locator('#next-section').isDisabled(),true);for(let i=0;i<4;i++){await p.locator('#previous-section').click();await p.waitForTimeout(80);}await p.waitForFunction(()=>document.body.dataset.scene==='home');await p.emulateMedia({reducedMotion:'reduce'});await p.waitForFunction(()=>document.querySelector('.motion-toggle').getAttribute('aria-pressed')==='true');assert.equal(await toggle.getAttribute('aria-pressed'),'true');assert.equal(await beam.evaluate(e=>getComputedStyle(e).animationName),'none');for(const id of ['expenses','aura','lumen','studio']){await p.evaluate(id=>document.querySelector(`a[href="#${id}"]`).click(),id);await p.waitForFunction(id=>document.body.dataset.scene===id,id);assert.equal(await p.locator('#'+id+' img').evaluateAll(images=>images.every(i=>i.complete&&i.naturalWidth>0)),true)}console.log('PASS: keyboard, rapid section controls, decoded images, offscreen/hidden animation suspension, explicit pause, and reduced motion.');}finally{await b.close()}})();
+// Runtime checks for the restored native-scrolling implementation.
+const {chromium}=require('playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({channel:'chrome',headless:true});
+ try {
+  const page=await browser.newPage({viewport:{width:390,height:844}});
+  await page.goto(process.env.SITE_URL||'http://127.0.0.1:8088');
+  const toggle=page.locator('.motion-toggle');
+  await toggle.click();assert.equal(await toggle.getAttribute('aria-pressed'),'true');
+  await page.keyboard.press('ArrowDown');
+  await page.waitForFunction(()=>document.body.dataset.scene==='expenses');
+  assert.equal(await toggle.getAttribute('aria-pressed'),'true');
+  await page.keyboard.press('Home');
+  await page.waitForFunction(()=>document.body.dataset.scene==='home');
+  await toggle.click();assert.equal(await toggle.getAttribute('aria-pressed'),'false');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.waitForFunction(()=>document.querySelector('.motion-toggle').getAttribute('aria-pressed')==='true');
+  for(const id of ['expenses','aura','lumen','studio']) {
+   await page.evaluate(id=>document.querySelector(`a[href="#${id}"]`).click(),id);
+   await page.waitForFunction(id=>document.body.dataset.scene===id,id);
+  }
+  assert.equal(await page.locator('#next-section').isDisabled(),true);
+  assert.equal(await page.evaluate(()=>{const e=new WheelEvent('wheel',{deltaY:120,bubbles:true,cancelable:true});document.body.dispatchEvent(e);return e.defaultPrevented;}),false);
+  console.log('PASS: restored section controls, keyboard/anchor navigation, explicit pause, reduced motion, and native wheel handling.');
+ } finally {await browser.close();}
+})();

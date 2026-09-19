@@ -107,7 +107,11 @@ def main():
         text = re.sub(r'url\(([^)]+)\)', css_url, path.read_text()).replace("format('truetype')", "format('woff2')")
         emit(path, cssmin(text).encode(), '.min.css', 'css')
     for path in sorted(ROOT.glob('*.js')):
-        emit(path, jsmin(path.read_text()).encode(), '.min.js', 'js')
+        if path.name == 'script.js':
+            # Preserve the restored interaction runtime byte-for-byte.
+            emit(path, path.read_bytes(), '.js', 'js', delivery='Unminified, byte-identical to source')
+        else:
+            emit(path, jsmin(path.read_text()).encode(), '.min.js', 'js')
     for page, text in originals.items():
         def tag(m):
             original = m[0]

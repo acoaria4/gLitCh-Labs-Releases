@@ -1,5 +1,7 @@
 # Performance verification — 19 September 2026
 
+**Historical measurement:** the figures below describe the initial optimization build. The scrolling runtime and base CSS have since been restored from `a7bd58a`; the runtime is now served byte-for-byte without minification. The added hidden/offscreen CSS animation pausing and later custom gesture interception have been removed. These timings have not been remeasured for that restoration.
+
 The public homepage, product pages, get pages, and supporting pages now use verified lossless assets in `assets/optimized/`. Source artwork and Social Composer are unchanged. The site remains plain static files served from the repository root.
 
 ## Asset savings
@@ -31,7 +33,7 @@ Resource bytes fell 32.7%; median LCP improved 38.2%. FCP was 92 ms slower in th
 - Compared 56 before/after screenshots: every public page at desktop and high-density mobile sizes, plus every homepage scene at 320 × 568 and high-density 768 × 1024.
 - Layout and typography remain unchanged. Chrome's PNG/WebP rendering and compositing produced small rasterization differences; the worst screenshot's mean channel difference was below 0.15 on a 0–255 scale. This is not a claim of byte-identical screenshots.
 - No horizontal overflow, missing assets, or JavaScript errors in the capture pass.
-- Verified arrow-key navigation, Home/End, rapid section-button presses, decoded artwork at section arrival, reduced motion, user pause persistence, and hidden/offscreen animation suspension.
+- The initial checks covered navigation, image readiness, reduced motion, user pause, and added animation suspension. They did not establish equivalent real-world scrolling feel; the added runtime behavior has since been rolled back.
 - The existing page check validates all 20 HTML pages, local links and anchors, and unchanged privacy wording.
 - Rebuilding pages in an isolated copy reproduced the optimized HTML exactly. All 147 original asset and Social Composer files matched their pre-change hashes; public text and navigation/store links matched the baseline.
 
