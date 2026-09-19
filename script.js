@@ -58,6 +58,7 @@ document.addEventListener('click', event => {
 });
 function syncMotion() {
   document.body.classList.toggle('motion-paused', paused);
+  document.body.classList.toggle('motion-hidden', document.hidden);
   toggle.setAttribute('aria-pressed', String(paused));
   toggle.setAttribute('aria-label', paused ? 'Play ambient animation' : 'Pause ambient animation');
   toggle.title = toggle.getAttribute('aria-label');
@@ -75,15 +76,15 @@ if (video.dataset.src) {
   video.addEventListener('playing', () => video.closest('.hero').classList.add('video-ready'));
   video.addEventListener('error', () => video.closest('.hero').classList.remove('video-ready'));
 }
-const observer = new IntersectionObserver(entries => {
-  for (const entry of entries) {
-    if (entry.target.id === 'home') { heroVisible = entry.isIntersecting; syncMotion(); }
-  }
+const observer = new IntersectionObserver(() => {
   const active = scenes.reduce((best, scene) => {
     const rect = scene.getBoundingClientRect();
     const visible = Math.max(0, Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0));
+    scene.classList.toggle('motion-offscreen', visible === 0);
+    if (scene.id === 'home') heroVisible = visible > 0;
     return visible > best.visible ? { scene, visible } : best;
   }, { scene: scenes[0], visible: 0 }).scene;
+  syncMotion();
   activeIndex = scenes.indexOf(active);
   updateControls();
   document.body.dataset.scene = active.id;
