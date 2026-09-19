@@ -2,6 +2,15 @@
 from pathlib import Path
 import re, html
 ROOT=Path(__file__).resolve().parents[1]
+# Resolve generated asset URLs before updating shells; regenerate them at the end.
+# Load build dependencies before writing anything, so a missing dependency is safe.
+import importlib.util, json
+_spec=importlib.util.spec_from_file_location('optimize_assets', ROOT/'scripts/optimize-assets.py')
+_optimizer=importlib.util.module_from_spec(_spec);_spec.loader.exec_module(_optimizer)
+if _optimizer.MANIFEST.exists():
+ _manifest=json.loads(_optimizer.MANIFEST.read_text())
+ for _page in _optimizer.pages():
+  _page.write_text(_optimizer.original_references(_page.read_text(),_page,_manifest))
 PRODUCTS={'expenses':('Expenses','#0b0b12'),'aura':('AURA','#f2ede5'),'lumen':('Lumen','#f8e7ed'),'studio':('gLitCh Labs','#0b0d10')}
 LABELS={'privacy':'Privacy','support':'Support','delete-account':'Delete account','data-controls':'Data controls','invite':'Group invite','about':'About','contact':'Contact'}
 def styles(prefix):
@@ -60,3 +69,5 @@ s=s.replace('https://acoaria4.github.io/gLitCh-Labs-Releases/about.html','about.
 s=s.replace('<a href="mailto:glitchlabsio@gmail.com">Contact</a>','<a href="contact.html">Contact</a>')
 p.write_text(s)
 print('Built supporting pages and /get pages; linked shared typography and local resources.')
+
+_optimizer.main()

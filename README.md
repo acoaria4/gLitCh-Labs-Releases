@@ -51,3 +51,32 @@ Both directories are local, ignored backups and must remain untracked. Make ongo
 ## Social Composer
 
 Social Composer is restored at `social-composer/` from the latest `main` snapshot used during promotion. It is part of the published root site and links back to the studio homepage. Its files and assets are tracked normally.
+
+## Lossless performance build
+
+The published pages load content-hashed files from `assets/optimized/`. Original icons and font files remain read-only inputs. No files in icon archives (including `finalized icons`), Social Composer, or store listings are processed. No runtime packages or hosting changes are required.
+
+To rebuild after editing the readable root CSS/JavaScript or replacing a source asset:
+
+```sh
+python3 -m venv .cache/performance-venv
+.cache/performance-venv/bin/pip install -r scripts/requirements-performance.txt
+.cache/performance-venv/bin/python scripts/optimize-assets.py
+.cache/performance-venv/bin/python scripts/check-optimized.py
+python3 scripts/check-pages.py
+```
+
+Use the same Python environment for `scripts/build-pages.py`; it restores source references before regenerating pages, then automatically optimizes the results. Generated files are committed alongside the HTML, so GitHub Pages continues serving the repository root. Never edit generated minified files directly.
+
+The optimizer compares original/optimized PNG and lossless WebP sizes and verifies exact decoded RGBA pixels, dimensions, and ICC profiles. PNG favicon copies retain compatibility; page images use the smaller verified format. Fonts retain character coverage, outlines, and metrics in WOFF2. CSS and JavaScript are minified without bundling, selector restructuring, or variable renaming. The manifest records source/output hashes, sizes, savings, and PNG fallbacks. Stale hashed outputs owned by the optimizer are removed on rebuild.
+
+For browser checks, install Playwright in a local tool environment and make it available through `NODE_PATH` (Chrome must be installed). Serve the site on port 8088:
+
+```sh
+node scripts/test-performance.cjs
+node scripts/measure-performance.cjs http://127.0.0.1:8088 .cache/performance-results.json
+```
+
+`SITE_URL` overrides the interaction-test address. The measurement script runs three fresh-cache Chrome loads at 390 × 844, 2× pixel density, 80 ms network latency, 8 Mbps download, and 4× CPU slowdown. It records resource transfer bytes, request counts, FCP, LCP, CLS, and load time. Resource Timing totals exclude HTML and browser-internal favicon requests; these are local comparisons, not production field measurements.
+
+For visual comparison, serve a baseline snapshot on port 8089 and the working site on 8088, then run `node scripts/capture-performance-visuals.cjs`. Captures go to `.cache/performance-visuals/` or `CAPTURE_DIR`. See `performance-report.md` for this optimization's measured results.
