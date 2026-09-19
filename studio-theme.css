@@ -1,0 +1,51 @@
+/* Titanium identity for the opening and closing scenes only. */
+.studio-home :is(.hero,.studio){
+ --accent:#c8c5bf;
+ --paper:#f2f1ee;
+ --line:#d9d7d12b;
+ color:#f2f1ee;
+}
+.studio-home .hero{
+ background:radial-gradient(ellipse at 50% 38%,#30302f 0%,#141413 30%,#050505 68%);
+}
+.studio-home .hero .beam{
+ background:linear-gradient(90deg,transparent,#eeeae218,transparent);
+}
+.studio-home .hero .emblem-glow{box-shadow:0 0 130px 20px #e0dcd32c}
+.studio-home .hero .horizon{background:radial-gradient(ellipse,#e5e1d81c,transparent 65%)}
+.studio-home .hero h1{color:#eeede9;text-shadow:0 2px 32px #eeeae218}
+.studio-home .hero .title-dot{color:#c8c5bf}
+.studio-home .hero .hero-description{color:#c9c7c2}
+.studio-home :is(.hero,.studio) .eyebrow{color:#bcbab5}
+.studio-home .hero .small-label{color:#a3a19d}
+.studio-home .hero .scroll-cue{color:#dedbd5}
+.studio-home .hero .scroll-cue span{border-color:#d9d7d140}
+.studio-home .studio{
+ background:radial-gradient(ellipse at 50% 110%,#b8b2a82b,transparent 65%),#070707;
+}
+.studio-home .studio h2{color:#eeede9}
+.studio-home .studio h2 span{color:#bdbab4}
+.studio-home #studio-title>.desktop-copy{color:inherit}
+.studio-home #studio-title>.mobile-copy{color:#eeede9}
+.studio-home .studio-content>p:not(.eyebrow){color:#c8c5bf}
+.studio-home .studio-contact{color:#eeede9;border-color:#c8c5bf70}
+.studio-home .studio :is(.footer-links,.footer-bottom){color:#c8c5bf}
+.studio-home .studio .privacy-links>span{color:#aaa7a1}
+/* The fixed chrome follows the active scene, including the initial paint. */
+.studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"])>.navigation{
+ color:#f2f1ee;background:linear-gradient(#050505ed,transparent);
+}
+.studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"])>.navigation nav{color:#dedbd5}
+.studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"]) .section-controls{background-color:#111110eb;border-color:#c8c5bf40}
+.studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"]) .section-controls button{
+ background:#161615;color:#e8e5df;border-color:#c8c5bf60;
+}
+.studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"]) .section-controls button:hover:not(:disabled){background:#343330}
+.studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"]) .motion-toggle{background:#111110eb;color:#dedbd5!important}
+@media(max-width:800px), (min-width:801px) and (max-width:1100px) and (orientation:portrait){
+ .studio-home .studio .studio-contact{
+  background:linear-gradient(120deg,#f0ede7,#c7c3bc 55%,#dedad3);
+  color:#111110;box-shadow:0 0 24px #dedad312;
+ }
+ .studio-home body:is(:not([data-scene]),[data-scene="home"],[data-scene="studio"])>.navigation{background:#080808f5}
+}
