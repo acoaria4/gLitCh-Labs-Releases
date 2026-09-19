@@ -1,0 +1,16 @@
+const {chromium}=require('playwright');const assert=require('node:assert/strict');
+(async()=>{const browser=await chromium.launch({channel:'chrome',headless:true});try{
+ const page=await browser.newPage({viewport:{width:1280,height:900}});const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.route('https://aura-glitchlabs.fly.dev/**',route=>{const params=new URL(route.request().url()).searchParams;const date=params.get('date'),language=params.get('lang');return route.fulfill({json:{date,language,timezone:'Asia/Kolkata',disclaimer:'For reflection only. Use your own judgement.',readings:['aries','taurus','gemini','cancer','leo','virgo','libra','scorpio','sagittarius','capricorn','aquarius','pisces'].map(sign=>({sign,summary:language==='ta'?'அடுத்த முடிவுக்கு முன் புதிய கோணத்தில் சிந்தியுங்கள்.':'Take one thoughtful step. Give yourself room to grow.'}))}})});
+ await page.goto(process.env.COMPOSER_URL||'http://127.0.0.1:8088/social-composer/');await page.locator('[data-brand="aura"]').click();
+ assert.equal(await page.locator('#horoscope-theme option').count(),9);
+ await page.locator('#horoscope-theme').selectOption('friday');await page.locator('#horoscope-date').fill('2026-09-21');await page.locator('#horoscope-date').dispatchEvent('change');assert.equal(await page.locator('#horoscope-theme').inputValue(),'friday');assert.match(await page.locator('#horoscope-palette').innerText(),/Friday/);
+ await page.locator('#horoscope-create').click();await page.waitForFunction(()=>document.querySelector('#horoscope-status').textContent.startsWith('Ready:'));
+ assert.deepEqual(await page.locator('#stage-canvas').evaluate(c=>[c.width,c.height]),[1080,1920]);
+ for(const lang of ['ta','en']){await page.locator('#horoscope-language').selectOption(lang);await page.locator('#horoscope-create').click();await page.waitForFunction(()=>document.querySelector('#horoscope-status').textContent.startsWith('Ready:'));}
+ for(const key of ['none','sunday','monday','tuesday','wednesday','thursday','friday','saturday','daily']){await page.locator('#horoscope-theme').selectOption(key);await page.locator('#horoscope-blank').click();await page.waitForFunction(()=>document.querySelector('#horoscope-status').textContent.startsWith('Blank template ready'));assert.equal(await page.locator('#horoscope-theme option').count(),9)}
+ const download=page.waitForEvent('download');await page.locator('#btn-download').click();assert.match((await download).suggestedFilename(),/aura-daily-horoscope-2026-09-21-1080x1920/);
+ const overflow=await page.evaluate(async()=>{try{const t=window.AuraHoroscopeTemplate;await t.render({date:'2026-09-21',ordered:t.signs.map(name=>({name,text:'Long summary '.repeat(80)})),disclaimer:'Context'},t.neutral);return false}catch(e){return /No text was cut/.test(e.message)}});assert.equal(overflow,true);
+ await page.setViewportSize({width:390,height:844});assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);assert.deepEqual(errors,[]);
+ console.log('PASS: API-fed render, all nine selections, date-independent tints, blank templates, PNG export, overflow guard, mobile width.');
+}finally{await browser.close()}})();

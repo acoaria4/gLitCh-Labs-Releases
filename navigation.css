@@ -82,3 +82,9 @@ body[data-scene="lumen"] .section-controls button:hover:not(:disabled){backgroun
 @media(max-width:800px){
  .hero h1{font-size:clamp(44px,10vw,76px);letter-spacing:-.045em;line-height:1.12;padding-inline:16px}
 }
+
+/* Lumen controls share the section's pale blush surface and plum ink. */
+body[data-scene="lumen"] .section-controls{background:#f8e7edf2;border-color:#71394f35}
+body[data-scene="lumen"] .section-controls button{background:#f8e7ed;color:#291426;border-color:#71394f55}
+body[data-scene="lumen"] .section-controls button:hover:not(:disabled){background:#efdae4}
+body[data-scene="lumen"] .motion-toggle{background:#f8e7edf2;color:#291426!important;border:1px solid #71394f35;border-radius:50%}

@@ -14,12 +14,19 @@ The older files under `brands/` are no longer referenced by the composer.
 
 ## Daily horoscope posts
 
-Select **AURA** in the brand picker, then choose a reading date and **Day-specific** or **General · AURA ivory**, then select **Create horoscope**. This produces a 1080 × 1350 PNG-ready canvas with all 12 Moon-sign summaries from AURA. Existing canvas content is replaced only after a complete, date-matched edition renders successfully. The usual Save and Download PNG controls work; horoscope filenames include the reading date.
+Select **AURA**, choose **தமிழ் · Tamil** (default) or **English**, a reading date, and a background. **Create horoscope** fetches the selected language directly from AURA and produces a 1080 × 1920 (9:16) canvas. Save and Download PNG use the normal composer controls.
 
-The date defaults to today in Asia/Kolkata. Day-specific colors follow the selected date: Sunday gold, Monday pearl, Tuesday terracotta, Wednesday sage, Thursday saffron, Friday rose, Saturday indigo. General always uses the original ivory/bronze palette. These are editorial color choices, not API predictions.
+All eight backgrounds are always available in either language: No tint (ivory), Sunday warm gold, Monday moon pearl, Tuesday terracotta, Wednesday sage, Thursday saffron, Friday rose, and Saturday lavender. Automatic follows the selected date in Asia/Kolkata. These are editorial tints, independent of the readings.
 
-API: `https://aura-glitchlabs.fly.dev/api/horoscopes/daily?date=YYYY-MM-DD&lang=en`. The composer uses each reading's `summary` verbatim, preserves the Moon-sign context and API disclaimer, and checks that all 12 unique signs and the requested date are present. No generated/sample fallback is used on errors. Longer summaries cause an explicit layout error rather than silent text truncation.
+API: `https://aura-glitchlabs.fly.dev/api/horoscopes/daily?date=YYYY-MM-DD&lang=ta` (or `lang=en`). Summaries are used unchanged. The requested language, date, timezone, all twelve unique signs, and reading context are validated before replacing the canvas. Failed requests never fall back to invented or translated readings. Changing language or date cancels stale requests. The API disclaimer appears below the controls; the artwork has no footer text.
 
-The AURA server must allow the hosting origin through `CORS_ORIGINS`, including `https://acoaria4.github.io` for GitHub Pages and the chosen local preview origin (for example `http://127.0.0.1:8088`). No API secrets are stored in this static website.
+The shared renderer (`js/horoscope-template.js`) uses local gold-emblem artwork, Tamil Rasi names or their English transliterations, localized dates, and self-hosted Noto Sans Tamil with its OFL license. Tamil wrapping respects grapheme boundaries. Overlong summaries produce an explicit error instead of being clipped. Blank horoscope template needs no API connection.
 
-The AURA panel checks the daily endpoint when selected. Its small status indicator shows Checking API, Working after a validated response, Waiting for API to cold start after 3 seconds without a response, and API not working after a failure or 60-second timeout. The waiting label indicates a possible cold start, not a server-confirmed diagnosis. Selecting AURA again or creating a horoscope retries the check.
+The API must allow the site's origin through its CORS configuration. The status indicator checks the chosen language, reports a possible cold start after three seconds, and times out after sixty seconds.
+
+With a local server on port 8088 and Playwright available through `NODE_PATH`:
+
+- `node social-composer/scripts/test-horoscope.cjs` checks both languages, all tints, blank templates, dimensions, PNG export, overflow handling, and mobile width using mocked API responses.
+- `node social-composer/scripts/render-horoscope.cjs` exports English editorial samples and blanks for all eight backgrounds. These samples are layout previews, not live forecasts. Pass `HOROSCOPE_DATA=/path/to/api-response.json` to render a saved actual Tamil or English API edition instead.
+
+Exports are local review artifacts under `exports/daily-horoscope/` and are not committed.
