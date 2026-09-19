@@ -6,7 +6,7 @@
     <title>Social Composer — gLitCh Labs</title>
     <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/composer.css?v=horoscope-status-2" />
+    <link rel="stylesheet" href="css/composer.css?v=tamil-emblems-1" />
   </head>
   <body>
     <div class="app">
@@ -135,10 +135,14 @@
             <p class="pane-hint">All 12 Moon signs, straight from AURA.</p>
             <p id="horoscope-api-status" class="api-status" data-state="checking" role="status" aria-live="polite">Checking API…</p>
             <label class="horoscope-field">Reading date <input id="horoscope-date" type="date" min="1900-01-01" max="2100-12-31" required></label>
-            <label class="horoscope-field">Post color <select id="horoscope-theme"><option value="daily">Day-specific</option><option value="general">General · AURA ivory</option></select></label>
+            <label class="horoscope-field">Language <select id="horoscope-language"><option value="ta">தமிழ் · Tamil</option><option value="en">English</option></select></label>
+            <label class="horoscope-field">Post color <select id="horoscope-theme"><option value="daily">Automatic · reading day</option><option value="none">No tint · AURA ivory</option><option value="sunday">Sunday · Warm gold</option><option value="monday">Monday · Moon pearl</option><option value="tuesday">Tuesday · Terracotta</option><option value="wednesday">Wednesday · Sage</option><option value="thursday">Thursday · Saffron</option><option value="friday">Friday · Rose</option><option value="saturday">Saturday · Lavender</option></select></label>
+            <p class="pane-hint">Golden Rasi emblems, readings in your chosen language, and eight backgrounds. Every tint is available for any date.</p>
+            <p id="horoscope-context" class="pane-hint" lang="ta"></p>
             <p id="horoscope-palette" class="pane-hint"></p>
             <button id="horoscope-create" type="button" class="btn btn-primary">Create horoscope</button>
-            <p id="horoscope-status" class="pane-hint" role="status" aria-live="polite">Choose a date to create a 1080 × 1350 post.</p>
+            <button id="horoscope-blank" type="button" class="btn btn-ghost">Blank horoscope template</button>
+            <p id="horoscope-status" class="pane-hint" role="status" aria-live="polite">Choose a date to create a 1080 × 1920 story.</p>
           </details>
 
             <div class="asset-grid" id="assets-aura"></div>
@@ -223,7 +227,8 @@
       </div>
     </div>
 
-    <script src="js/composer.js?v=horoscope-status-2"></script>
-    <script src="js/horoscope.js?v=horoscope-status-2"></script>
+    <script src="js/composer.js?v=tamil-emblems-1"></script>
+    <script src="js/horoscope-template.js?v=tamil-emblems-1"></script>
+    <script src="js/horoscope.js?v=tamil-emblems-1"></script>
   </body>
 </html>

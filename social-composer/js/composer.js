@@ -1485,7 +1485,7 @@
   // Shared canvas pipeline: template posts retain normal placement, saving and export.
   window.auraComposer = {
     async setHoroscope(blob, date) {
-      state.presetKey = "1080x1350";
+      state.presetKey = "1080x1920";
       els.preset.value = state.presetKey;
       state.showGrid = false;
       syncGridToggle();
