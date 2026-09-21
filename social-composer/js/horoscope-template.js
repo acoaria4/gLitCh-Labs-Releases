@@ -50,20 +50,20 @@
     const date=new Intl.DateTimeFormat(ta?'ta-IN':'en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(`${data.date}T12:00:00Z`));
     center(date,345,`400 ${ta?24:25}px "${family}"`);
     signs.forEach((sign,i)=>{
-      const cardX=i%2?547:28,y=412+Math.floor(i/2)*197,x=cardX+154;
+      const cardX=i%2?547:28,y=412+Math.floor(i/2)*197,x=cardX+22;
       c.fillStyle='#fffcf5';c.beginPath();c.roundRect(cardX,y,505,180,32);c.fill();
-      // Compact emblems give Tamil's longer word forms a comfortable reading column.
-      c.save();c.beginPath();c.arc(cardX+77,y+90, 60,0,Math.PI*2);c.clip();
-      c.drawImage(art,(cardX+29)*art.width/1080,(y+8)*art.height/1920,166*art.width/1080,166*art.height/1920,cardX+17,y+30,120,120);c.restore();c.fillStyle=colors[2];
-      let nameSize=ta?29:39;c.font=`${ta?600:500} ${nameSize}px "${ta?family:'Cormorant Garamond'}"`;
-      const name=ta?tamil[i]:rasis[i];while(c.measureText(name).width>328){nameSize--;c.font=`${ta?600:500} ${nameSize}px "${ta?family:'Cormorant Garamond'}"`;}
-      text(name,x,y+20,c.font);
+      // Small header emblems leave the full card width for longer Tamil readings.
+      c.save();c.beginPath();c.arc(cardX+42,y+30,22,0,Math.PI*2);c.clip();
+      c.drawImage(art,(cardX+29)*art.width/1080,(y+8)*art.height/1920,166*art.width/1080,166*art.height/1920,cardX+20,y+8,44,44);c.restore();c.fillStyle=colors[2];
+      let nameSize=ta?27:34;c.font=`${ta?600:500} ${nameSize}px "${ta?family:'Cormorant Garamond'}"`;
+      const name=ta?tamil[i]:rasis[i];while(c.measureText(name).width>405){nameSize--;c.font=`${ta?600:500} ${nameSize}px "${ta?family:'Cormorant Garamond'}"`;}
+      text(name,cardX+76,y+12,c.font);
       if(blank)return;
       const reading=data.ordered[i];if(!reading||reading.name!==sign)throw new Error(`Missing or unordered ${sign} reading.`);
       let size=ta?23:28,lines;
-      do{c.font=`400 ${size}px "${family}"`;lines=wrap(c,reading.text,328,ta?'ta':'en');if(lines.length<=4)break;size--;}while(size>=20);
+      do{c.font=`400 ${size}px "${family}"`;lines=wrap(c,reading.text,461,ta?'ta':'en');if(lines.length*Math.ceil(size*1.3)<=116)break;size--;}while(size>=20);
       if(size<20)throw new Error(`${name}'s summary is too long for a readable post. No text was cut and the canvas is unchanged.`);
-      lines.forEach((line,n)=>text(line,x,y+62+n*28,`400 ${size}px "${family}"`));
+      lines.forEach((line,n)=>text(line,x,y+56+n*Math.ceil(size*1.3),`400 ${size}px "${family}"`));
     });
     return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Could not render the horoscope.')),'image/png'));
   }

@@ -3,6 +3,21 @@
   const ENDPOINT = 'https://aura-glitchlabs.fly.dev/api/horoscopes/daily';
   const template = window.AuraHoroscopeTemplate;
   const SIGNS = template.signs;
+  const source = document.getElementById('horoscope-source');
+  const manualPanel = document.getElementById('horoscope-manual');
+  const fields = SIGNS.map((sign, index) => {
+    const label = document.createElement('label');
+    label.className = 'horoscope-field';
+    const name = document.createElement('span');
+    const input = document.createElement('textarea');
+    input.id = `horoscope-reading-${sign.toLowerCase()}`;
+    input.rows = 5;
+    input.setAttribute('aria-describedby', 'horoscope-status');
+    input.addEventListener('input', () => {input.removeAttribute('aria-invalid'); update();});
+    label.append(name, input);
+    document.getElementById('horoscope-readings').append(label);
+    return {name, input, index};
+  });
   const dateInput = document.getElementById('horoscope-date');
   const language = document.getElementById('horoscope-language');
   const context = document.getElementById('horoscope-context');
@@ -54,7 +69,7 @@
     }
   }
   function checkApi() {
-    if (!dateInput.checkValidity() || request) return;
+    if (source.value !== 'api' || !dateInput.checkValidity() || request) return;
     fetchReadings(dateInput.value, language.value).catch(() => {});
   }
   document.querySelector('[data-brand="aura"]').addEventListener('click', checkApi);
@@ -69,15 +84,30 @@
   function palette() { return template.palette(theme.value, dateInput.value); }
   function update() {
     revision++;
+    apiRevision++;
+    apiController?.abort();
+    apiController = null;
     request?.abort();
     request = null;
     button.disabled = false;
     button.textContent = 'Create horoscope';
+    const manual = source.value === 'manual';
+    manualPanel.hidden = !manual;
+    apiStatus.hidden = manual;
+    context.hidden = manual;
+    context.textContent = '';
+    if (!manual) setApiStatus('idle', 'Create horoscope to fetch readings.');
+    fields.forEach(({name, input, index}) => {
+      name.textContent = language.value === 'ta' ? template.tamil[index] : template.rasis[index];
+      input.lang = language.value;
+      name.lang = language.value;
+    });
     const colors = palette();
     paletteLabel.textContent = colors[0];
     paletteLabel.style.setProperty('--day-accent', colors[3]);
     status.textContent = 'Create to apply this date and color. Any existing canvas stays unchanged until ready.';
   }
+  source.addEventListener('change', () => {update();checkApi();});
   dateInput.addEventListener('change', () => {update();checkApi();});
   theme.addEventListener('change', update);
   language.addEventListener('change', () => {update();checkApi();});
@@ -101,30 +131,42 @@
   document.getElementById('horoscope-blank').addEventListener('click', async () => {
     if (!dateInput.reportValidity()) return;
     const version=++revision, day=dateInput.value,lang=language.value;
-    request?.abort();request=null;button.disabled=false;button.textContent='Create horoscope';
+    request?.abort();request=null;apiRevision++;apiController?.abort();apiController=null;button.disabled=false;button.textContent='Create horoscope';
     try {
       const blob=await render({date:day,language:lang},palette(),{blank:true});
       if(version!==revision)return;
-      await window.auraComposer.setHoroscope(blob,day);
+      if (!await window.auraComposer.setHoroscope(blob,day,()=>version===revision)) return;
       context.textContent='';
-      status.textContent='Blank template ready. Add your own readings beside each emblem. Download PNG to export.';
+      status.textContent='Blank template ready. Add your own readings below each sign name. Download PNG to export.';
     } catch(error) {if(version===revision)status.textContent=error.message;}
   });
   button.addEventListener('click', async()=>{
     if(!dateInput.reportValidity())return;
+    const manual = source.value === 'manual';
+    if (manual) {
+      const missing = fields.find(({input}) => !input.value.trim());
+      if (missing) {
+        missing.input.setAttribute('aria-invalid', 'true');
+        missing.input.focus();
+        status.textContent = `Add the ${missing.name.textContent} reading. The canvas is unchanged.`;
+        return;
+      }
+    }
     const day=dateInput.value,lang=language.value,colors=palette(),version=++revision;
+    const manualData = {date:day, language:lang, ordered:fields.map(({input}, i)=>({name:SIGNS[i], text:input.value.trim()}))};
     request?.abort();const controller=new AbortController();request=controller;
-    button.disabled=true;button.textContent='Loading AURA…';status.textContent=`Fetching all 12 readings for ${day}…`;
+    button.disabled=true;button.textContent=manual?'Creating horoscope…':'Loading AURA…';status.textContent=manual?'Preparing your 12 readings…':`Fetching all 12 readings for ${day}…`;
     try {
-      const data=await fetchReadings(day, lang, controller.signal);
+      const data=manual ? manualData : await fetchReadings(day, lang, controller.signal);
+      if(version!==revision)return;
       const blob=await render(data,colors);
       if(version!==revision)return;
-      await window.auraComposer.setHoroscope(blob,day);
-      context.textContent=data.disclaimer;context.lang=lang;
-      status.textContent=`Ready: ${day} · ${colors[0]} · ${lang==='ta'?'தமிழ்':'English'} · all 12 readings from AURA. Download PNG to export.`;
+      if (!await window.auraComposer.setHoroscope(blob,day,()=>version===revision)) return;
+      context.textContent=manual?'':data.disclaimer;context.lang=lang;
+      status.textContent=`Ready: ${day} · ${colors[0]} · ${lang==='ta'?'தமிழ்':'English'} · all 12 ${manual?'manual readings':'readings from AURA'}. Download PNG to export.`;
     } catch(error) {
       if(version!==revision)return;
-      status.textContent=error.name==='AbortError' ? 'AURA took too long to respond. Please retry. The canvas is unchanged.' : error instanceof TypeError ? 'Could not reach AURA. Check your connection and that the API allows this website. The canvas is unchanged.' : error.message;
+      status.textContent=error.name==='AbortError' ? 'AURA took too long to respond. Please retry. The canvas is unchanged.' : !manual && error instanceof TypeError ? 'Could not reach AURA. Check your connection and that the API allows this website. The canvas is unchanged.' : error.message;
     } finally {
       if(version===revision){button.disabled=false;button.textContent='Create horoscope';request=null;}
     }

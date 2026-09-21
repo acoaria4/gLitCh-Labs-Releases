@@ -419,8 +419,9 @@
     });
   }
 
-  async function setBackground(file) {
+  async function setBackground(file, beforeApply = () => true) {
     const img = await loadImageFromFile(file);
+    if (!beforeApply()) return false;
     state.bgImage = img;
     state.postDate = null;
     state.overlays = [];
@@ -428,6 +429,7 @@
     recomputeCanvasSize();
     fitCanvasElement();
     draw();
+    return true;
   }
 
   function defaultOverlaySize(assetId) {
@@ -1484,13 +1486,18 @@
 
   // Shared canvas pipeline: template posts retain normal placement, saving and export.
   window.auraComposer = {
-    async setHoroscope(blob, date) {
-      state.presetKey = "1080x1920";
-      els.preset.value = state.presetKey;
-      state.showGrid = false;
-      syncGridToggle();
-      await setBackground(blob);
+    async setHoroscope(blob, date, isCurrent = () => true) {
+      const applied = await setBackground(blob, () => {
+        if (!isCurrent()) return false;
+        state.presetKey = "1080x1920";
+        els.preset.value = state.presetKey;
+        state.showGrid = false;
+        syncGridToggle();
+        return true;
+      });
+      if (!applied) return false;
       state.postDate = date;
+      return true;
     }
   };
 

@@ -827,7 +827,7 @@ body::before{background:radial-gradient(ellipse at 50% 0,#20273280,transparent 6
 .horoscope-panel{border-bottom:1px solid var(--line);padding-bottom:18px}
 .horoscope-panel .brand-heading{font-size:25px}
 .horoscope-field{display:flex;flex-direction:column;gap:6px;margin:14px 0;font-size:13px;font-weight:600}
-.horoscope-field input,.horoscope-field select{width:100%;min-width:0;min-height:44px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#141b26}
+.horoscope-field input,.horoscope-field select,.horoscope-field textarea{width:100%;min-width:0;min-height:44px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#141b26}
 #horoscope-create{width:100%;margin:12px 0}
 #horoscope-palette{border-left:4px solid var(--day-accent,#ba7f46);padding-left:9px}
 
@@ -836,3 +836,8 @@ body::before{background:radial-gradient(ellipse at 50% 0,#20273280,transparent 6
 .api-status[data-state="working"]::before{background:#8acda6}
 .api-status[data-state="waiting"]::before{background:#e4ba72}
 .api-status[data-state="error"]::before{background:#ee9292}
+
+.horoscope-panel [hidden]{display:none}
+.horoscope-field textarea{scroll-margin-top:110px;resize:vertical;min-height:140px;font:400 15px/1.8 "Noto Sans Tamil","DM Sans",sans-serif;color:var(--text,#edf2f7)}
+.horoscope-field textarea[aria-invalid="true"]{border-color:#ee9292}
+.horoscope-field textarea:focus-visible,.horoscope-field select:focus-visible{outline:2px solid #ba7f46;outline-offset:2px}
