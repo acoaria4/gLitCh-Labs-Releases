@@ -6,7 +6,7 @@
     <title>Social Composer — gLitCh Labs</title>
     <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/composer.css?v=tamil-emblems-1" />
+    <link rel="stylesheet" href="css/composer.css?v=manual-horoscope-1" />
   </head>
   <body>
     <div class="app">
@@ -132,13 +132,15 @@
             <summary class="brand-heading brand-aura">AURA<span>.</span></summary>
           <details class="horoscope-panel" open>
             <summary class="brand-heading brand-aura">Daily horoscope<span>.</span></summary>
-            <p class="pane-hint">All 12 Moon signs, straight from AURA.</p>
-            <p id="horoscope-api-status" class="api-status" data-state="checking" role="status" aria-live="polite">Checking API…</p>
+            <p class="pane-hint">All 12 Moon signs in one story. Paste your readings or fetch them from AURA.</p>
+            <label class="horoscope-field">Reading source <select id="horoscope-source"><option value="manual" selected>Manual entry</option><option value="api">Fetch from AURA API</option></select></label>
+            <p hidden id="horoscope-api-status" class="api-status" data-state="checking" role="status" aria-live="polite">Checking API…</p>
             <label class="horoscope-field">Reading date <input id="horoscope-date" type="date" min="1900-01-01" max="2100-12-31" required></label>
             <label class="horoscope-field">Language <select id="horoscope-language"><option value="ta">தமிழ் · Tamil</option><option value="en">English</option></select></label>
             <label class="horoscope-field">Post color <select id="horoscope-theme"><option value="daily">Automatic · reading day</option><option value="none">No tint · AURA ivory</option><option value="sunday">Sunday · Warm gold</option><option value="monday">Monday · Moon pearl</option><option value="tuesday">Tuesday · Terracotta</option><option value="wednesday">Wednesday · Sage</option><option value="thursday">Thursday · Saffron</option><option value="friday">Friday · Rose</option><option value="saturday">Saturday · Lavender</option></select></label>
             <p class="pane-hint">Golden Rasi emblems, readings in your chosen language, and eight backgrounds. Every tint is available for any date.</p>
-            <p id="horoscope-context" class="pane-hint" lang="ta"></p>
+            <div id="horoscope-manual"><p class="pane-hint">Paste a reading for each sign. Your text stays here while you adjust the post or switch sources.</p><div id="horoscope-readings"></div></div>
+            <p hidden id="horoscope-context" class="pane-hint" lang="ta"></p>
             <p id="horoscope-palette" class="pane-hint"></p>
             <button id="horoscope-create" type="button" class="btn btn-primary">Create horoscope</button>
             <button id="horoscope-blank" type="button" class="btn btn-ghost">Blank horoscope template</button>
@@ -227,8 +229,8 @@
       </div>
     </div>
 
-    <script src="js/composer.js?v=tamil-emblems-1"></script>
-    <script src="js/horoscope-template.js?v=tamil-emblems-1"></script>
-    <script src="js/horoscope.js?v=tamil-emblems-1"></script>
+    <script src="js/composer.js?v=manual-horoscope-1"></script>
+    <script src="js/horoscope-template.js?v=manual-horoscope-1"></script>
+    <script src="js/horoscope.js?v=manual-horoscope-1"></script>
   </body>
 </html>
