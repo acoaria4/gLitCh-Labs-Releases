@@ -12,11 +12,11 @@ if _optimizer.MANIFEST.exists():
  for _page in _optimizer.pages():
   _page.write_text(_optimizer.original_references(_page.read_text(),_page,_manifest))
 PRODUCTS={'expenses':('Expenses','#0b0b12'),'aura':('AURA','#f2ede5'),'lumen':('Lumen','#f8e7ed'),'studio':('gLitCh Labs','#0b0d10')}
-LABELS={'privacy':'Privacy','support':'Support','delete-account':'Delete account','data-controls':'Data controls','invite':'Group invite','about':'About','contact':'Contact'}
+LABELS={'privacy':'Privacy','terms':'Terms','support':'Support','delete-account':'Delete account','data-controls':'Data controls','invite':'Group invite','about':'About','contact':'Contact'}
 def styles(prefix):
  return ''.join(f'<link rel="stylesheet" href="{prefix}{name}.css?v=unified-1">' for name in ['fonts','styles','product-themes','typography','documents','navigation'])
 def resources(slug,prefix=''):
- return ''.join(f'<a href="{prefix}{key}.html">{LABELS[key]}</a>' for key in ('privacy','support','delete-account','data-controls') if (ROOT/'content'/slug/(key+'.html')).exists())
+ return ''.join(f'<a href="{prefix}{key}.html">{LABELS[key]}</a>' for key in ('privacy','terms','support','delete-account','data-controls') if (ROOT/'content'/slug/(key+'.html')).exists())
 for slug,(name,color) in PRODUCTS.items():
  studio=slug=='studio';prefix='' if studio else '../';theme='studio-site' if studio else slug;asset='glitchlabs' if studio else slug
  folder=ROOT if studio else ROOT/slug

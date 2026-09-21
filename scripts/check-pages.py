@@ -23,15 +23,29 @@ for p,page in pages.items():
   if target.is_dir():target/= 'index.html'
   assert target.is_file(),(p,url,'missing file')
   if u.fragment and target in pages:assert u.fragment in pages[target].ids,(p,url,'missing anchor')
-for slug in ('expenses','aura','lumen'):
- source=(ROOT/'content'/slug/'privacy.html').read_text()
- output=(ROOT/slug/'privacy.html').read_text()
+documents=[ROOT/'content'/slug/'privacy.html' for slug in ('expenses','aura')]
+documents+=sorted((ROOT/'content/lumen').glob('*.html'))
+for document in documents:
+ source=document.read_text()
+ output=(ROOT/document.parent.name/document.name).read_text()
  article=re.search(r'<article class="document-content"[^>]*>([\s\S]*?)</article>',output).group(1)
  article=re.sub(r'<details[\s\S]*?</details>','',article)
  plain=lambda s:' '.join(re.sub('<[^>]*>',' ',s).split())
- assert plain(source)==plain(article),(slug,'privacy wording changed')
+ assert plain(source)==plain(article),(document,'document wording changed')
+for p in (ROOT/'lumen').rglob('*.html'):
+ text=p.read_text()
+ footer=re.search(r'<nav aria-label="Product resources">([\s\S]*?)</nav>',text)
+ assert footer,(p,'missing product resources')
+ required=('privacy.html','terms.html','support.html','delete-account.html','data-controls.html')
+ prefix='../' if p.parent.name=='get' else ''
+ assert all(f'href="{prefix}{name}"' in footer[1] for name in required),(p,'missing legal resource')
+ if p.name not in ('index.html',):
+  sidebar=re.search(r'<nav aria-label="Lumen pages">([\s\S]*?)</nav>',text)
+  assert sidebar and all(f'href="{name}"' in sidebar[1] for name in required),(p,'missing sidebar resource')
+deletion=(ROOT/'content/lumen/delete-account.html').read_text()
+assert 'mailto:glitchlabsio@gmail.com?subject=Lumen%20account%20deletion%20request' in deletion,'Missing private deletion request route'
 for p in ROOT.glob('*.css'):
  for path in re.findall(r'url\(([^)]+)\)',p.read_text()):
   path=path.strip('\'"')
   if not path.startswith(('data:','http')):assert (p.parent/path).exists(),(p,path)
-print(f'PASS: {len(pages)} pages, local links/anchors/assets, marketing-page headings, privacy text preserved.')
+print(f'PASS: {len(pages)} pages, local links/anchors/assets, headings, source document text, Lumen legal navigation and deletion request route.')
