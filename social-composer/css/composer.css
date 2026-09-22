@@ -841,3 +841,7 @@ body::before{background:radial-gradient(ellipse at 50% 0,#20273280,transparent 6
 .horoscope-field textarea{scroll-margin-top:110px;resize:vertical;min-height:140px;font:400 15px/1.8 "Noto Sans Tamil","DM Sans",sans-serif;color:var(--text,#edf2f7)}
 .horoscope-field textarea[aria-invalid="true"]{border-color:#ee9292}
 .horoscope-field textarea:focus-visible,.horoscope-field select:focus-visible{outline:2px solid #ba7f46;outline-offset:2px}
+
+.horoscope-size-controls{display:grid;grid-template-columns:minmax(0,1fr) 76px;gap:10px;align-items:center}
+.horoscope-size-controls input[type="range"]{padding:0;accent-color:#ba7f46}
+.horoscope-field input:focus-visible{outline:2px solid #ba7f46;outline-offset:2px}

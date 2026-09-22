@@ -21,6 +21,10 @@
   const dateInput = document.getElementById('horoscope-date');
   const language = document.getElementById('horoscope-language');
   const context = document.getElementById('horoscope-context');
+  const fontSize = document.getElementById('horoscope-font-size');
+  const fontRange = document.getElementById('horoscope-font-size-range');
+  const fontWeight = document.getElementById('horoscope-font-weight');
+  const typography = () => ({readingFontSize:fontSize.valueAsNumber, readingFontWeight:Number(fontWeight.value)});
   const theme = document.getElementById('horoscope-theme');
   const button = document.getElementById('horoscope-create');
   const status = document.getElementById('horoscope-status');
@@ -105,11 +109,14 @@
     const colors = palette();
     paletteLabel.textContent = colors[0];
     paletteLabel.style.setProperty('--day-accent', colors[3]);
-    status.textContent = 'Create to apply this date and color. Any existing canvas stays unchanged until ready.';
+    status.textContent = 'Create to apply this date, color, and text style. Any existing canvas stays unchanged until ready.';
   }
   source.addEventListener('change', () => {update();checkApi();});
   dateInput.addEventListener('change', () => {update();checkApi();});
   theme.addEventListener('change', update);
+  fontRange.addEventListener('input', () => {fontSize.value=fontRange.value;update();});
+  fontSize.addEventListener('input', () => {if(fontSize.checkValidity())fontRange.value=fontSize.value;update();});
+  fontWeight.addEventListener('change', update);
   language.addEventListener('change', () => {update();checkApi();});
   update();
 
@@ -141,7 +148,7 @@
     } catch(error) {if(version===revision)status.textContent=error.message;}
   });
   button.addEventListener('click', async()=>{
-    if(!dateInput.reportValidity())return;
+    if(!dateInput.reportValidity() || !fontSize.reportValidity())return;
     const manual = source.value === 'manual';
     if (manual) {
       const missing = fields.find(({input}) => !input.value.trim());
@@ -153,13 +160,14 @@
       }
     }
     const day=dateInput.value,lang=language.value,colors=palette(),version=++revision;
+    const textStyle = typography();
     const manualData = {date:day, language:lang, ordered:fields.map(({input}, i)=>({name:SIGNS[i], text:input.value.trim()}))};
     request?.abort();const controller=new AbortController();request=controller;
     button.disabled=true;button.textContent=manual?'Creating horoscope…':'Loading AURA…';status.textContent=manual?'Preparing your 12 readings…':`Fetching all 12 readings for ${day}…`;
     try {
       const data=manual ? manualData : await fetchReadings(day, lang, controller.signal);
       if(version!==revision)return;
-      const blob=await render(data,colors);
+      const blob=await render(data,colors,textStyle);
       if(version!==revision)return;
       if (!await window.auraComposer.setHoroscope(blob,day,()=>version===revision)) return;
       context.textContent=manual?'':data.disclaimer;context.lang=lang;
