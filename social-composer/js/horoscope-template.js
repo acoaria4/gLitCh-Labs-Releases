@@ -3,67 +3,83 @@
   const signs=['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
   const rasis=['Mesham','Rishabam','Mithunam','Kadagam','Simmam','Kanni','Thulam','Viruchigam','Dhanusu','Magaram','Kumbam','Meenam'];
   const tamil=['மேஷம்','ரிஷபம்','மிதுனம்','கடகம்','சிம்மம்','கன்னி','துலாம்','விருச்சிகம்','தனுசு','மகரம்','கும்பம்','மீனம்'];
+  // Label, atmosphere, reading ink, accessible name accent, background key.
   const palettes=[
-    ['Sunday · Warm gold','#efb777','#382d22','#a57938'],
-    ['Monday · Moon pearl','#afc7df','#293238','#77868d'],
-    ['Tuesday · Terracotta','#da9b88','#40302a','#ac735e'],
-    ['Wednesday · Sage','#b3c393','#30372b','#7a8c60'],
-    ['Thursday · Saffron','#e5c36a','#403622','#a38a42'],
-    ['Friday · Rose','#e8a7ba','#412d35','#ac798b'],
-    ['Saturday · Lavender','#b8a6d2','#352f44','#8e80a7'],
+    ['Sunday · Warm gold','#efb777','#253026','#805b2d','sunday'],
+    ['Monday · Moon pearl','#afc7df','#253026','#49627a','monday'],
+    ['Tuesday · Terracotta','#da9b88','#253026','#8b5142','tuesday'],
+    ['Wednesday · Sage','#b3c393','#253026','#4d6845','wednesday'],
+    ['Thursday · Saffron','#e5c36a','#253026','#7b601e','thursday'],
+    ['Friday · Rose','#e8a7ba','#253026','#875268','friday'],
+    ['Saturday · Lavender','#b8a6d2','#253026','#69557f','saturday'],
   ];
-  const neutral=['No tint · AURA ivory','#fbfaf7','#302b26','#ad8658'];
+  const neutral=['No tint · AURA ivory','#fbfaf7','#253026','#805b2d','none'];
   const keys=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
   function palette(key,date){if(key==='none'||key==='general')return neutral;return palettes[key==='daily'?new Date(`${date}T12:00:00Z`).getUTCDay():keys.indexOf(key)]||neutral;}
-  const backgroundURL=new URL('../assets/horoscope/ivory-emblems.png',document.currentScript.src).href;
-  let background;
-  function loadBackground(){return background||(background=new Promise((resolve,reject)=>{const i=new Image();i.onload=()=>resolve(i);i.onerror=()=>{background=null;reject(new Error('Could not load the horoscope artwork. Please reload.'));};i.src=backgroundURL;}));}
-  // Segment long Tamil words only at grapheme boundaries, never inside a vowel mark.
+  const assetBase=new URL('../assets/horoscope/',document.currentScript.src);
+  const images=new Map();
+  function loadImage(name){
+    if(!images.has(name)) images.set(name,new Promise((resolve,reject)=>{
+      const image=new Image();image.onload=()=>resolve(image);
+      image.onerror=()=>{images.delete(name);reject(new Error('Could not load the horoscope artwork. Please reload.'));};
+      image.src=new URL(name,assetBase).href;
+    }));
+    return images.get(name);
+  }
+  // Never split Tamil vowel marks, or introduce spaces within a long word.
   function wrap(c,text,width,locale){
     const lines=[];let line='';
-    const pieces=[];
     for(const word of text.trim().split(/\s+/)){
-      if(c.measureText(word).width<=width){pieces.push(word);continue;}
-      let part='';for(const {segment} of new Intl.Segmenter(locale,{granularity:'grapheme'}).segment(word)){
-        if(part&&c.measureText(part+segment).width>width){pieces.push(part);part='';}part+=segment;
-      }if(part)pieces.push(part);
+      if(c.measureText(word).width<=width){
+        const next=line?`${line} ${word}`:word;
+        if(line&&c.measureText(next).width>width){lines.push(line);line=word;}else line=next;
+        continue;
+      }
+      if(line){lines.push(line);line='';}
+      for(const {segment} of new Intl.Segmenter(locale,{granularity:'grapheme'}).segment(word)){
+        if(c.measureText(segment).width>width)throw new Error('A character is too wide. Reduce the reading text size.');
+        if(line&&c.measureText(line+segment).width>width){lines.push(line);line='';}
+        line+=segment;
+      }
     }
-    for(const word of pieces){const next=line?`${line} ${word}`:word;if(line&&c.measureText(next).width>width){lines.push(line);line=word;}else line=next;}
     if(line)lines.push(line);return lines;
   }
-  async function render(data,colors,{blank=false}={}){
+  async function render(data,colors,{blank=false,readingFontSize=30,readingFontWeight=600}={}){
+    if(!Number.isInteger(readingFontSize)||readingFontSize<18||readingFontSize>36)throw new Error('Choose a whole reading text size from 18 to 36 px.');
+    if(![400,600,700].includes(readingFontWeight))throw new Error('Choose Regular, Semibold, or Bold reading text.');
     const ta=data.language==='ta',family=ta?'Noto Sans Tamil':'DM Sans';
-    const [art]=await Promise.all([loadBackground(),document.fonts.load('500 64px "Cormorant Garamond"'),document.fonts.load('400 26px "DM Sans"'),document.fonts.load('600 30px "Noto Sans Tamil"','மேஷம்'),document.fonts.load('400 24px "Noto Sans Tamil"','ராசி')]);
+    const bodyFont=`${readingFontWeight} ${readingFontSize}px "${family}"`;
+    const [background,art]=await Promise.all([
+      loadImage(`background-${colors[4]||'none'}.png`),loadImage('ivory-emblems.png'),
+      document.fonts.load(bodyFont,ta?'தமிழ்':'Reading'),
+      document.fonts.load(`700 32px "${family}"`,ta?'மேஷம்':'Mesham'),
+      document.fonts.load(`600 24px "${family}"`,ta?'புதன்':'Wednesday'),
+      document.fonts.load('700 44px "Noto Sans Tamil"','இன்றைய ராசிபலன்'),
+      document.fonts.load('500 60px "Cormorant Garamond"'),
+    ]);
     const canvas=document.createElement('canvas');canvas.width=1080;canvas.height=1920;const c=canvas.getContext('2d');
-    c.drawImage(art,0,0,1080,1920);
-    // Color the atmosphere while leaving the reading panels and brand signature intact.
-    if(colors!==neutral&&colors[0]!==neutral[0]){
-      c.save();c.beginPath();c.rect(0,0,1080,1920);
-      for(let i=0;i<12;i++)c.roundRect(i%2?547:28,412+Math.floor(i/2)*197,505,180,32);
-      c.clip('evenodd');
-      c.globalCompositeOperation='multiply';c.globalAlpha=.68;c.fillStyle=colors[1];c.fillRect(0,0,1080,1920);c.restore();
-    }
-    c.textBaseline='top';c.fillStyle=colors[2];
-    const text=(v,x,y,font)=>{c.font=font;c.fillText(v,x,y);};
-    const center=(v,y,font)=>{c.font=font;c.fillText(v,(1080-c.measureText(v).width)/2,y);};
-    center(ta?'இன்றைய ராசிபலன்':'Your daily horoscope',ta?258:250,ta?'600 52px "Noto Sans Tamil"':'500 76px "Cormorant Garamond"');
+    c.drawImage(background,0,0,1080,1920);c.textBaseline='alphabetic';c.fillStyle=colors[2];
+    const center=(value,y,font)=>{c.font=font;c.fillText(value,(1080-c.measureText(value).width)/2,y);};
+    center(ta?'இன்றைய ராசிபலன்':'Your daily horoscope',310,ta?'700 44px "Noto Sans Tamil"':'500 60px "Cormorant Garamond"');
     const date=new Intl.DateTimeFormat(ta?'ta-IN':'en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(`${data.date}T12:00:00Z`));
-    center(date,345,`400 ${ta?24:25}px "${family}"`);
+    center(date,361,`600 24px "${family}"`);
     signs.forEach((sign,i)=>{
-      const cardX=i%2?547:28,y=412+Math.floor(i/2)*197,x=cardX+22;
-      c.fillStyle='#fffcf5';c.beginPath();c.roundRect(cardX,y,505,180,32);c.fill();
-      // Small header emblems leave the full card width for longer Tamil readings.
-      c.save();c.beginPath();c.arc(cardX+42,y+30,22,0,Math.PI*2);c.clip();
-      c.drawImage(art,(cardX+29)*art.width/1080,(y+8)*art.height/1920,166*art.width/1080,166*art.height/1920,cardX+20,y+8,44,44);c.restore();c.fillStyle=colors[2];
-      let nameSize=ta?27:34;c.font=`${ta?600:500} ${nameSize}px "${ta?family:'Cormorant Garamond'}"`;
-      const name=ta?tamil[i]:rasis[i];while(c.measureText(name).width>405){nameSize--;c.font=`${ta?600:500} ${nameSize}px "${ta?family:'Cormorant Garamond'}"`;}
-      text(name,cardX+76,y+12,c.font);
+      const cardX=180+(i%2)*370,y=400+Math.floor(i/2)*208;
+      c.fillStyle='#fffcf5';c.beginPath();c.roundRect(cardX,y,350,196,22);c.fill();
+      const originalX=i%2?547:28,originalY=412+Math.floor(i/2)*197;
+      c.save();c.beginPath();c.arc(cardX+38,y+28,19,0,Math.PI*2);c.clip();
+      c.drawImage(art,(originalX+29)*art.width/1080,(originalY+8)*art.height/1920,166*art.width/1080,166*art.height/1920,cardX+19,y+9,38,38);c.restore();
+      const name=ta?tamil[i]:rasis[i];
+      c.fillStyle=colors[3];c.font=`700 32px "${family}"`;c.fillText(name,cardX+68,y+37);
       if(blank)return;
-      const reading=data.ordered[i];if(!reading||reading.name!==sign)throw new Error(`Missing or unordered ${sign} reading.`);
-      let size=ta?23:28,lines;
-      do{c.font=`400 ${size}px "${family}"`;lines=wrap(c,reading.text,461,ta?'ta':'en');if(lines.length*Math.ceil(size*1.3)<=116)break;size--;}while(size>=20);
-      if(size<20)throw new Error(`${name}'s summary is too long for a readable post. No text was cut and the canvas is unchanged.`);
-      lines.forEach((line,n)=>text(line,x,y+56+n*Math.ceil(size*1.3),`400 ${size}px "${family}"`));
+      const reading=data.ordered[i];if(!reading||reading.name!==sign||typeof reading.text!=='string'||!reading.text.trim())throw new Error(`Missing or unordered ${sign} reading.`);
+      c.fillStyle=colors[2];c.font=bodyFont;
+      const lines=wrap(c,reading.text,306,ta?'ta':'en'),lineHeight=Math.ceil(readingFontSize*1.2);
+      const baseline=y+46+readingFontSize;
+      if(lines.some((line,n)=>baseline+n*lineHeight+c.measureText(line).actualBoundingBoxDescent>y+182)){
+        throw new Error(`${name}'s reading does not fit at ${readingFontSize} px. Reduce the shared reading text size or shorten this reading. No text was cut and the canvas is unchanged.`);
+      }
+      lines.forEach((line,n)=>c.fillText(line,cardX+22,baseline+n*lineHeight));
     });
     return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('Could not render the horoscope.')),'image/png'));
   }

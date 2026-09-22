@@ -6,7 +6,7 @@
     <title>Social Composer — gLitCh Labs</title>
     <link rel="icon" href="brands/current/glitchlabs-icon.png" type="image/png" />
     <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/composer.css?v=manual-horoscope-1" />
+    <link rel="stylesheet" href="css/composer.css?v=weekly-templates-1" />
   </head>
   <body>
     <div class="app">
@@ -139,6 +139,15 @@
             <label class="horoscope-field">Language <select id="horoscope-language"><option value="ta">தமிழ் · Tamil</option><option value="en">English</option></select></label>
             <label class="horoscope-field">Post color <select id="horoscope-theme"><option value="daily">Automatic · reading day</option><option value="none">No tint · AURA ivory</option><option value="sunday">Sunday · Warm gold</option><option value="monday">Monday · Moon pearl</option><option value="tuesday">Tuesday · Terracotta</option><option value="wednesday">Wednesday · Sage</option><option value="thursday">Thursday · Saffron</option><option value="friday">Friday · Rose</option><option value="saturday">Saturday · Lavender</option></select></label>
             <p class="pane-hint">Golden Rasi emblems, readings in your chosen language, and eight backgrounds. Every tint is available for any date.</p>
+            <div class="horoscope-field">
+              <label for="horoscope-font-size">Reading text size · px</label>
+              <div class="horoscope-size-controls">
+                <input id="horoscope-font-size-range" type="range" min="18" max="36" step="1" value="30" aria-label="Reading text size" aria-describedby="horoscope-type-hint">
+                <input id="horoscope-font-size" type="number" min="18" max="36" step="1" value="30" required aria-describedby="horoscope-type-hint">
+              </div>
+            </div>
+            <label class="horoscope-field">Reading text weight <select id="horoscope-font-weight" aria-describedby="horoscope-type-hint"><option value="400">Regular</option><option value="600" selected>Semibold</option><option value="700">Bold</option></select></label>
+            <p id="horoscope-type-hint" class="pane-hint">Applies to all 12 readings. Smaller text fits more. Select Create horoscope to apply; sign names keep their own style.</p>
             <div id="horoscope-manual"><p class="pane-hint">Paste a reading for each sign. Your text stays here while you adjust the post or switch sources.</p><div id="horoscope-readings"></div></div>
             <p hidden id="horoscope-context" class="pane-hint" lang="ta"></p>
             <p id="horoscope-palette" class="pane-hint"></p>
@@ -229,8 +238,8 @@
       </div>
     </div>
 
-    <script src="js/composer.js?v=manual-horoscope-1"></script>
-    <script src="js/horoscope-template.js?v=manual-horoscope-1"></script>
-    <script src="js/horoscope.js?v=manual-horoscope-1"></script>
+    <script src="js/composer.js?v=weekly-templates-1"></script>
+    <script src="js/horoscope-template.js?v=weekly-templates-1"></script>
+    <script src="js/horoscope.js?v=weekly-templates-1"></script>
   </body>
 </html>
