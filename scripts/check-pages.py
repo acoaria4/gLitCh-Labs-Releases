@@ -14,8 +14,7 @@ class Page(HTMLParser):
    if a.get(key):self.links.append(a[key])
 pages={p:Page(p.read_text()) for p in ROOT.rglob('*.html') if not {'content', 'old_main_website', 'glitch-labs-website', '.git'}.intersection(p.relative_to(ROOT).parts) and not p.name.startswith('google')}
 for p,page in pages.items():
- if 'social-composer' not in p.relative_to(ROOT).parts:
-  assert page.h1==1,(p,'heading count',page.h1)
+ assert page.h1==1,(p,'heading count',page.h1)
  for url in page.links:
   u=urlsplit(url)
   if u.scheme or u.netloc:continue
