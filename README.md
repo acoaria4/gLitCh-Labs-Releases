@@ -50,11 +50,11 @@ Both directories are local, ignored backups and must remain untracked. Make ongo
 
 ## Social Composer
 
-Social Composer is restored at `social-composer/` from the latest `main` snapshot used during promotion. It is part of the published root site and links back to the studio homepage. Its files and assets are tracked normally.
+Social Composer now lives in its own repository. `social-composer-old.zip` at the repo root is a local archive of the copy that shipped here. It is gitignored and is not part of the published site.
 
 ## Lossless performance build
 
-The published pages load content-hashed files from `assets/optimized/`. Original icons and font files remain read-only inputs. No files in icon archives (including `finalized icons`), Social Composer, or store listings are processed. No runtime packages or hosting changes are required.
+The published pages load content-hashed files from `assets/optimized/`. Original icons and font files remain read-only inputs. No files in icon archives (including `finalized icons`) or store listings are processed. No runtime packages or hosting changes are required.
 
 To rebuild after editing the readable root CSS/JavaScript or replacing a source asset:
 

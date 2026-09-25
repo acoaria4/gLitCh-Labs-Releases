@@ -42,5 +42,5 @@ assets/generations/
 # Local iOS App Store listing copy
 /ios-store-listings/
 
-# Local Social Composer export drafts
-/social-composer/exports/
+# Local archive of Social Composer after it moved to its own repo
+/social-composer-old.zip
