@@ -1,0 +1,56 @@
+name: Publish filtered website to Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - uses: actions/checkout@v6
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Install verification dependencies
+        run: python -m pip install -r scripts/requirements-performance.txt
+      - name: Check the website and standalone archive
+        run: |
+          python scripts/check-pages.py
+          python scripts/check-optimized.py
+          python scripts/check-package-renders.py
+      - name: Stage and verify public files only
+        run: python scripts/prepare-pages.py --output "$RUNNER_TEMP/pages-site"
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Upload filtered website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ${{ runner.temp }}/pages-site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy website artifact
+        id: deployment
+        uses: actions/deploy-pages@v4

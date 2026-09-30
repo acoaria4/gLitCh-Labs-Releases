@@ -41,7 +41,21 @@ Invite links accept `?t=...` or `?token=...` and open the Expenses deep link onl
 
 ## GitHub Pages and local archives
 
-The repository root is the live website source. GitHub Pages is configured to deploy the `main` branch at `/` (root). `.nojekyll` serves this as plain static files. Publish by committing the root changes and merging/pushing them to `main`.
+The repository root remains the live website source. A filtered GitHub Actions workflow is now prepared in `.github/workflows/pages.yml`; it checks the committed site and uploads only public files from root and `assets/`, `expenses/`, `aura/` and `lumen/`. It serves the existing generated files without rebuilding or changing their bytes. `.nojekyll`, `CNAME` and verification files retain their public paths.
+
+**Activation order:** before committing/pushing the package archive to `main`, open repository **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**. Then commit and push the prepared changes to `main`; the filtered workflow runs on pushes to `main` or manual dispatch from `main`. Do not merge the archive while branch-root publishing is still enabled, because that publisher would serve the tracked archive too. These settings have not been changed automatically.
+
+To prepare and check the exact public file set locally, choose an empty directory outside the repository:
+
+```sh
+python3 scripts/check-pages.py
+python3 scripts/check-package-renders.py
+python3 scripts/prepare-pages.py --output /tmp/glitch-pages-site
+```
+
+Staging includes only Git-tracked public files and verifies copied bytes and local HTML/CSS references. It rejects nonempty output directories and never deletes existing files. Newly added public files must be added to Git before staging. The Pages workflow also runs `scripts/check-optimized.py` using the dependencies listed in `scripts/requirements-performance.txt`.
+
+`product-package-renders/` is a standalone, tracked TRAYN design archive. It is excluded from website page checks, optimization and the deployed artifact. Its copied galleries, prompts and image manifest are described in [the archive README](product-package-renders/README.md).
 
 - `old_main_website/` preserves the previous root website and its supporting files.
 - `glitch-labs-website/` preserves the pre-promotion copy of the new site.
