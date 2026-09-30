@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "created": "2026-09-30",
+  "batch": "batch-04-slipstream-silver-type-2026-09-30",
+  "assets": [
+    {
+      "destination": "batch-04-slipstream-silver-type-2026-09-30/slipstream-silver-type.png",
+      "sha256": "e9a2953ae6fabb509b07da03b01235733f41a06fff1e38c1fdf6414cc7b9f8a7",
+      "bytes": 2262507,
+      "id": "slipstream-silver-type",
+      "family": "performance",
+      "references": [
+        "batch-03-website-performance-2026-09-30/performance/performance-02-slipstream.png"
+      ]
+    }
+  ]
+}

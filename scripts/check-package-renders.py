@@ -43,7 +43,22 @@ def main():
                 assert hashlib.sha256((sources/original).read_bytes()).hexdigest() == entry['sha256'], original
     assert len(represented) == len(set(represented)) == manifest['source_file_count']
     assert len(manifest['assets']) == manifest['archived_file_count']
-    assert not list(ARCHIVE.rglob('.DS_Store'))
+    generated_count = 0
+    for generated in sorted(ARCHIVE.glob('batch-*/manifest.json')):
+        for entry in json.loads(generated.read_text())['assets']:
+            target = ARCHIVE/entry['destination']
+            assert target.resolve().is_relative_to(ARCHIVE.resolve()), target
+            assert target.stat().st_size == entry['bytes'], target
+            assert hashlib.sha256(target.read_bytes()).hexdigest() == entry['sha256'], target
+            assert all((ARCHIVE/reference).is_file() for reference in entry['references']), entry
+            generated_count += 1
+    # Every render belongs to an explicit batch, including future batches.
+    for render in ARCHIVE.rglob('*'):
+        if render.is_file() and render.suffix.lower() in {'.png', '.webp', '.jpg', '.jpeg', '.avif', '.zip'}:
+            assert render.relative_to(ARCHIVE).parts[0].startswith('batch-'), render
+    # Finder can create ignored metadata while someone browses the archive locally.
+    # Verify it was not imported rather than rejecting the user's local metadata.
+    assert all(Path(source).name != '.DS_Store' for source in represented)
     pages = {p: Page(p.read_text()) for p in ARCHIVE.rglob('*.html')}
     for p, page in pages.items():
         for link in page.links:
@@ -65,9 +80,11 @@ def main():
         with zipfile.ZipFile(archive) as zipped:
             assert zipped.testzip() is None, archive
             for member in zipped.namelist():
-                target = archive.parent/'revised'/member
+                target = (archive.parent/'revised'/member if archive.name == 'revised-pouches.zip'
+                          else archive.parent/member)
+                assert target.resolve().is_relative_to(archive.parent.resolve()), (archive, member)
                 assert target.is_file() and target.read_bytes() == zipped.read(member), (archive, member)
-    print(f'PASS: {len(manifest["assets"])} archive file hashes, {len(represented)} source records, '
+    print(f'PASS: {len(manifest["assets"])} copied and {generated_count} generated file hashes, {len(represented)} source records, '
           f'{len(pages)} galleries, dynamic image paths and ZIP contents'
           + ('; original source hashes unchanged.' if args.verify_sources else '.'))
 

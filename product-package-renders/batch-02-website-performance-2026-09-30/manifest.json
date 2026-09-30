@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "created": "2026-09-30",
+  "assets": [
+    {
+      "destination": "batch-02-website-performance-2026-09-30/website/website-01-satin-arc.png",
+      "sha256": "40d76174ed9b5f579326ecd86cce4fe5500c4446f7af1fd70fc8fd4a42e62f5b",
+      "bytes": 2089992,
+      "id": "website-01-satin-arc",
+      "family": "website",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/a-website.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    },
+    {
+      "destination": "batch-02-website-performance-2026-09-30/website/website-02-precision-sweep.png",
+      "sha256": "e6b5e62a590f33f1c26e117fb98a0d711d6f2896e4fddebd2b50e010657da8fe",
+      "bytes": 2218723,
+      "id": "website-02-precision-sweep",
+      "family": "website",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/a-website.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    },
+    {
+      "destination": "batch-02-website-performance-2026-09-30/performance/performance-01-velocity.png",
+      "sha256": "267100f243a43370f84995803430fdc7b530787f1e5e5c6c2b399255450ff2b8",
+      "bytes": 2628125,
+      "id": "performance-01-velocity",
+      "family": "performance",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/b-performance.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    },
+    {
+      "destination": "batch-02-website-performance-2026-09-30/performance/performance-02-cutline.png",
+      "sha256": "303ca3d5fb32371687582cb4d79010c439d666c835a07af64f4efcd5e4276f20",
+      "bytes": 2483684,
+      "id": "performance-02-cutline",
+      "family": "performance",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/b-performance.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    }
+  ],
+  "batch": "batch-02-website-performance-2026-09-30"
+}

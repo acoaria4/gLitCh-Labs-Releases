@@ -7,6 +7,7 @@ import shutil
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'product-package-renders'
+BATCH = Path('batch-01-imported-archive')
 CONCEPTS = Path('new_website_3/assets/package renders')
 FLAVOURS = ('belgian-chocolate', 'vanilla-creme', 'cafe-mocha', 'cookies-cream')
 IMAGE_TYPES = {'.png', '.webp', '.jpg', '.jpeg', '.avif'}
@@ -40,6 +41,7 @@ def main():
             selected.append((path, Path('trayn/flavour-pouches')/version/path.name))
     records, by_hash, by_output = [], {}, {}
     for original, relative in selected:
+        relative = BATCH/relative
         checksum = digest(original)
         preserve_gallery_path = CONCEPTS in original.relative_to(source).parents
         record = None if preserve_gallery_path else by_hash.get(checksum)
@@ -62,7 +64,7 @@ def main():
         record['sources'].append(original.relative_to(source).as_posix())
         if digest(original) != checksum:
             raise RuntimeError(f'Source changed while copying: {original}')
-    manifest = {'version': 1, 'source_project': str(source),
+    manifest = {'version': 1, 'batch': BATCH.as_posix(), 'source_project': str(source),
                 'source_file_count': len(selected), 'archived_file_count': len(records),
                 'assets': records}
     (OUT/'manifest.json').write_text(json.dumps(manifest, indent=2)+'\n')

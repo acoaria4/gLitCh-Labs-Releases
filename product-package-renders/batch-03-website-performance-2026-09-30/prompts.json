@@ -1,0 +1,58 @@
+{
+  "workflow": "built-in image_gen",
+  "created": "2026-09-30",
+  "jobs": [
+    {
+      "id": "website-01-contour",
+      "family": "website",
+      "name": "Website \u00b7 Contour",
+      "direction": "Quiet editorial design. On the lower third only, use three very fine nested crimson contour lines forming a graceful rounded rising wave, with one subtle silver hairline. Most of the surface stays matte black. Restrained red curved contour linework instead of broad red stripes. Keep flavour and quantity below the wave on uncluttered black. Calm refined precision.",
+      "prompt": "Use case: product-mockup. Create ONE premium photorealistic TRAYN NUTRITION whey protein resealable stand-up pouch concept. Portrait 2:3, 1024x1536. Reference image 1 establishes the Website or Performance family; reference image 2 is the approved exact silver logo. Preserve closely the angular T symbol, custom TRAYN lettering, stacked NUTRITION with horizontal rules, proportions and metallic finish. Single full front view, whole pouch visible, realistic matte-black laminate with subtle grain, natural folds and zipper. Neutral charcoal studio background and floor, soft directional highlights, premium realistic product photography. Keep centered silver logo and large white condensed WHEY, with clean black text reading zones. Exact text: 'TRAYN', 'NUTRITION', 'WHEY', 'Whey Protein Concentrate + Whey Protein Isolate Blend', 'Belgian Chocolate', 'Net Quantity: 500 g', 'Contains Milk', small 'PACKAGING CONCEPT \u2014 NOT FOR SALE'. Descriptor once in full on two or three legible lines under WHEY. No extra claims, badges, icons, nutrition facts, abbreviations, or new wording. No multiple pouches, collage or layout board. Produce a genuinely new graphic direction within the established family, not a repeat of existing diagonal sweep. Quiet editorial design. On the lower third only, use three very fine nested crimson contour lines forming a graceful rounded rising wave, with one subtle silver hairline. Most of the surface stays matte black. Restrained red curved contour linework instead of broad red stripes. Keep flavour and quantity below the wave on uncluttered black. Calm refined precision.",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/a-website.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ],
+      "source_file": "/Users/diwakarmohan/.codex/generated_images/01a09ecf-8e31-74d1-a556-d3bbcdfedcff/exec-e96fd3be-8510-4d39-b140-f7eba39c93b4.png",
+      "file": "website/website-01-contour.png"
+    },
+    {
+      "id": "website-02-horizon",
+      "family": "website",
+      "name": "Website \u00b7 Horizon",
+      "direction": "Quiet editorial design with a broad low horizontal deep-red band wrapping the bottom quarter, a gently curved upper edge, and one fine brushed-silver boundary line. Keep all branding and descriptor above it on matte black, set the flavour in bright white on the red band, small quantity and Contains Milk beneath on black. Red satin ink, not a gradient sky. No diagonal strokes. Balanced premium architectural packaging.",
+      "prompt": "Use case: product-mockup. Create ONE premium photorealistic TRAYN NUTRITION whey protein resealable stand-up pouch concept. Portrait 2:3, 1024x1536. Reference image 1 establishes the Website or Performance family; reference image 2 is the approved exact silver logo. Preserve closely the angular T symbol, custom TRAYN lettering, stacked NUTRITION with horizontal rules, proportions and metallic finish. Single full front view, whole pouch visible, realistic matte-black laminate with subtle grain, natural folds and zipper. Neutral charcoal studio background and floor, soft directional highlights, premium realistic product photography. Keep centered silver logo and large white condensed WHEY, with clean black text reading zones. Exact text: 'TRAYN', 'NUTRITION', 'WHEY', 'Whey Protein Concentrate + Whey Protein Isolate Blend', 'Belgian Chocolate', 'Net Quantity: 500 g', 'Contains Milk', small 'PACKAGING CONCEPT \u2014 NOT FOR SALE'. Descriptor once in full on two or three legible lines under WHEY. No extra claims, badges, icons, nutrition facts, abbreviations, or new wording. No multiple pouches, collage or layout board. Produce a genuinely new graphic direction within the established family, not a repeat of existing diagonal sweep. Quiet editorial design with a broad low horizontal deep-red band wrapping the bottom quarter, a gently curved upper edge, and one fine brushed-silver boundary line. Keep all branding and descriptor above it on matte black, set the flavour in bright white on the red band, small quantity and Contains Milk beneath on black. Red satin ink, not a gradient sky. No diagonal strokes. Balanced premium architectural packaging.",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/a-website.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ],
+      "source_file": "/Users/diwakarmohan/.codex/generated_images/01a09ecf-8e31-74d1-a556-d3bbcdfedcff/exec-09a23282-dcc6-4201-b5ec-a41ea869351e.png",
+      "file": "website/website-02-horizon.png"
+    },
+    {
+      "id": "performance-01-apex",
+      "family": "performance",
+      "name": "Performance \u00b7 Apex",
+      "direction": "Strong athletic design built around a bold asymmetrical crimson chevron in the lower half, its apex pointing upward, paired with narrow brushed-silver chevron edges and precise black gaps. Fast angular motorsport energy, premium rather than chaotic. Logo and WHEY remain unobstructed on clean black; descriptor clean black zone; flavour and quantity in an uncluttered lower black panel. No distress or grunge.",
+      "prompt": "Use case: product-mockup. Create ONE premium photorealistic TRAYN NUTRITION whey protein resealable stand-up pouch concept. Portrait 2:3, 1024x1536. Reference image 1 establishes the Website or Performance family; reference image 2 is the approved exact silver logo. Preserve closely the angular T symbol, custom TRAYN lettering, stacked NUTRITION with horizontal rules, proportions and metallic finish. Single full front view, whole pouch visible, realistic matte-black laminate with subtle grain, natural folds and zipper. Neutral charcoal studio background and floor, soft directional highlights, premium realistic product photography. Keep centered silver logo and large white condensed WHEY, with clean black text reading zones. Exact text: 'TRAYN', 'NUTRITION', 'WHEY', 'Whey Protein Concentrate + Whey Protein Isolate Blend', 'Belgian Chocolate', 'Net Quantity: 500 g', 'Contains Milk', small 'PACKAGING CONCEPT \u2014 NOT FOR SALE'. Descriptor once in full on two or three legible lines under WHEY. No extra claims, badges, icons, nutrition facts, abbreviations, or new wording. No multiple pouches, collage or layout board. Produce a genuinely new graphic direction within the established family, not a repeat of existing diagonal sweep. Strong athletic design built around a bold asymmetrical crimson chevron in the lower half, its apex pointing upward, paired with narrow brushed-silver chevron edges and precise black gaps. Fast angular motorsport energy, premium rather than chaotic. Logo and WHEY remain unobstructed on clean black; descriptor clean black zone; flavour and quantity in an uncluttered lower black panel. No distress or grunge.",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/b-performance.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ],
+      "source_file": "/Users/diwakarmohan/.codex/generated_images/01a09ecf-8e31-74d1-a556-d3bbcdfedcff/exec-36ee3939-cf01-47ef-9c25-11cba29899d3.png",
+      "file": "performance/performance-01-apex.png"
+    },
+    {
+      "id": "performance-02-slipstream",
+      "family": "performance",
+      "name": "Performance \u00b7 Slipstream",
+      "direction": "Dynamic premium athletic design: several disciplined red curved speed ribbons sweep vertically up the right-hand seam from the lower-left bottom, with two thin silver ribbons following the flow. Left and center keep uncluttered black reading zones. Strong sense of motion through sweeping tapered curves, not diagonal straight bands, not chevrons, no grunge. Retain all centered brand hierarchy and legible text.",
+      "prompt": "Use case: product-mockup. Create ONE premium photorealistic TRAYN NUTRITION whey protein resealable stand-up pouch concept. Portrait 2:3, 1024x1536. Reference image 1 establishes the Website or Performance family; reference image 2 is the approved exact silver logo. Preserve closely the angular T symbol, custom TRAYN lettering, stacked NUTRITION with horizontal rules, proportions and metallic finish. Single full front view, whole pouch visible, realistic matte-black laminate with subtle grain, natural folds and zipper. Neutral charcoal studio background and floor, soft directional highlights, premium realistic product photography. Keep centered silver logo and large white condensed WHEY, with clean black text reading zones. Exact text: 'TRAYN', 'NUTRITION', 'WHEY', 'Whey Protein Concentrate + Whey Protein Isolate Blend', 'Belgian Chocolate', 'Net Quantity: 500 g', 'Contains Milk', small 'PACKAGING CONCEPT \u2014 NOT FOR SALE'. Descriptor once in full on two or three legible lines under WHEY. No extra claims, badges, icons, nutrition facts, abbreviations, or new wording. No multiple pouches, collage or layout board. Produce a genuinely new graphic direction within the established family, not a repeat of existing diagonal sweep. Dynamic premium athletic design: several disciplined red curved speed ribbons sweep vertically up the right-hand seam from the lower-left bottom, with two thin silver ribbons following the flow. Left and center keep uncluttered black reading zones. Strong sense of motion through sweeping tapered curves, not diagonal straight bands, not chevrons, no grunge. Retain all centered brand hierarchy and legible text.",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/b-performance.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ],
+      "source_file": "/Users/diwakarmohan/.codex/generated_images/01a09ecf-8e31-74d1-a556-d3bbcdfedcff/exec-c5e65a62-c35c-45af-9778-0ad8eb3dd3c7.png",
+      "file": "performance/performance-02-slipstream.png"
+    }
+  ]
+}

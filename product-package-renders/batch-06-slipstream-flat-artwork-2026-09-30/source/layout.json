@@ -1,0 +1,76 @@
+{
+  "canvas": {
+    "width": 800,
+    "height": 1200,
+    "units": "reference SVG units, not physical pouch dimensions"
+  },
+  "copy": [
+    {
+      "id": "hero-whey",
+      "text": "WHEY",
+      "font": "BigShoulders-Bold.ttf",
+      "x": 145,
+      "y": 404,
+      "w": 510,
+      "h": 245
+    },
+    {
+      "id": "descriptor-line-1",
+      "text": "Whey Protein Concentrate +",
+      "font": "Montserrat-Bold.ttf",
+      "x": 130,
+      "y": 691,
+      "size": 26
+    },
+    {
+      "id": "descriptor-line-2",
+      "text": "Whey Protein Isolate Blend",
+      "font": "Montserrat-Bold.ttf",
+      "x": 144,
+      "y": 725,
+      "size": 26
+    },
+    {
+      "id": "flavour",
+      "text": "Belgian Chocolate",
+      "font": "Montserrat-Bold.ttf",
+      "x": 90,
+      "y": 1005,
+      "size": 30
+    },
+    {
+      "id": "quantity",
+      "text": "Net Quantity: 500 g",
+      "font": "Montserrat-Regular.ttf",
+      "x": 90,
+      "y": 1070,
+      "size": 20
+    },
+    {
+      "id": "allergen",
+      "text": "Contains Milk",
+      "font": "Montserrat-Regular.ttf",
+      "x": 90,
+      "y": 1100,
+      "size": 18
+    },
+    {
+      "id": "concept-footer",
+      "text": "PACKAGING CONCEPT \u2014 NOT FOR SALE",
+      "font": "Montserrat-Regular.ttf",
+      "x": 170,
+      "y": 1160,
+      "size": 11
+    }
+  ],
+  "red_ribbon_paths": [
+    "M-15 973 C190 778 592 942 749 485 C810 289 802 124 702 -25 C834 93 863 293 802 514 C675 961 258 827 -15 1008Z",
+    "M-15 1000 C269 764 582 880 813 1052 L813 1084 C559 887 222 832 -15 1022Z",
+    "M-15 958 C187 811 518 898 714 621 C839 442 868 168 781 41 C888 197 851 475 735 655 C524 916 185 839 -15 980Z"
+  ],
+  "silver_ribbon_paths": [
+    "M-15 941 C192 795 492 904 683 651 C823 459 824 225 774 97 C843 237 837 478 696 673 C506 927 195 815 -15 956Z",
+    "M-15 999 C258 817 597 929 813 1107 L813 1125 C574 927 229 842 -15 1012Z",
+    "M-15 982 C253 799 613 915 750 629 C773 582 792 527 805 474 C788 561 776 609 760 646 C603 946 258 822 -15 990Z"
+  ]
+}

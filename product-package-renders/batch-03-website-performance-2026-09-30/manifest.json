@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "created": "2026-09-30",
+  "batch": "batch-03-website-performance-2026-09-30",
+  "assets": [
+    {
+      "destination": "batch-03-website-performance-2026-09-30/website/website-01-contour.png",
+      "sha256": "a082824436eabb2ed9183c656515232ea47fac00a0d302ce2f91eb904e4f0973",
+      "bytes": 2201667,
+      "id": "website-01-contour",
+      "family": "website",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/a-website.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    },
+    {
+      "destination": "batch-03-website-performance-2026-09-30/website/website-02-horizon.png",
+      "sha256": "f8b8f889e838ff5bfa5e16288203de0fbfd3d8b41cfdb95c6a8ece3b22ee7841",
+      "bytes": 2048538,
+      "id": "website-02-horizon",
+      "family": "website",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/a-website.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    },
+    {
+      "destination": "batch-03-website-performance-2026-09-30/performance/performance-01-apex.png",
+      "sha256": "dd75f16589fcb8741508258f4b54318d382ef9e06d5fa1e878e80a7db0755517",
+      "bytes": 2443615,
+      "id": "performance-01-apex",
+      "family": "performance",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/b-performance.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    },
+    {
+      "destination": "batch-03-website-performance-2026-09-30/performance/performance-02-slipstream.png",
+      "sha256": "1a5f4c7a8ff98ee6698c66d6859390ad35dcd92f7438420b444f922e6c8c522e",
+      "bytes": 2487297,
+      "id": "performance-02-slipstream",
+      "family": "performance",
+      "references": [
+        "batch-01-imported-archive/trayn/package-concepts/revised/b-performance.png",
+        "batch-01-imported-archive/trayn/package-concepts/revised/approved-logo.png"
+      ]
+    }
+  ]
+}
