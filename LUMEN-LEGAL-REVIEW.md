@@ -1,4 +1,26 @@
-# Lumen legal content review — 21 September 2026
+# Lumen legal content review
+
+## Terms revision — 6 November 2026
+
+The Terms of Service covers monthly and yearly Pro subscriptions, ranked Spark,
+optional platform cloud backups and the current deletion flow. Privacy, data-control,
+support and account-deletion pages were also refreshed against the current app source.
+The earlier implementation review below is historical.
+
+Published on 6 November 2026 in website commit
+`96cf77bab8601906a9d2a78b770916fd35bbdcea`; GitHub Pages deployment succeeded.
+All nine updated public AURA/Lumen policy and support pages matched the verified
+local HTML over HTTPS. Both apps' privacy and Terms URLs were saved in Play Console;
+their existing Yes trader selection was retained. Google review remains pending;
+no send-for-review action was taken.
+
+AURA's published terms use the owner's current business model: a
+free app with a ₹999 one-time charge per detailed prediction report, with no
+subscriptions. The sibling AURA app still contains disabled membership checkout
+logic and a detailed-reading release gate; those must match the report model
+before report sales are enabled.
+
+## Earlier review — 21 September 2026
 
 Prepared locally for owner review; nothing has been published. The effective date
 is 21 September 2026 as requested. Review the generated Privacy, Terms, Support,

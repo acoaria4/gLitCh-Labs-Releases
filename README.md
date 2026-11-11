@@ -27,9 +27,9 @@ Fonts are self-hosted in `assets/fonts/`, with open-source licenses included. No
 
 ## Supporting pages
 
-Each product has local privacy, support, and `/get/` pages. Expenses also has account deletion and group invitations. AURA and Lumen have data-control pages. Studio About and Contact are local too.
+Each product has local privacy, support, and `/get/` pages. Expenses also has account deletion and group invitations. AURA and Lumen have Terms of Service and data-control pages. Studio About and Contact are local too.
 
-Edit supporting-page copy in `content/<product>/`, then run `python3 scripts/build-pages.py` from this folder. The builder reuses the shared shell and regenerates `/get/` pages from each product landing page's download controls. It never writes outside this folder. Privacy wording and original dates were preserved from the reference files; support and data-control copy follows those policies. No new legal terms or data-processing promises were added.
+Edit supporting-page copy in `content/<product>/`, then run `python3 scripts/build-pages.py --reuse-assets` for content-only changes, or omit the flag to rebuild optimized assets too. The content-only mode validates and reuses the existing assets and updates legal resource links while preserving landing and download page designs. It never writes outside this folder. AURA and Lumen privacy, terms and data-control pages were updated and published on 6 November 2026. AURA is free with ₹999 one-time detailed prediction reports.
 
 Run `python3 scripts/check-pages.py` to check local destinations, anchors, assets, page headings, and that generated policies preserve their content source.
 
